@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>张清溪 · AI内容与增长作品集 | Zhang Qingxi · AI Content & Growth Portfolio</title>
+<meta name="description" content="张清溪（清溪）— 7年新媒体运营，专注 AI × 内容 × 增长。作品集与项目案例，适配HR/用人经理快速浏览与深度了解。">
+<meta name="og:title" content="张清溪 · AI内容与增长作品集">
+<meta name="og:description" content="AI × 内容 × 增长 · 作品集">
+<meta name="og:type" content="website">
+<meta name="theme-color" content="#0F172A">
+<style>
+  :root{
+    --bg:#0F172A;--panel:#111827;--text:#E5E7EB;--muted:#94A3B8;
+    --brand:#4F46E5;--brand-2:#06B6D4;--accent:#F43F5E;--ok:#22C55E;
+    --border:#1F2937;--shadow:0 10px 30px rgba(0,0,0,.35);--radius:14px;
+    --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei", Arial;
+  }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{margin:0;background: radial-gradient(1200px 800px at 75% -10%, rgba(79,70,229,.25), transparent 60%),var(--bg);color:var(--text);font-family:var(--font);line-height:1.6}
+  a{color:var(--brand)}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px}
+  header{display:flex;align-items:center;gap:18px;justify-content:space-between;margin-bottom:26px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .avatar{width:48px;height:48px;border-radius:50%;background:#1f2937;flex:0 0 48px;overflow:hidden;border:1px solid var(--border)}
+  .brand h1{font-size:18px;margin:0}.brand small{display:block;color:var(--muted);margin-top:2px}
+  .toolbar{display:flex;gap:10px;align-items:center}
+  .btn{appearance:none;border:1px solid var(--border);background:#0b1220;color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer;transition:transform .15s ease, background .15s ease, border .15s ease}
+  .btn:hover{transform:translateY(-1px);border-color:#2b3648}.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;margin:12px 0 28px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .hero .pitch{padding:24px}
+  .title{font-size:34px;line-height:1.25;margin:0 0 8px;font-weight:800;background:linear-gradient(135deg,#fff,#c7d2fe 35%,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .subtitle{color:var(--muted);margin:0 0 14px}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 6px}
+  .badge{font-size:12px;border:1px solid var(--border);color:#cbd5e1;background:#0b1220;padding:6px 10px;border-radius:999px}
+  .kpis{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+  .kpi{flex:1;min-width:140px;padding:14px;border-radius:12px;background:#0d1526;border:1px solid var(--border)}
+  .kpi b{display:block;font-size:22px;line-height:1.2}
+  .hero .media{position:relative;overflow:hidden;border-radius:var(--radius);border:1px solid var(--border)}
+  .mock{aspect-ratio:16/10;background:radial-gradient(800px 500px at 80% 0%, rgba(244,63,94,.25), transparent 60%),linear-gradient(180deg,#0e1628,#0b1220 60%,#0b1220);display:flex;align-items:center;justify-content:center;color:#cbd5e1;font-size:14px}
+  .sec{margin:28px 0}.sec h2{margin:0 0 12px;font-size:22px}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
+  .col-6{grid-column:span 6}.col-4{grid-column:span 4}
+  .project{display:flex;flex-direction:column;overflow:hidden}
+  .thumb{aspect-ratio:16/9;background:#0b1220;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:#93c5fd}
+  .project .inner{padding:14px}.project h3{margin:0 0 6px;font-size:16px}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .tag{font-size:11px;color:#93a3b8;border:1px dashed #223046;padding:3px 8px;border-radius:999px}
+  .socials{display:flex;gap:10px;flex-wrap:wrap}
+  .soc{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);padding:10px 12px;border-radius:12px;background:#0b1220;text-decoration:none;color:var(--text)}
+  .soc svg{width:18px;height:18px}
+  .faq details{background:#0b1220;border:1px solid var(--border);border-radius:12px;padding:12px}
+  .faq summary{cursor:pointer}
+  footer{color:var(--muted);margin:26px 0;text-align:center}
+  @media (max-width: 920px){
+    .hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(6,1fr)}
+    .col-6{grid-column:span 6}.col-4{grid-column:span 6}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="avatar"></div>
+      <div>
+        <h1 id="siteName">Zhang Qingxi</h1>
+        <small id="siteRole">AI Content · Growth · Workflow</small>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button class="btn" id="langToggle">EN</button>
+      <a id="downloadResume" class="btn">下载简历 / Download CV</a>
+      <a id="contactBtn" class="btn primary">联系我 / Contact</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="pitch card">
+      <h2 class="title" id="headline">AI × 内容 × 增长</h2>
+      <p class="subtitle" id="subline">7年新媒体运营｜用 AI 与工作流把「内容 → 增长 → 变现」跑通</p>
+      <div class="badges" id="badges"></div>
+      <div class="kpis" id="kpis"></div>
+      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+        <a id="ctaPrimary" class="btn primary"></a>
+        <a id="ctaSecondary" class="btn"></a>
+      </div>
+    </div>
+    <div class="media card">
+      <div class="mock" id="heroMock">在这里放一张项目合成图 / Composite banner here</div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 id="aboutTitle">关于我 / About</h2>
+    <div class="card" style="padding:16px">
+      <p id="aboutText"></p>
+      <ul id="bullets" style="margin:10px 0 0; padding-left:18px"></ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 id="projTitle">核心作品 / Featured Projects</h2>
+    <div class="grid" id="projectsGrid"></div>
+  </section>
+
+  <section class="sec">
+    <h2 id="socialTitle">内容矩阵 / Social & Channels</h2>
+    <div class="socials" id="socials"></div>
+  </section>
+
+  <section class="sec">
+    <h2 id="faqTitle">对HR与老板的关键信息 / For HR & Hiring Managers</h2>
+    <div class="faq grid">
+      <div class="col-6">
+        <details open><summary id="q1"></summary><div id="a1" style="margin-top:8px"></div></details>
+      </div>
+      <div class="col-6">
+        <details open><summary id="q2"></summary><div id="a2" style="margin-top:8px"></div></details>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">© <span id="year"></span> Zhang Qingxi. All rights reserved.</footer>
+</div>
+
+<script>
+const CONFIG = {
+  lang:"zh",
+  name:"张清溪",
+  role:{ zh:"AI 内容 · 增长 · 工作流", en:"AI Content · Growth · Workflow" },
+  headline:{ zh:"AI × 内容 × 增长", en:"AI × Content × Growth" },
+  subline:{
+    zh:"7年新媒体运营｜用 AI 与工作流把「内容 → 增长 → 变现」跑通",
+    en:"7 years in new media. Ship AI-powered workflows that turn Content → Growth → Revenue."
+  },
+  resumeUrl:"#",
+  ctas:{
+    primary:{ zh:"查看我的小红书主页", en:"View my Xiaohongshu", href:"https://xhslink.com/m/6cxRI4Oywy1"},
+    secondary:{ zh:"下载作品集PDF", en:"Download Portfolio (PDF)", href:"#"}
+  },
+  badges:[
+    { zh:"新媒体运营 7年", en:"7y New-Media Ops" },
+    { zh:"AI工作流/自动化", en:"AI Workflows/Automation" },
+    { zh:"小红书/短视频增长", en:"Xiaohongshu/Shorts Growth" },
+    { zh:"品效合一", en:"Brand + Performance" }
+  ],
+  kpis:[
+    { zhLabel:"小红书赞与收藏", enLabel:"XHS Likes & Saves", value:"65,000+" },
+    { zhLabel:"累计曝光", enLabel:"Total Impressions", value:"30M+" },
+    { zhLabel:"跨平台粉丝", enLabel:"Cross-platform Followers", value:"130K" }
+  ],
+  about:{
+    title:{ zh:"关于我 / About", en:"About" },
+    text:{
+      zh:"我是清溪，专注 AI × 内容 × 增长。能独立完成策略→脚本→拍摄剪辑→视觉→上线→数据复盘的全链路，擅长把 AI 工具接成可复用的工作流，追求以最少的人力跑出可持续的内容生意。",
+      en:"I'm Qingxi: AI × Content × Growth. I run end-to-end from strategy, scripting, production, design to publishing & analytics. I wire AI tools into reusable workflows to build sustainable content businesses with lean teams."
+    },
+    bullets:[
+      { zh:"小红书主号：清溪AI提效说（AI/工作流/Prompt）", en:"Xiaohongshu: AI efficiency & workflows" },
+      { zh:"在小红书收获 6.5万 次赞与收藏", en:"65k likes & saves on Xiaohongshu" },
+      { zh:"目标：短期现金流优先，长期沉淀数字产品与SOP", en:"Focus: near-term cashflow, long-term digital assets & SOPs" }
+    ]
+  },
+  projects:[
+    {
+      title:{ zh:"AI短剧封面生成 · Prompt 素材包", en:"AI Short-Drama Covers · Prompt Pack" },
+      desc:{ zh:"面向短剧团队/创作者的封面生成系统，含中英Prompt与字体/文案一体化生成规范。", en:"Cover-generation system with CN/EN prompts & typography-in-image specs." },
+      link:"#", img:"", tags:["MidJourney","即梦","Prompt工程","封面系统"]
+    },
+    {
+      title:{ zh:"AI短剧小程序（MVP）", en:"AI Short-Drama Mini-App (MVP)" },
+      desc:{ zh:"竖屏播放/付费/推荐闭环，目标：24h可播可付费可推荐的最小版本。", en:"Vertical player + payments + recommendations MVP in 24h." },
+      link:"#", img:"", tags:["MVP","小程序","播放/付费","增长闭环"]
+    },
+    {
+      title:{ zh:"问问日常 · 情绪陪伴小程序（MVP）", en:"Ask-Daily · Emotions Companion Mini-App (MVP)" },
+      desc:{ zh:"极简注册、即时聊天、打卡与轻量推荐，聚焦可用性与留存。", en:"Minimal signup, instant chat, journaling & light recommendations." },
+      link:"#", img:"", tags:["情绪陪伴","MVP","留存"]
+    }
+  ],
+  socials:[
+    { key:"xiaohongshu", label:"小红书", url:"https://xhslink.com/m/6cxRI4Oywy1"},
+    { key:"wechat", label:"微信", url:"#", note:"加微请备注：职位/公司/来意"},
+    { key:"douyin", label:"抖音", url:"https://v.douyin.com/-AnTCADzYG0/"},
+    { key:"xiwujie", label:"西五街", url:"https://m.ix5j.cn/share/user?uid=248333&ucode=005bm5&channel=AppStore&platform=ios&from=WEIXIN"},
+    { key:"weixinmp", label:"公众号", url:"https://mp.weixin.qq.com/s/TqBVo6AvzRtjbLWvhPYFHw"},
+    { key:"youtube", label:"YouTube", url:"#"},
+    { key:"email", label:"Email", url:"mailto:2@9.com"}
+  ],
+  faq:[
+    {
+      q:{ zh:"我适合哪些岗位？", en:"Which roles am I a fit for?" },
+      a:{ zh:"新媒体运营/内容运营/增长/AI产品运营/AI内容工作流设计等。能独立从0→1搭建内容与增长闭环。", en:"New-media ops, content ops, growth, AI product ops, workflow design. Comfortable building 0→1 content-to-growth loops." }
+    },
+    {
+      q:{ zh:"最快到岗与合作方式？", en:"Availability & engagement modes?" },
+      a:{ zh:"最快两周内到岗；亦可项目制/顾问制，按里程碑结算。", en:"Available within ~2 weeks; also open to project-based/advisory with milestone billing." }
+    }
+  ],
+  year:new Date().getFullYear()
+};
+
+const $=(q)=>document.querySelector(q);const t=(o)=> CONFIG.lang==="zh"?o.zh:o.en;
+
+function render(){
+  $("#siteName").textContent=CONFIG.name.includes("清溪")?CONFIG.name:`${CONFIG.name} / 张清溪`;
+  $("#siteRole").textContent=t(CONFIG.role);
+  $("#headline").textContent=t(CONFIG.headline);
+  $("#subline").textContent=t(CONFIG.subline);
+  $("#downloadResume").href=CONFIG.resumeUrl||"#";
+  const ctaP=$("#ctaPrimary");ctaP.textContent=t(CONFIG.ctas.primary);ctaP.href=CONFIG.ctas.primary.href||"#";
+  const ctaS=$("#ctaSecondary");ctaS.textContent=t(CONFIG.ctas.secondary);ctaS.href=CONFIG.ctas.secondary.href||"#";
+
+  const badges=$("#badges");badges.innerHTML="";CONFIG.badges.forEach(b=>{const span=document.createElement("span");span.className="badge";span.textContent=t(b);badges.appendChild(span);});
+  const kpis=$("#kpis");kpis.innerHTML="";CONFIG.kpis.forEach(k=>{const card=document.createElement("div");card.className="kpi";card.innerHTML=`<b>${k.value}</b><span style="color:#9fb2c8">${CONFIG.lang==="zh"?k.zhLabel:k.enLabel}</span>`;kpis.appendChild(card);});
+  $("#aboutTitle").textContent=t(CONFIG.about.title);$("#aboutText").textContent=t(CONFIG.about.text);
+  const bullets=$("#bullets");bullets.innerHTML="";CONFIG.about.bullets.forEach(item=>{const li=document.createElement("li");li.textContent=t(item);bullets.appendChild(li);});
+
+  $("#projTitle").textContent=CONFIG.lang==="zh"?"核心作品 / Featured Projects":"Featured Projects";const grid=$("#projectsGrid");
+  grid.innerHTML="";
+  CONFIG.projects.forEach(p=>{
+    const card=document.createElement("a");
+    card.href=p.link||"#"; card.target="_blank"; card.rel="noopener";
+    card.className="project card col-6";
+    card.innerHTML=`
+      <div class="thumb">${t(p.title)}</div>
+      <div class="inner">
+        <h3>${t(p.title)}</h3>
+        <p style="color:#9fb2c8;margin:6px 0 0">${t(p.desc)}</p>
+        <div class="tags">${(p.tags||[]).map(tag=>`<span class="tag">${tag}</span>`).join("")}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  $("#socialTitle").textContent=CONFIG.lang==="zh"?"内容矩阵 / Social & Channels":"Social & Channels";
+  const socials=$("#socials"); socials.innerHTML="";
+  CONFIG.socials.forEach(s=>{
+    const a=document.createElement("a");
+    a.className="soc"; a.href=s.url||"#"; a.target=s.url?.startsWith("http")?"_blank":"_self"; a.rel="noopener";
+    a.innerHTML = `<span>${s.label}</span>${s.note?`<span style="color:#94A3B8">${s.note}</span>`:""}`;
+    socials.appendChild(a);
+  });
+
+  $("#faqTitle").textContent=CONFIG.lang==="zh"?"对HR与老板的关键信息 / For HR & Hiring Managers":"For HR & Hiring Managers";
+  $("#q1").textContent=t(CONFIG.faq[0].q); $("#a1").textContent=t(CONFIG.faq[0].a);
+  $("#q2").textContent=t(CONFIG.faq[1].q); $("#a2").textContent=t(CONFIG.faq[1].a);
+
+  $("#year").textContent=CONFIG.year;
+
+  $("#langToggle").textContent = CONFIG.lang==="zh"?"EN":"中";
+}
+
+function toggleLang(){ CONFIG.lang = CONFIG.lang==="zh"?"en":"zh"; render(); }
+
+function wireInteractions(){
+  $("#langToggle").addEventListener("click", toggleLang);
+  $("#contactBtn").addEventListener("click", ()=>{
+    const email = (CONFIG.socials.find(s=>s.key==="email")||{}).url || "mailto:2@9.com";
+    window.location.href = email;
+  });
+  $("#downloadResume").addEventListener("click", (e)=>{
+    if(!CONFIG.resumeUrl || CONFIG.resumeUrl==="#"){ e.preventDefault(); alert(CONFIG.lang==="zh"?"暂未上传简历，请稍后再试。":"CV not uploaded yet."); }
+  });
+}
+
+render(); wireInteractions();
+</script>
+</body>
+</html>
+

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="360" viewBox="0 0 800 360">
+  <rect width="800" height="360" rx="24" fill="#0f1320"/>
+  <g stroke="#253049" fill="#121826">
+    <rect x="24" y="24" width="232" height="148" rx="12"/>
+    <rect x="284" y="24" width="232" height="148" rx="12"/>
+    <rect x="544" y="24" width="232" height="148" rx="12"/>
+    <rect x="24" y="188" width="232" height="148" rx="12"/>
+    <rect x="284" y="188" width="232" height="148" rx="12"/>
+    <rect x="544" y="188" width="232" height="148" rx="12"/>
+  </g>
+  <text x="400" y="340" text-anchor="middle" font-family="Inter, Arial" font-weight="700" font-size="18" fill="#9fb4ff">CERTIFICATES PLACEHOLDER</text>
+</svg>
+
