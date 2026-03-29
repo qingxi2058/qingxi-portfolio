@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>问问日常 | AI日常节奏助手</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%237666ff'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='30' font-family='Arial' fill='white'%3E%E9%97%AE%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+
+    <header class="site-header">
+      <div class="container nav-shell">
+        <div class="brand">
+          <span class="brand-mark">问</span>
+          <div class="brand-copy">
+            <strong>问问日常</strong>
+            <small>AI 日常节奏助手</small>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <a href="#today">今日提醒</a>
+          <a href="#plan">计划日历</a>
+          <a href="#month-year">阶段主线</a>
+          <a href="#dream">梦境关键词</a>
+          <a href="#poster">结果卡片</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page">
+      <section class="hero section">
+        <div class="hero-copy">
+          <p class="eyebrow">AI 日常节奏助手</p>
+          <h1>今天，是先出击<br>还是先等等？</h1>
+          <p class="hero-text">输入生日，30 秒知道今天最适合做什么、哪些事先别动、未来 7 天怎么安排。</p>
+          <div class="badge-row">
+            <span class="badge">🎯 今日主线</span>
+            <span class="badge">📅 7 天日历</span>
+            <span class="badge">📊 月度提醒</span>
+            <span class="badge">🌙 解梦查询</span>
+            <span class="badge">🃏 结果卡片</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#today">先看我今天的状态 →</a>
+          </div>
+        </div>
+        <div class="hero-preview">
+          <article class="panel hero-form-card">
+            <div class="panel-tag">先填资料</div>
+            <h3>只需生日，30 秒出结果</h3>
+            <label style="margin-top:12px">
+              <span>出生日期</span>
+              <input id="birth-date" type="date" value="1996-08-18" />
+            </label>
+            <details class="extra-fields">
+              <summary class="extra-toggle">+ 填更多，结果更准确（可选）</summary>
+              <div class="field-grid compact-grid">
+                <label>
+                  <span>称呼</span>
+                  <input id="nickname" type="text" placeholder="比如：大美丽" value="大美丽" />
+                </label>
+                <label>
+                  <span>性别</span>
+                  <select id="gender">
+                    <option value="女" selected>女</option>
+                    <option value="男">男</option>
+                    <option value="保密">保密</option>
+                  </select>
+                </label>
+              </div>
+              <label>
+                <span>出生时间（影响辰时节奏）</span>
+                <input id="birth-time" type="time" value="08:30" />
+              </label>
+              <label class="compact-label">
+                <span>最近更关注什么</span>
+                <select id="focus">
+                  <option value="work">工作推进</option>
+                  <option value="relationship">关系沟通</option>
+                  <option value="rest">休息调整</option>
+                  <option value="creative">创作灵感</option>
+                </select>
+              </label>
+            </details>
+            <div class="form-hint" id="profile-hint">录入后会一起生成风格、元素偏好和当天重点。</div>
+            <button class="btn btn-primary full" id="generate-button" type="button">生成今日提醒</button>
+            <div class="social-proof">已为 <strong>12,847</strong> 人生成今日提醒</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="today">
+        <div class="section-head">
+          <p class="eyebrow">今日提醒</p>
+          <h2>今天先看什么</h2>
+          <p>先抓住今天的主线，再决定今天怎么安排。</p>
+        </div>
+
+        <div class="today-grid single-result">
+          <article class="panel result-panel">
+            <div class="panel-tag">今日提醒</div>
+            <h3>今日重点</h3>
+            <p class="result-lead" id="result-title">大美丽，先把注意力收回来</p>
+            <div class="meta-row" id="result-meta">
+              <span>狮子风格</span>
+              <span>元素偏好火</span>
+              <span>辰时节奏</span>
+            </div>
+            <div class="today-score-wrap">
+              <span class="today-score-num" id="today-score">88</span>
+              <span class="today-score-unit">分</span>
+              <span class="today-score-desc">今日能量指数</span>
+            </div>
+            <div class="result-block">
+              <span class="result-label">今日主线</span>
+              <p id="result-summary">今天更适合先完成一件最重要的小事，再去处理沟通和其他杂讯。</p>
+            </div>
+            <div class="result-block">
+              <span class="result-label">行动建议</span>
+              <div class="chip-row" id="result-chips">
+                <span>先聚焦</span>
+                <span>少切换</span>
+                <span>先推进</span>
+              </div>
+            </div>
+            <div class="result-footer" id="result-footer">建议：把今天最关键的一件事拆成两步，先完成第一步再看其他信息。</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="plan">
+        <div class="section-head">
+          <p class="eyebrow">计划日历</p>
+          <h2>未来 7 天先怎么安排</h2>
+          <p>先看 7 天重点，点某一天再看下面详情。</p>
+        </div>
+
+        <div class="day-scroll" id="timeline-list"></div>
+
+        <article class="panel detail-panel">
+          <div class="detail-head">
+            <div class="panel-tag" id="day-detail-tag">计划日历</div>
+            <strong id="day-detail-title">周一更适合先推进一件已经在做的事情</strong>
+          </div>
+          <p id="day-detail-summary">这一天更适合把已经启动的事情往前推一步，不要被临时消息带着跑。</p>
+          <div class="meta-row" id="day-detail-chips">
+            <span>推进日</span>
+            <span>先收口</span>
+            <span>少分心</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="month-year">
+        <div class="section-head">
+          <p class="eyebrow">阶段主线</p>
+          <h2>短期提醒之外，还有更长一点的安排</h2>
+          <p>月度看重点，年度看关键词和方向。</p>
+        </div>
+
+        <div class="insight-grid">
+          <article class="panel insight-card">
+            <div class="panel-tag">阶段主线</div>
+            <h3>月度重点</h3>
+            <p class="insight-lead" id="month-title">这个月先把主线拎出来</p>
+            <p id="month-summary">先决定本月最值得持续推进的一件事，其他安排都围着它来。</p>
+            <div class="mini-chip-row" id="month-chips"></div>
+            <div class="insight-points" id="month-points"></div>
+          </article>
+          <article class="panel insight-card">
+            <div class="panel-tag">阶段主线</div>
+            <h3>年度关键词</h3>
+            <p class="insight-lead" id="year-title">全年更适合围绕一条主线去走</p>
+            <p id="year-summary">把年度关键词和重点月份放在一起看，更容易做长线安排。</p>
+            <div class="mini-chip-row" id="year-chips"></div>
+            <div class="insight-points" id="year-points"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="dream">
+        <div class="section-head">
+          <p class="eyebrow">梦境关键词</p>
+          <h2>梦到什么，直接查</h2>
+          <p>热门词直接点，也可以自己输关键词。</p>
+        </div>
+
+        <div class="dream-grid">
+          <article class="panel search-panel">
+            <div class="search-bar">
+              <input id="dream-input" type="text" placeholder="试试输入：考试、堵车、迟到、搬家" />
+              <button class="btn" id="dream-button" type="button">查询</button>
+            </div>
+            <div class="keyword-row" id="keyword-row"></div>
+            <div class="search-result" id="dream-result">
+              <h3>考试</h3>
+              <p>通常对应近期对结果、评价或时间节点的担心。先把压在心里的事拆成一小步，会更有掌控感。</p>
+            </div>
+          </article>
+
+          <article class="panel side-panel">
+            <div class="panel-tag">解梦贴士</div>
+            <h3>梦是情绪的镜子</h3>
+            <p>梦境通常不是预兆，而是近期情绪和压力的折射。反复出现同类主题，说明那件事还没在心里整理清楚。</p>
+            <div class="dream-tips">
+              <div class="dream-tip-item">
+                <span class="tip-icon">📌</span>
+                <span>梦到<strong>逃跑/追赶</strong>：多半是现实中有件事在回避，先把它写下来</span>
+              </div>
+              <div class="dream-tip-item">
+                <span class="tip-icon">📌</span>
+                <span>梦到<strong>熟人说陌生话</strong>：可能是对那段关系还有期待或担心</span>
+              </div>
+              <div class="dream-tip-item">
+                <span class="tip-icon">📌</span>
+                <span>同一个梦<strong>反复出现</strong>：通常意味着某件事还没有真正处理完</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="poster">
+        <div class="section-head">
+          <p class="eyebrow">结果卡片</p>
+          <h2>把重点结果收成一张卡</h2>
+          <p>今天版、月度版、年度版都能单独看。</p>
+        </div>
+
+        <div class="poster-grid">
+          <article class="poster-board" id="poster-board">
+            <div class="poster-top">
+              <span id="poster-mode-label">今日结果卡片</span>
+              <strong id="poster-name">大美丽</strong>
+            </div>
+            <h3 id="poster-title">先把心收回来，再推进一件重要小事</h3>
+            <p id="poster-summary">今天更适合先完成一件最关键的小事，再去处理其他信息。</p>
+            <div class="poster-chips" id="poster-chips"></div>
+            <div class="poster-foot" id="poster-foot">元素偏好火 · 辰时节奏</div>
+            <div class="poster-meta-row">
+              <span id="poster-date"></span>
+              <span class="poster-brand">问问日常 · qingxihub.com/daily</span>
+            </div>
+          </article>
+
+          <article class="panel poster-side">
+            <div class="panel-tag">切换查看</div>
+            <h3>今天版、月度版、年度版都能单独看</h3>
+            <p>如果只是看一段结果，很快就忘了；整理成结果卡片后，重点会更清楚，也更适合保存。</p>
+            <div class="poster-switches">
+              <button class="poster-switch is-active" data-poster-mode="today" type="button">今日版</button>
+              <button class="poster-switch" data-poster-mode="month" type="button">月度版</button>
+              <button class="poster-switch" data-poster-mode="year" type="button">年度版</button>
+            </div>
+            <button class="btn btn-save" id="save-poster" type="button">📥 保存卡片（发小红书 / 朋友圈）</button>
+            <div class="mini-follow">
+              <p>喜欢今天的结果？关注清溪，每周更新 AI 工具用法 ↓</p>
+              <div class="mini-follow-btns">
+                <a class="mini-btn-xhs" href="https://xhslink.com/m/15zyxo67w0J" target="_blank">📕 关注小红书</a>
+                <a class="mini-btn-dy" href="https://v.douyin.com/jUdv0B2yNdw/" target="_blank">🎵 关注抖音</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- 清溪关注引导区 -->
+    <div class="qx-cta-wrap">
+      <div class="qx-cta-box">
+        <div class="qx-cta-eyebrow">✦ 跟着清溪一起用AI</div>
+        <div class="qx-cta-title">每周更新，真实在用的AI工具</div>
+        <div class="qx-cta-sub">用AI做内容的亲身记录 · 帮你少走弯路</div>
+        <div class="qx-cta-btns">
+          <a class="qx-btn-xhs" href="https://xhslink.com/m/15zyxo67w0J" target="_blank">📕 关注小红书</a>
+          <a class="qx-btn-dy" href="https://v.douyin.com/jUdv0B2yNdw/" target="_blank">🎵 关注抖音</a>
+        </div>
+        <div class="qx-cta-note">关注小红书后私信 <strong>「工具包」</strong> → 免费领 Prompt合集 + 工具清单 + 爆款选题模板</div>
+        <div class="qx-biz">商务合作 · ✉️ zhangxin19940203@gmail.com · 💬 微信 qingxi20250501</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
