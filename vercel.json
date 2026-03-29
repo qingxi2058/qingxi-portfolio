@@ -1,12 +1,20 @@
 {
   "rewrites": [
     {
+      "source": "/portfolio",
+      "destination": "/portfolio/index.html"
+    },
+    {
+      "source": "/portfolio/",
+      "destination": "/portfolio/index.html"
+    },
+    {
       "source": "/home",
-      "destination": "/home/index.html"
+      "destination": "/index.html"
     },
     {
       "source": "/home/",
-      "destination": "/home/index.html"
+      "destination": "/index.html"
     }
   ]
 }
