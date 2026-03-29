@@ -330,6 +330,28 @@ a { color: inherit; text-decoration: none; }
     flex-direction: column;
   }
 }
+
+/* ===== 清溪关注引导区 ===== */
+.qx-cta-wrap {
+  background: linear-gradient(135deg, #6c3de0 0%, #9b5cf0 100%);
+  padding: 56px 24px 48px;
+  text-align: center;
+}
+.qx-cta-box { max-width: 640px; margin: 0 auto; }
+.qx-cta-eyebrow { font-size: 13px; color: rgba(255,255,255,.72); letter-spacing: .08em; margin-bottom: 12px; }
+.qx-cta-title { font-size: clamp(20px,4vw,30px); font-weight: 700; color: #fff; margin-bottom: 8px; }
+.qx-cta-sub { font-size: 15px; color: rgba(255,255,255,.85); margin-bottom: 28px; }
+.qx-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+.qx-btn-xhs, .qx-btn-dy {
+  display: inline-block; padding: 13px 28px; border-radius: 50px;
+  font-size: 15px; font-weight: 600; text-decoration: none;
+  transition: opacity .2s, transform .15s;
+}
+.qx-btn-xhs:hover, .qx-btn-dy:hover { opacity: .88; transform: translateY(-2px); }
+.qx-btn-xhs { background: #ff2442; color: #fff; }
+.qx-btn-dy { background: rgba(255,255,255,.18); color: #fff; border: 1.5px solid rgba(255,255,255,.5); }
+.qx-cta-note { font-size: 13px; color: rgba(255,255,255,.8); margin-bottom: 20px; }
+.qx-biz { font-size: 12px; color: rgba(255,255,255,.6); padding-top: 16px; border-top: 1px solid rgba(255,255,255,.15); }
 </style>
 </head>
 <body>
@@ -506,6 +528,21 @@ a { color: inherit; text-decoration: none; }
       </div>
     </div>
   </section>
+
+  <!-- 清溪关注引导区 -->
+  <div class="qx-cta-wrap">
+    <div class="qx-cta-box">
+      <div class="qx-cta-eyebrow">✦ 跟着清溪一起用AI</div>
+      <div class="qx-cta-title">每周更新，真实在用的AI工具</div>
+      <div class="qx-cta-sub">用AI做内容的亲身记录 · 帮你少走弯路</div>
+      <div class="qx-cta-btns">
+        <a class="qx-btn-xhs" href="https://www.xiaohongshu.com/user/profile/5a4858224eacab31e51122a3" target="_blank" rel="noopener">📕 关注小红书</a>
+        <a class="qx-btn-dy" href="https://v.douyin.com/-AnTCADzYG0/" target="_blank" rel="noopener">🎵 关注抖音</a>
+      </div>
+      <div class="qx-cta-note">关注小红书后私信 <strong>「工具包」</strong> → 免费领 Prompt合集 + 工具清单 + 爆款选题模板</div>
+      <div class="qx-biz">商务合作 · ✉️ zhangxin19940203@gmail.com · 💬 微信 qingxi20250501</div>
+    </div>
+  </div>
 
   <div class="footer">
     张清溪 · AI产品 / 内容增长 / 项目落地
