@@ -1,0 +1,20 @@
+{
+  "name": "下班倒计时·摸鱼神器",
+  "short_name": "下班倒计时",
+  "description": "打工人专属下班倒计时工具，可以安装到桌面，像独立应用一样打开。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a1b25",
+  "theme_color": "#0a1b25",
+  "icons": [
+    {
+      "src": "pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>下班倒计时 · 动态壁纸</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Manrope:wght@300;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --neon: #39ff14;
+      --accent: #fca311;
+      --accent2: #06d6a0;
+      --accent3: #ff6b35;
+      --bg: #070e14;
+      --text: #f6f8fb;
+      --muted: rgba(255,255,255,0.55);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      user-select: none;
+    }
+
+    /* ── 粒子画布 ── */
+    #canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* ── 光晕叠层 ── */
+    .glow-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 20%, rgba(252,163,17,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 45% at 85% 15%, rgba(6,214,160,.14) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 50% at 70% 80%, rgba(255,107,53,.18) 0%, transparent 65%);
+    }
+
+    /* ── 扫描线 ── */
+    .scanline {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(57,255,20,.025) 3px, rgba(57,255,20,.025) 4px);
+      animation: scanmove 8s linear infinite;
+    }
+    @keyframes scanmove {
+      from { background-position: 0 0; }
+      to   { background-position: 0 -80px; }
+    }
+
+    /* ── 主内容 ── */
+    #app {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    /* ── 日期行 ── */
+    #dateRow {
+      font-size: clamp(13px, 1.4vw, 20px);
+      letter-spacing: .22em;
+      color: rgba(255,255,255,.45);
+      text-transform: uppercase;
+      margin-bottom: clamp(12px, 2vh, 32px);
+      font-weight: 300;
+    }
+
+    /* ── 主倒计时 ── */
+    #countdown {
+      font-family: "Share Tech Mono", monospace;
+      font-size: clamp(72px, 17vw, 300px);
+      letter-spacing: .04em;
+      color: var(--neon);
+      line-height: 1;
+      text-shadow:
+        0 0 12px rgba(57,255,20,.5),
+        0 0 40px rgba(57,255,20,.3),
+        0 24px 60px rgba(2,10,16,.8);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { text-shadow: 0 0 10px rgba(57,255,20,.4), 0 0 30px rgba(57,255,20,.2), 0 20px 50px rgba(2,10,16,.8); }
+      50%      { text-shadow: 0 0 18px rgba(57,255,20,.75), 0 0 55px rgba(57,255,20,.45), 0 20px 50px rgba(2,10,16,.8); }
+    }
+
+    /* 下班后倒计时变红 */
+    body.offwork #countdown {
+      color: #ff4d4d;
+      animation: pulse-red 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse-red {
+      0%,100% { text-shadow: 0 0 14px rgba(255,60,60,.5), 0 0 40px rgba(255,60,60,.25), 0 20px 50px rgba(20,0,0,.8); }
+      50%      { text-shadow: 0 0 22px rgba(255,60,60,.85), 0 0 65px rgba(255,60,60,.5), 0 20px 50px rgba(20,0,0,.8); }
+    }
+    body.offwork {
+      background: #060808;
+    }
+    body.offwork .glow-layer {
+      background:
+        radial-gradient(ellipse 65% 55% at 20% 20%, rgba(255,50,50,.22) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 50% at 80% 20%, rgba(255,120,60,.16) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 55% at 65% 80%, rgba(255,40,40,.22) 0%, transparent 65%);
+      animation: alarm-pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes alarm-pulse {
+      0%,100% { opacity: .75; }
+      50%      { opacity: 1; }
+    }
+
+    /* ── 状态行 ── */
+    #statusRow {
+      margin-top: clamp(10px, 1.8vh, 24px);
+      font-size: clamp(12px, 1.3vw, 18px);
+      letter-spacing: .3em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── 当前时间 ── */
+    #nowTime {
+      margin-top: clamp(18px, 3vh, 44px);
+      font-family: "Share Tech Mono", monospace;
+      font-size: clamp(28px, 4.5vw, 72px);
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.22);
+      text-shadow: 0 0 20px rgba(252,163,17,.25);
+    }
+
+    /* ── 进度条 ── */
+    #progressWrap {
+      margin-top: clamp(20px, 3.5vh, 52px);
+      width: min(580px, 70vw);
+    }
+    #progressLabel {
+      display: flex;
+      justify-content: space-between;
+      font-size: clamp(10px, 1vw, 13px);
+      color: rgba(255,255,255,.38);
+      letter-spacing: .1em;
+      margin-bottom: 8px;
+    }
+    #progressBar {
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      overflow: hidden;
+    }
+    #progressFill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--neon), var(--accent2));
+      box-shadow: 0 0 8px rgba(57,255,20,.5);
+      transition: width .8s ease;
+      width: 0%;
+    }
+    body.offwork #progressFill {
+      width: 100% !important;
+      background: linear-gradient(90deg, #ff4d4d, #ff9966);
+      box-shadow: 0 0 8px rgba(255,60,60,.5);
+    }
+
+    /* ── 骂人弹幕 ── */
+    #barrage {
+      position: fixed;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .barrage-item {
+      position: absolute;
+      white-space: nowrap;
+      font-size: clamp(16px, 2vw, 24px);
+      color: rgba(255,255,255,.9);
+      background: rgba(200,0,0,.22);
+      border: 1px solid rgba(255,60,60,.4);
+      padding: 6px 20px;
+      border-radius: 999px;
+      text-shadow: 0 4px 14px rgba(0,0,0,.5);
+      animation-name: barrage-move;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+    }
+    @keyframes barrage-move {
+      from { transform: translateX(110vw); }
+      to   { transform: translateX(-120%); }
+    }
+
+    /* ── 使用说明按钮 ── */
+    #helpBtn {
+      position: fixed;
+      bottom: 24px;
+      right: 28px;
+      z-index: 10;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.45);
+      font-size: 16px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all .2s;
+      backdrop-filter: blur(8px);
+    }
+    #helpBtn:hover {
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      border-color: rgba(255,255,255,.45);
+    }
+
+    /* ── 使用说明弹窗 ── */
+    #helpOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: rgba(4,14,22,.82);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+    }
+    #helpOverlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .help-card {
+      background: rgba(16,36,52,.97);
+      border: 1px solid rgba(57,255,20,.25);
+      border-radius: 24px;
+      padding: 36px 32px 28px;
+      max-width: 480px;
+      width: 90vw;
+      box-shadow: 0 24px 60px rgba(0,0,0,.7), 0 0 0 1px rgba(57,255,20,.08);
+      position: relative;
+    }
+    .help-close {
+      position: absolute;
+      top: 14px; right: 16px;
+      background: rgba(255,255,255,.1);
+      border: none; border-radius: 50%;
+      width: 28px; height: 28px;
+      color: rgba(255,255,255,.6);
+      font-size: 12px;
+      cursor: pointer;
+      display: grid; place-items: center;
+    }
+    .help-close:hover { background: rgba(255,255,255,.2); color: #fff; }
+    .help-title {
+      font-size: 18px; font-weight: 700;
+      color: var(--neon);
+      margin-bottom: 6px;
+      letter-spacing: .06em;
+    }
+    .help-sub {
+      font-size: 13px; color: rgba(255,255,255,.55);
+      margin-bottom: 22px; line-height: 1.6;
+    }
+    .help-section {
+      margin-bottom: 18px;
+    }
+    .help-os {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .help-steps {
+      list-style: none;
+      counter-reset: step;
+    }
+    .help-steps li {
+      counter-increment: step;
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: rgba(255,255,255,.8);
+      line-height: 1.55;
+      margin-bottom: 7px;
+    }
+    .help-steps li::before {
+      content: counter(step);
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(57,255,20,.18);
+      border: 1px solid rgba(57,255,20,.35);
+      color: var(--neon);
+      font-size: 11px; font-weight: 700;
+      display: grid; place-items: center;
+      margin-top: 1px;
+    }
+    .help-steps a { color: var(--accent2); text-decoration: none; }
+    .help-steps a:hover { text-decoration: underline; }
+    .help-divider {
+      height: 1px; background: rgba(255,255,255,.1);
+      margin: 14px 0;
+    }
+    .help-note {
+      font-size: 11px; color: rgba(255,255,255,.38);
+      line-height: 1.7;
+    }
+    .help-copy-btn {
+      display: block;
+      width: 100%;
+      margin-top: 14px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(57,255,20,.35);
+      background: rgba(57,255,20,.1);
+      color: var(--neon);
+      font-size: 13px; font-weight: 600;
+      cursor: pointer; letter-spacing: .04em;
+      transition: all .18s;
+      font-family: "Manrope", sans-serif;
+    }
+    .help-copy-btn:hover {
+      background: rgba(57,255,20,.2);
+      border-color: rgba(57,255,20,.6);
+    }
+
+    /* ── 下班提示 ── */
+    #offworkBanner {
+      position: fixed;
+      top: clamp(20px, 4vh, 48px);
+      left: 50%; transform: translateX(-50%);
+      z-index: 5;
+      font-size: clamp(14px, 2vw, 22px);
+      letter-spacing: .25em;
+      font-weight: 700;
+      color: #ffbaba;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(255,80,80,.7);
+      opacity: 0;
+      pointer-events: none;
+      animation: jitter .5s infinite;
+      transition: opacity .4s;
+    }
+    #offworkBanner.show { opacity: 1; }
+    @keyframes jitter {
+      0%   { transform: translateX(calc(-50% + 0px)); }
+      20%  { transform: translateX(calc(-50% + 2px)); }
+      40%  { transform: translateX(calc(-50% - 2px)); }
+      60%  { transform: translateX(calc(-50% + 1px)); }
+      80%  { transform: translateX(calc(-50% - 1px)); }
+      100% { transform: translateX(calc(-50% + 0px)); }
+    }
+
+    /* ── 返回按钮 ── */
+    #backBtn {
+      position: fixed;
+      bottom: 24px;
+      left: 28px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.4);
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s;
+      backdrop-filter: blur(8px);
+      font-family: "Manrope", sans-serif;
+      letter-spacing: .04em;
+    }
+    #backBtn:hover {
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.75);
+      border-color: rgba(255,255,255,.35);
+    }
+
+    /* ── 全屏提示 ── */
+    #fullscreenHint {
+      position: fixed;
+      top: 22px; right: 24px;
+      z-index: 10;
+      font-size: 11px;
+      color: rgba(255,255,255,.2);
+      letter-spacing: .08em;
+      cursor: pointer;
+      transition: color .2s;
+    }
+    #fullscreenHint:hover { color: rgba(255,255,255,.5); }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div class="glow-layer"></div>
+  <div class="scanline"></div>
+
+  <div id="offworkBanner">🔥 到点了！该撤了！</div>
+
+  <div id="app">
+    <div id="dateRow">— 北京时间 —</div>
+    <div id="countdown">00:00:00</div>
+    <div id="statusRow">距离下班还有</div>
+    <div id="nowTime">00:00</div>
+    <div id="progressWrap">
+      <div id="progressLabel">
+        <span>今日工作进度</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div id="progressBar"><div id="progressFill"></div></div>
+    </div>
+  </div>
+
+  <div id="barrage"></div>
+
+  <div id="fullscreenHint" onclick="toggleFullscreen()">⛶ 全屏 / F11</div>
+  <a id="backBtn" href="index.html">← 返回设置</a>
+  <button id="helpBtn" onclick="toggleHelp()">?</button>
+
+  <!-- 使用说明弹窗 -->
+  <div id="helpOverlay" onclick="closeHelp(event)">
+    <div class="help-card" onclick="event.stopPropagation()">
+      <button class="help-close" onclick="closeHelp()">✕</button>
+      <div class="help-title">🖥️ 如何设为电脑壁纸</div>
+      <div class="help-sub">把这个动态倒计时变成你的桌面壁纸，每次开机都能看到，完全免费。</div>
+
+      <div class="help-section">
+        <div class="help-os">🍎 macOS 用户</div>
+        <ol class="help-steps">
+          <li>在 App Store 免费下载安装 <a href="https://apps.apple.com/app/plash/id1494023538" target="_blank">Plash</a></li>
+          <li>打开 Plash → 点击菜单栏图标 → Preferences</li>
+          <li>把下方的网址粘贴到 URL 输入框</li>
+          <li>勾选「在屏幕下方显示」，壁纸立即生效 ✅</li>
+        </ol>
+      </div>
+
+      <div class="help-divider"></div>
+
+      <div class="help-section">
+        <div class="help-os">🪟 Windows 用户</div>
+        <ol class="help-steps">
+          <li>在 Microsoft Store 免费下载 <a href="https://apps.microsoft.com/detail/9ntm2qc6qws7" target="_blank">Lively Wallpaper</a></li>
+          <li>打开 Lively → 点击「+」添加 → 选「网页」</li>
+          <li>把下方的网址粘贴进去，点击「确定」</li>
+          <li>选中后点「设为壁纸」✅</li>
+        </ol>
+      </div>
+
+      <div class="help-divider"></div>
+
+      <div class="help-note">💡 壁纸页会自动读取你在主页设置的下班时间，无需重新配置。建议先在主页设好下班时间再设壁纸。</div>
+
+      <button class="help-copy-btn" id="copyUrlBtn" onclick="copyWallpaperUrl()">📋 复制壁纸网址</button>
+    </div>
+  </div>
+
+  <script>
+    // ══════════════════════════════════════════════
+    // 粒子画布系统
+    // ══════════════════════════════════════════════
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', () => { resize(); initParticles(); });
+
+    function randBetween(a, b) { return a + Math.random() * (b - a); }
+
+    const PARTICLE_COLORS = [
+      'rgba(57,255,20,',
+      'rgba(252,163,17,',
+      'rgba(6,214,160,',
+      'rgba(255,107,53,',
+      'rgba(180,100,255,',
+    ];
+
+    function mkParticle() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: randBetween(.4, 2.2),
+        vx: randBetween(-0.18, 0.18),
+        vy: randBetween(-0.22, 0.22),
+        color: PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
+        alpha: randBetween(0.12, 0.55),
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: randBetween(0.008, 0.025),
+      };
+    }
+
+    function initParticles() {
+      const count = Math.floor((W * H) / 8000);
+      particles = Array.from({ length: Math.min(count, 180) }, mkParticle);
+    }
+    initParticles();
+
+    let animId;
+    function drawFrame() {
+      ctx.clearRect(0, 0, W, H);
+
+      // 流光连线
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            const lineAlpha = (1 - dist / 110) * 0.065;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(57,255,20,${lineAlpha})`;
+            ctx.lineWidth = .5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // 粒子
+      for (const p of particles) {
+        p.pulse += p.pulseSpeed;
+        const a = p.alpha * (0.7 + 0.3 * Math.sin(p.pulse));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color + a + ')';
+        ctx.fill();
+
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -10) p.x = W + 10;
+        if (p.x > W + 10) p.x = -10;
+        if (p.y < -10) p.y = H + 10;
+        if (p.y > H + 10) p.y = -10;
+      }
+
+      animId = requestAnimationFrame(drawFrame);
+    }
+    drawFrame();
+
+    // ══════════════════════════════════════════════
+    // 倒计时核心逻辑
+    // ══════════════════════════════════════════════
+    const SETTINGS_KEY = 'offwork-clock-settings';
+    const WORK_HOURS_PER_DAY = 8;
+    const WORK_DAYS_PER_MONTH = 22;
+
+    let endHour = 18, endMinute = 0;
+    let barrageTimer = null;
+
+    function loadSettings() {
+      try {
+        const raw = localStorage.getItem(SETTINGS_KEY);
+        if (raw) {
+          const d = JSON.parse(raw);
+          if (d.endTime) {
+            const [h, m] = d.endTime.split(':').map(Number);
+            endHour = h || 18;
+            endMinute = m || 0;
+          }
+        }
+      } catch(e) {}
+    }
+    loadSettings();
+    // 每30秒重新读一次，确保主页改完后壁纸也跟着更新
+    setInterval(loadSettings, 30000);
+
+    function getBeijingParts() {
+      const fmt = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Shanghai',
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        hour12: false
+      });
+      const map = {};
+      for (const p of fmt.formatToParts(new Date())) {
+        if (p.type !== 'literal') map[p.type] = p.value;
+      }
+      return {
+        year: +map.year, month: +map.month, day: +map.day,
+        hour: +map.hour, minute: +map.minute, second: +map.second
+      };
+    }
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function fmtDuration(ms) {
+      const s = Math.floor(Math.abs(ms) / 1000);
+      return `${pad(Math.floor(s/3600))}:${pad(Math.floor((s%3600)/60))}:${pad(s%60)}`;
+    }
+
+    const countdownEl   = document.getElementById('countdown');
+    const statusEl      = document.getElementById('statusRow');
+    const nowTimeEl     = document.getElementById('nowTime');
+    const progressFill  = document.getElementById('progressFill');
+    const progressPct   = document.getElementById('progressPct');
+    const offworkBanner = document.getElementById('offworkBanner');
+    const barrageEl     = document.getElementById('barrage');
+
+    const barrageLines = [
+      '快滚回家搞副业！',
+      '还不走？老板给你加钱了吗？',
+      '下班铃都响了，你还在演感动中国？',
+      '该走了！公司不会记你加班的。',
+      '别卷了，天都黑了。',
+      '摸鱼也要有下班线，给自己放过。',
+      '你在坚持什么？KPI不会感动你的。',
+      '世界在外面等你，桌子拦不住你的。',
+    ];
+
+    function createBarrageItem() {
+      const el = document.createElement('div');
+      el.className = 'barrage-item';
+      el.textContent = barrageLines[Math.floor(Math.random() * barrageLines.length)];
+      el.style.top = (Math.random() * 72 + 5) + '%';
+      el.style.animationDuration = (7 + Math.random() * 7) + 's';
+      el.style.fontSize = (15 + Math.random() * 10) + 'px';
+      barrageEl.appendChild(el);
+      el.addEventListener('animationend', () => el.remove());
+    }
+
+    function startBarrage() {
+      if (barrageTimer) return;
+      createBarrageItem();
+      barrageTimer = setInterval(createBarrageItem, 1200);
+    }
+    function stopBarrage() {
+      if (!barrageTimer) return;
+      clearInterval(barrageTimer);
+      barrageTimer = null;
+      barrageEl.innerHTML = '';
+    }
+
+    function tick() {
+      const p = getBeijingParts();
+      const now = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second);
+      const end = Date.UTC(p.year, p.month - 1, p.day, endHour, endMinute, 0);
+      const diff = end - now;
+      const isOff = diff <= 0;
+
+      // 当前时间
+      nowTimeEl.textContent = `${pad(p.hour)}:${pad(p.minute)}`;
+
+      // 倒计时
+      countdownEl.textContent = isOff
+        ? `超时 ${fmtDuration(diff)}`
+        : fmtDuration(diff);
+
+      statusEl.textContent = isOff ? '已到设定时间' : '距离下班还有';
+
+      // 进度条：从上班（下班前8h）到下班
+      const workStart = end - WORK_HOURS_PER_DAY * 3600 * 1000;
+      const elapsed   = Math.min(Math.max(now - workStart, 0), WORK_HOURS_PER_DAY * 3600 * 1000);
+      const pct       = Math.round(elapsed / (WORK_HOURS_PER_DAY * 3600 * 1000) * 100);
+      progressFill.style.width = Math.min(pct, 100) + '%';
+      progressPct.textContent  = Math.min(pct, 100) + '%';
+
+      // 状态切换
+      document.body.classList.toggle('offwork', isOff);
+      offworkBanner.classList.toggle('show', isOff);
+
+      if (isOff) startBarrage();
+      else stopBarrage();
+    }
+
+    tick();
+    setInterval(tick, 500);
+
+    // ══════════════════════════════════════════════
+    // UI 交互
+    // ══════════════════════════════════════════════
+    function toggleHelp() {
+      document.getElementById('helpOverlay').classList.toggle('show');
+    }
+    function closeHelp(e) {
+      if (!e || e.target === document.getElementById('helpOverlay')) {
+        document.getElementById('helpOverlay').classList.remove('show');
+      }
+    }
+
+    function copyWallpaperUrl() {
+      // 生成当前壁纸页的绝对 URL（去掉 hash/query，确保指向 wallpaper.html）
+      let url = location.href.split('?')[0].split('#')[0];
+      if (!url.endsWith('wallpaper.html')) {
+        url = url.replace(/\/?$/, '/wallpaper.html');
+      }
+      // 也支持线上地址
+      const onlineUrl = 'https://qingxihub.com/timer/wallpaper.html';
+      const copyText = onlineUrl;
+      const btn = document.getElementById('copyUrlBtn');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(copyText).then(() => {
+          btn.textContent = '✅ 已复制！粘贴到 Plash / Lively 里';
+          setTimeout(() => { btn.textContent = '📋 复制壁纸网址'; }, 2500);
+        }).catch(fallback);
+      } else { fallback(); }
+
+      function fallback() {
+        const ta = document.createElement('textarea');
+        ta.value = copyText; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); btn.textContent = '✅ 已复制！'; } catch(e) {}
+        document.body.removeChild(ta);
+        setTimeout(() => { btn.textContent = '📋 复制壁纸网址'; }, 2500);
+      }
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    // F11 快捷键
+    document.addEventListener('keydown', e => {
+      if (e.key === 'F11') { e.preventDefault(); toggleFullscreen(); }
+      if (e.key === 'Escape') { closeHelp(); }
+    });
+
+    // 双击切换全屏
+    document.getElementById('app').addEventListener('dblclick', toggleFullscreen);
+  </script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- ✅ SEO 核心标签 -->
+    <title>下班倒计时·摸鱼神器 | 打工人专属解压工具</title>
+    <meta name="description" content="打工人专属下班倒计时工具！输入下班时间，实时显示距下班剩余时长，自动计算今日工资进度，骂人弹幕轮播解压。免费在线使用，数据仅本地计算，不上传不记录。" />
+    <meta name="keywords" content="下班倒计时,摸鱼神器,打工人工具,下班提醒,工资计算器,班味解压,骂人屏保,打工人摸鱼,下班时间,倒计时工具" />
+    <link rel="canonical" href="https://qingxihub.com/timer/" />
+
+    <!-- ✅ Favicon（emoji版，无需上传文件）-->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏱</text></svg>" />
+    <meta name="theme-color" content="#0a1b25" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="下班倒计时" />
+
+    <!-- ✅ Open Graph（微信/微博分享预览）-->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://qingxihub.com/timer/" />
+    <meta property="og:title" content="下班倒计时·骂人解压神器 | 打工人必备摸鱼工具" />
+    <meta property="og:description" content="输入下班时间，实时倒计时 + 骂人弹幕解压，还能看今天赚了多少钱💰打工人摸鱼必备，免费永久使用！" />
+    <meta property="og:image" content="https://qingxihub.com/assets/images/countdown-cover-20260326.png" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="到点提醒·下班倒计时" />
+
+    <!-- ✅ Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="下班倒计时·骂人解压神器 | 打工人必备摸鱼工具" />
+    <meta name="twitter:description" content="输入下班时间，实时倒计时+骂人弹幕解压，还能看今天赚了多少钱。打工人摸鱼必备！" />
+    <meta name="twitter:image" content="https://qingxihub.com/assets/images/countdown-cover-20260326.png" />
+
+    <!-- ✅ 结构化数据（Google富文本搜索结果）-->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "下班倒计时·摸鱼神器",
+      "url": "https://qingxihub.com/timer/",
+      "description": "打工人专属下班倒计时工具，实时显示距下班剩余时长，自动计算工资进度，骂人弹幕解压。",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "CNY"
+      },
+      "inLanguage": "zh-CN"
+    }
+    </script>
+
+    <!-- ✅ Google Analytics（替换 G-XXXXXXXXXX 为你的真实ID）-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L13LVT0J8F"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L13LVT0J8F');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="top">
+        <div class="brand">
+          <div class="brand-dot"></div>
+          <div>
+            <h1>⏱ 到点提醒</h1>
+            <p>把流逝的时间，变成可判断的进度。</p>
+          </div>
+        </div>
+        <div class="controls">
+          <div class="meta-time" id="beijingTime">北京时间 00:00</div>
+          <label>
+            <span>下班时间</span>
+            <input type="time" id="endTime" value="18:00" />
+          </label>
+          <label>
+            <span>月薪（元/月）</span>
+            <div class="salary-input">
+              <input
+                type="text"
+                id="monthlySalary"
+                inputmode="decimal"
+                autocomplete="off"
+                spellcheck="false"
+                value="8000"
+              />
+              <button
+                type="button"
+                id="salaryToggle"
+                class="salary-toggle"
+                aria-label="显示月薪"
+                aria-pressed="false"
+              >
+                <svg class="eye-closed" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M2.5 12c2.8-4.8 6.7-7.2 11.5-7.2 4.9 0 8.7 2.4 11.5 7.2-2.8 4.8-6.7 7.2-11.5 7.2-4.8 0-8.7-2.4-11.5-7.2Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  />
+                  <path
+                    d="M7 12a5 5 0 1 0 10 0 5 5 0 0 0-10 0Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  />
+                  <path
+                    d="m3 3 18 18"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M2.5 12c2.8-4.8 6.7-7.2 11.5-7.2 4.9 0 8.7 2.4 11.5 7.2-2.8 4.8-6.7 7.2-11.5 7.2-4.8 0-8.7-2.4-11.5-7.2Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  />
+                  <path
+                    d="M7 12a5 5 0 1 0 10 0 5 5 0 0 0-10 0Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  />
+                </svg>
+              </button>
+            </div>
+            <span class="input-hint">仅在本地计算，不记录，也不评判</span>
+          </label>
+          <label class="toggle">
+            <span>轻微提醒</span>
+            <div class="toggle-row">
+              <input type="checkbox" id="remindThirty" />
+              <span>距离下班 30 分钟时提示</span>
+            </div>
+          </label>
+        </div>
+      </header>
+
+      <main class="display">
+        <div class="penalty" id="penalty" aria-hidden="true">
+          <span class="penalty-sub">已到设定时间</span>
+          <span class="penalty-main">这一天够了，该回归生活了。</span>
+        </div>
+        <div class="countdown" id="countdown">00:00:00</div>
+        <div class="status" id="status">距离结束节点还有</div>
+        <div class="today-earnings">
+          <span>今日累计进度</span>
+          <strong id="todayEarned">0.0000</strong>
+        </div>
+        <div class="today-note">按你的月薪和工作时长自动换算</div>
+      </main>
+
+      <div class="toast" id="toast" aria-live="polite"></div>
+      <div class="barrage" id="barrage" aria-hidden="true"></div>
+
+      <!-- ✅ 商务合作弹窗 -->
+      <div class="qr-overlay" id="qrOverlay" onclick="closeQR()">
+        <div class="qr-card" onclick="event.stopPropagation()">
+          <button class="qr-close" onclick="closeQR()">✕</button>
+          <p class="qr-name">💼 清溪 · 商务合作</p>
+          <p class="qr-tip">AI工具开发 · 内容变现 · 流量合作</p>
+
+          <div class="qr-section">
+            <p class="qr-section-label">💚 微信扫码加好友</p>
+            <img src="wechat-qr.png" alt="清溪微信二维码" class="qr-img" />
+            <button class="qr-copy-btn" onclick="copyWechat()">
+              <span id="wxCopyText">复制微信号 qingxi20250501</span>
+            </button>
+          </div>
+
+          <div class="qr-divider"></div>
+
+          <div class="qr-links">
+            <a class="qr-link-btn qr-xhs" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noopener noreferrer">
+              📕 小红书主页
+            </a>
+            <a class="qr-link-btn qr-dy" href="https://v.douyin.com/fZNLm0iCwfA/" target="_blank" rel="noopener noreferrer">
+              🎵 抖音主页
+            </a>
+            <button class="qr-link-btn qr-mail" onclick="toggleEmailPopup()">
+              ✉️ 发邮件合作
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ 邮箱弹窗 -->
+      <div class="qr-overlay" id="emailOverlay" onclick="closeEmailPopup()">
+        <div class="qr-card" onclick="event.stopPropagation()" style="max-width:320px">
+          <button class="qr-close" onclick="closeEmailPopup()">✕</button>
+          <p class="qr-name">✉️ 商务合作邮箱</p>
+          <p class="qr-tip">AI工具开发 · 内容变现 · 流量合作<br>发邮件说明来意，48小时内回复</p>
+          <div class="email-display">zhangxin19940203@gmail.com</div>
+          <button class="qr-copy-btn" onclick="copyEmail()" style="width:100%">
+            <span id="emailCopyText">📋 复制邮箱地址</span>
+          </button>
+          <a class="qr-link-btn qr-mail" href="mailto:zhangxin19940203@gmail.com?subject=商务合作咨询" style="width:100%;box-sizing:border-box;margin-top:4px">
+            📨 直接发邮件
+          </a>
+        </div>
+      </div>
+
+      <!-- ✅ 右下角商务合作悬浮按钮 -->
+      <div class="fab-container" id="fabContainer">
+        <button class="fab-main" id="fabMain" onclick="toggleFab()" aria-label="联系我 / 商务合作">
+          <span class="fab-icon-open">💼</span>
+          <span class="fab-icon-close">✕</span>
+          <span class="fab-label">联系方式</span>
+        </button>
+        <div class="fab-menu" id="fabMenu">
+          <a class="fab-item fab-xhs" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noopener noreferrer">
+            <span class="fab-item-icon">📕</span>
+            <span class="fab-item-text">小红书</span>
+          </a>
+          <a class="fab-item fab-dy" href="https://v.douyin.com/fZNLm0iCwfA/" target="_blank" rel="noopener noreferrer">
+            <span class="fab-item-icon">🎵</span>
+            <span class="fab-item-text">抖音</span>
+          </a>
+          <a class="fab-item fab-wallpaper" href="wallpaper.html" target="_blank">
+            <span class="fab-item-icon">🖥️</span>
+            <span class="fab-item-text">动态壁纸</span>
+          </a>
+          <button class="fab-item fab-install" id="installAppBtn" type="button">
+            <span class="fab-item-icon">📲</span>
+            <span class="fab-item-text">安装到桌面</span>
+          </button>
+          <button class="fab-item fab-wx" onclick="toggleQR(event)">
+            <span class="fab-item-icon">💼</span>
+            <span class="fab-item-text">商务合作</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ✅ 分享区 + SEO文案区 -->
+      <footer class="share-footer">
+        <div class="share-row">
+          <span class="share-label">👋 发给同事，一起摸鱼</span>
+          <div class="share-buttons">
+            <a class="share-btn share-wallpaper" href="wallpaper.html" target="_blank" id="wallpaperBtn">🖥️ 动态壁纸</a>
+            <button class="share-btn share-save" id="savePosterBtn" onclick="handleSavePoster()">🖼 保存桌面图</button>
+            <button class="share-btn share-install" id="installShareBtn" onclick="triggerInstallFromFooter()">📲 安装到桌面</button>
+            <button class="share-btn share-copy" id="copyLinkBtn" onclick="handleCopyLink()">🔗 复制链接</button>
+            <button class="share-btn share-mail" onclick="handleEmailShare()">✉️ 邮件发送</button>
+            <button class="share-btn share-xhs" id="copyXhsBtn" onclick="handleCopyXhsShare()">📕 小红书文案</button>
+            <a class="share-btn share-github"
+              href="https://github.com/qingxi2058/qingxi-countdown-timer"
+              target="_blank" rel="noopener noreferrer">🐙 GitHub</a>
+            <a class="share-btn share-weibo"
+              href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fqingxihub.com%2Ftimer%2F&title=%E4%B8%8B%E7%8F%AD%E5%80%92%E8%AE%A1%E6%97%B6%E6%91%B8%E9%B1%BC%E7%A5%9E%E5%99%A8%EF%BC%8C%E6%89%93%E5%B7%A5%E4%BA%BA%E5%BF%85%E5%A4%87%EF%BC%81%E5%AE%9E%E6%97%B6%E5%80%92%E8%AE%A1%E6%97%B6%2B%E9%AA%82%E4%BA%BA%E5%BC%B9%E5%B9%95%E8%A7%A3%E5%8E%8B%EF%BC%8C%E8%BF%98%E8%83%BD%E7%9C%8B%E4%BB%8A%E5%A4%A9%E8%B5%9A%E4%BA%86%E5%A4%9A%E5%B0%91%E9%92%B1+%23%E6%89%93%E5%B7%A5%E4%BA%BA+%23%E6%91%B8%E9%B1%BC"
+              target="_blank" rel="noopener noreferrer">🌐 微博分享</a>
+          </div>
+        </div>
+        <p class="share-note">想把它当成实时小工具放在电脑上，请点“安装到桌面”，不是只保存图片。</p>
+        <div class="contact-band">
+          <button class="contact-chip" type="button" onclick="copyWechat()">💬 微信：qingxi20250501</button>
+          <a class="contact-chip" href="mailto:zhangxin19940203@gmail.com?subject=下班倒计时合作咨询">✉️ 邮箱联系</a>
+          <a class="contact-chip" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noopener noreferrer">📕 小红书主页</a>
+          <a class="contact-chip" href="https://v.douyin.com/fZNLm0iCwfA/" target="_blank" rel="noopener noreferrer">🎵 抖音主页</a>
+        </div>
+        <!-- SEO关键词文案：对用户展示但同时被搜索引擎收录 -->
+        <p class="seo-desc">
+          下班倒计时 · 打工人摸鱼神器 · 班味解压 · 今日工资进度 · 提前30分钟提醒 · 骂人弹幕屏保 · 免费在线工具
+        </p>
+      </footer>
+    </div>
+
+    <!-- 清溪关注引导区 -->
+    <div class="qx-cta-wrap">
+      <div class="qx-cta-box">
+        <div class="qx-cta-eyebrow">✦ 跟着清溪一起用AI</div>
+        <div class="qx-cta-title">每周更新，真实在用的AI工具</div>
+        <div class="qx-cta-sub">用AI做内容的亲身记录 · 帮你少走弯路</div>
+        <div class="qx-cta-btns">
+          <a class="qx-btn-xhs" href="https://xhslink.com/m/15zyxo67w0J" target="_blank">📕 关注小红书</a>
+          <a class="qx-btn-dy" href="https://v.douyin.com/jUdv0B2yNdw/" target="_blank">🎵 关注抖音</a>
+        </div>
+        <div class="qx-cta-note">关注小红书后私信 <strong>「工具包」</strong> → 免费领 Prompt合集 + 工具清单 + 爆款选题模板</div>
+        <div class="qx-biz">商务合作 · ✉️ zhangxin19940203@gmail.com · 💬 微信 qingxi20250501</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+      // 悬浮按钮开关
+      var fabOpen = false;
+      function toggleFab() {
+        fabOpen = !fabOpen;
+        var container = document.getElementById('fabContainer');
+        container.classList.toggle('fab-active', fabOpen);
+      }
+      // 点外部关闭
+      document.addEventListener('click', function(e) {
+        if (fabOpen && !document.getElementById('fabContainer').contains(e.target)) {
+          fabOpen = false;
+          document.getElementById('fabContainer').classList.remove('fab-active');
+        }
+      });
+      // 二维码弹窗
+      function toggleQR(e) {
+        e.stopPropagation();
+        document.getElementById('qrOverlay').classList.add('qr-show');
+      }
+      function closeQR() {
+        document.getElementById('qrOverlay').classList.remove('qr-show');
+      }
+      // 复制微信号
+      function copyWechat() {
+        var wechat = 'qingxi20250501';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(wechat).then(showWxCopied).catch(function(){ fallbackWx(wechat); });
+        } else { fallbackWx(wechat); }
+      }
+      function fallbackWx(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); showWxCopied(); } catch(e){}
+        document.body.removeChild(ta);
+      }
+      function showWxCopied() {
+        var el = document.getElementById('wxCopyText');
+        el.textContent = '✅ 已复制！去微信搜索添加';
+        setTimeout(function(){ el.textContent = '复制微信号 qingxi20250501'; }, 2500);
+      }
+
+      // 邮箱弹窗
+      function toggleEmailPopup() {
+        document.getElementById('emailOverlay').classList.add('qr-show');
+      }
+      function closeEmailPopup() {
+        document.getElementById('emailOverlay').classList.remove('qr-show');
+      }
+      function copyEmail() {
+        var email = 'zhangxin19940203@gmail.com';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(showEmailCopied).catch(function(){ fallbackEmailCopy(email); });
+        } else { fallbackEmailCopy(email); }
+      }
+      function fallbackEmailCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); showEmailCopied(); } catch(e){}
+        document.body.removeChild(ta);
+      }
+      function showEmailCopied() {
+        var el = document.getElementById('emailCopyText');
+        el.textContent = '✅ 已复制！';
+        setTimeout(function(){ el.textContent = '📋 复制邮箱地址'; }, 2500);
+      }
+
+      // 复制链接功能
+      function handleCopyLink() {
+        const url = 'https://qingxihub.com/timer/';
+        const text = '下班倒计时摸鱼神器，打工人必备！' + url;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function() {
+            showCopyToast();
+          }).catch(function() {
+            fallbackCopy(text);
+          });
+        } else {
+          fallbackCopy(text);
+        }
+      }
+      function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); showCopyToast(); } catch(e) {}
+        document.body.removeChild(ta);
+      }
+      function showCopyToast() {
+        var btn = document.getElementById('copyLinkBtn');
+        var orig = btn.textContent;
+        btn.textContent = '✅ 已复制！去发给同事';
+        btn.style.background = 'rgba(57,255,20,0.18)';
+        btn.style.borderColor = 'rgba(57,255,20,0.5)';
+        setTimeout(function() {
+          btn.textContent = orig;
+          btn.style.background = '';
+          btn.style.borderColor = '';
+        }, 2500);
+      }
+
+      function handleEmailShare() {
+        var subject = encodeURIComponent('下班倒计时摸鱼神器，发你一个顺手工具');
+        var body = encodeURIComponent(
+          '这个下班倒计时我觉得你会用得上：\\n' +
+          '可以直接看倒计时、工资进度，还能装到桌面。\\n\\n' +
+          '链接：https://qingxihub.com/timer/'
+        );
+        window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+      }
+
+      function triggerInstallFromFooter() {
+        var installBtn = document.getElementById('installAppBtn');
+        if (installBtn) {
+          installBtn.click();
+        }
+      }
+
+      function handleCopyXhsShare() {
+        var text =
+          '打工人桌面摸鱼神器分享给你：\\n' +
+          '这个下班倒计时可以直接看实时倒计时、今日工资进度，还能装到桌面，像独立小工具一样打开。\\n\\n' +
+          '链接：https://qingxihub.com/timer/\\n\\n' +
+          '#打工人摸鱼 #下班倒计时 #效率工具 #桌面工具 #清溪AI';
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function() {
+            showXhsToast();
+          }).catch(function() {
+            fallbackCopy(text);
+            showXhsToast();
+          });
+        } else {
+          fallbackCopy(text);
+          showXhsToast();
+        }
+      }
+
+      function showXhsToast() {
+        var btn = document.getElementById('copyXhsBtn');
+        var orig = btn.textContent;
+        btn.textContent = '✅ 已复制小红书文案';
+        btn.style.background = 'rgba(255,36,66,0.18)';
+        btn.style.borderColor = 'rgba(255,36,66,0.5)';
+        setTimeout(function() {
+          btn.textContent = orig;
+          btn.style.background = '';
+          btn.style.borderColor = '';
+        }, 2500);
+      }
+
+      function handleSavePoster() {
+        var target = document.querySelector('.app');
+        var btn = document.getElementById('savePosterBtn');
+        if (!target || typeof html2canvas === 'undefined') {
+          showToast('暂时没法保存图片，刷新后再试一次');
+          return;
+        }
+
+        var original = btn.textContent;
+        btn.textContent = '⏳ 正在生成';
+        html2canvas(target, {
+          backgroundColor: null,
+          scale: 2,
+          useCORS: true
+        }).then(function(canvas) {
+          var link = document.createElement('a');
+          link.download = '下班倒计时-桌面图.png';
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+          btn.textContent = '✅ 已保存';
+          setTimeout(function() {
+            btn.textContent = original;
+          }, 2200);
+        }).catch(function() {
+          btn.textContent = original;
+          showToast('保存图片失败了，刷新页面后再试一次');
+        });
+      }
+    </script>
+  </body>
+</html>
