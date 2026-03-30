@@ -1,6 +1,94 @@
 {
   "rewrites": [
     {
+      "source": "/daily",
+      "destination": "/daily/index.html"
+    },
+    {
+      "source": "/daily/",
+      "destination": "/daily/index.html"
+    },
+    {
+      "source": "/drama",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/create",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/projects",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/login",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/register",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/character-setting",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/storyboard",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/resource-center",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/pricing",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/dashboard",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/analytics",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/explore",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/drama/player/:id",
+      "destination": "/drama/index.html"
+    },
+    {
+      "source": "/year-end",
+      "destination": "/year-end/index.html"
+    },
+    {
+      "source": "/year-end/",
+      "destination": "/year-end/index.html"
+    },
+    {
+      "source": "/tools",
+      "destination": "/tools/index.html"
+    },
+    {
+      "source": "/tools/",
+      "destination": "/tools/index.html"
+    },
+    {
+      "source": "/timer",
+      "destination": "/timer/index.html"
+    },
+    {
+      "source": "/timer/",
+      "destination": "/timer/index.html"
+    },
+    {
       "source": "/portfolio",
       "destination": "/portfolio/index.html"
     },
