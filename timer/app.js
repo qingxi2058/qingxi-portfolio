@@ -140,7 +140,7 @@ function updateInstallButtonVisibility(visible) {
   if (!installAppBtn) {
     return;
   }
-  installAppBtn.hidden = !visible;
+  installAppBtn.classList.toggle("is-ready", visible);
 }
 
 function isStandaloneMode() {
