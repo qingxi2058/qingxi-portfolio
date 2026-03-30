@@ -1019,3 +1019,237 @@ body.offwork .earnings strong {
   background: rgba(57,255,20,.14);
   color: #39ff14;
 }
+
+/* ══════════════════════════════════════════
+   ✅ 倒计时区域光晕增强
+══════════════════════════════════════════ */
+.display {
+  position: relative;
+}
+.display::before {
+  content: '';
+  position: absolute;
+  width: min(900px, 85vw);
+  height: min(320px, 35vh);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -52%);
+  background: radial-gradient(ellipse, rgba(57,255,20,.07) 0%, transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+.countdown, .status, .today-earnings, .today-note {
+  position: relative;
+  z-index: 1;
+}
+
+/* 倒计时数字更大更厚重 */
+.countdown {
+  font-size: clamp(96px, 18vw, 310px);
+  letter-spacing: 0.02em;
+}
+
+/* 状态标签更精致 */
+.status {
+  font-size: 15px;
+  letter-spacing: .4em;
+  color: rgba(255,255,255,.38);
+  font-weight: 300;
+}
+
+/* ══════════════════════════════════════════
+   ✅ 今日进度卡片升级
+══════════════════════════════════════════ */
+.today-earnings {
+  padding: 14px 32px;
+  background: rgba(57,255,20,.08);
+  border: 1px solid rgba(57,255,20,.22);
+  border-radius: 999px;
+  gap: 14px;
+  box-shadow: 0 0 30px rgba(57,255,20,.12), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.today-earnings strong {
+  font-size: clamp(26px, 3.5vw, 40px);
+  min-width: 10ch;
+}
+.today-note {
+  font-size: 11px;
+  opacity: .5;
+  letter-spacing: .08em;
+}
+
+/* ══════════════════════════════════════════
+   ✅ 分享海报卡片（隐藏模板）
+══════════════════════════════════════════ */
+#posterCard {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 800px;
+  height: 1000px;
+  background: linear-gradient(160deg, #050d14 0%, #0a1b25 50%, #0e2436 100%);
+  overflow: hidden;
+  font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  color: #f6f8fb;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+}
+.pc-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(57,255,20,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,255,20,.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: .7;
+  pointer-events: none;
+}
+.pc-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pc-glow-1 {
+  width: 600px; height: 500px;
+  background: radial-gradient(ellipse, rgba(57,255,20,.13) 0%, transparent 65%);
+  top: 30%; left: 50%; transform: translate(-50%, -50%);
+  filter: blur(40px);
+}
+.pc-glow-2 {
+  width: 350px; height: 280px;
+  background: radial-gradient(ellipse, rgba(252,163,17,.1) 0%, transparent 65%);
+  bottom: 60px; right: 0;
+  filter: blur(50px);
+}
+.pc-inner {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 52px 60px 44px;
+}
+.pc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+.pc-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.pc-brand-dot {
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: linear-gradient(120deg, #fca311, #ff6b35);
+  box-shadow: 0 0 18px rgba(252,163,17,.65);
+}
+.pc-date {
+  font-size: 13px;
+  color: rgba(255,255,255,.42);
+  letter-spacing: .06em;
+}
+.pc-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  margin: 0 -20px;
+}
+.pc-status {
+  font-size: 14px;
+  letter-spacing: .38em;
+  color: rgba(255,255,255,.42);
+  text-transform: uppercase;
+  font-weight: 300;
+}
+.pc-time {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 116px;
+  letter-spacing: .03em;
+  color: #39ff14;
+  line-height: 1;
+  text-shadow:
+    0 0 14px rgba(57,255,20,.55),
+    0 0 50px rgba(57,255,20,.28),
+    0 20px 50px rgba(2,10,16,.9);
+}
+.pc-progress-wrap {
+  margin: 28px 0 16px;
+}
+.pc-progress-bar {
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.1);
+  overflow: hidden;
+  margin-bottom: 9px;
+}
+.pc-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #39ff14, #06d6a0);
+  box-shadow: 0 0 8px rgba(57,255,20,.5);
+}
+.pc-progress-label {
+  font-size: 12px;
+  color: rgba(255,255,255,.38);
+  letter-spacing: .08em;
+  text-align: right;
+}
+.pc-earn {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 13px 26px;
+  background: rgba(6,214,160,.12);
+  border: 1px solid rgba(6,214,160,.28);
+  border-radius: 999px;
+  margin-bottom: 28px;
+  justify-content: center;
+}
+.pc-earn-label, .pc-earn-unit {
+  font-size: 14px;
+  color: rgba(255,255,255,.65);
+}
+.pc-earn-val {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 26px;
+  color: #06d6a0;
+  letter-spacing: .04em;
+  font-weight: 400;
+}
+.pc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.09);
+}
+.pc-tags {
+  display: flex;
+  gap: 8px;
+}
+.pc-tag {
+  font-size: 11px;
+  color: rgba(255,255,255,.38);
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: 4px 11px;
+  border-radius: 999px;
+  letter-spacing: .03em;
+}
+.pc-url {
+  font-size: 12px;
+  color: rgba(57,255,20,.55);
+  font-family: "Share Tech Mono", monospace;
+  letter-spacing: .06em;
+}
