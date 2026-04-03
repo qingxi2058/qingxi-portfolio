@@ -1,0 +1,1974 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>年终汇报翻译器｜老板听得懂版</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg0: #f6f8fc;
+        --bg1: #eef3ff;
+        --card: #ffffff;
+        --card2: #ffffff;
+        --line: rgba(15, 23, 42, 0.1);
+        --ink: #0f172a;
+        --muted: rgba(15, 23, 42, 0.65);
+        --accent: #2563eb;
+        --accent2: #7c3aed;
+        --accent3: #f59e0b;
+        --glow: rgba(37, 99, 235, 0.18);
+        --shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
+      }
+
+      html[data-theme="dark"] {
+        --bg0: #070a12;
+        --bg1: #0b1224;
+        --card: rgba(255, 255, 255, 0.06);
+        --card2: rgba(255, 255, 255, 0.08);
+        --line: rgba(255, 255, 255, 0.12);
+        --ink: #eaf0ff;
+        --muted: rgba(234, 240, 255, 0.72);
+        --accent: #49d3ff;
+        --accent2: #5b6cff;
+        --accent3: #ffb020;
+        --glow: rgba(73, 211, 255, 0.22);
+        --shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei",
+          sans-serif;
+        color: var(--ink);
+        background: radial-gradient(
+            circle at 10% 10%,
+            rgba(37, 99, 235, 0.1),
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 85% 0%,
+            rgba(124, 58, 237, 0.08),
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 50% 95%,
+            rgba(245, 158, 11, 0.08),
+            transparent 60%
+          ),
+          linear-gradient(180deg, var(--bg0), var(--bg1));
+        overflow-x: hidden;
+      }
+
+      html[data-theme="dark"] body {
+        background: radial-gradient(
+            circle at 12% 15%,
+            rgba(73, 211, 255, 0.18),
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 80% 8%,
+            rgba(255, 77, 125, 0.14),
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 45% 95%,
+            rgba(255, 176, 32, 0.12),
+            transparent 55%
+          ),
+          linear-gradient(180deg, var(--bg0), var(--bg1));
+      }
+
+      .page {
+        position: relative;
+        padding: 64px 18px 80px;
+      }
+
+      .page::before,
+      .page::after {
+        content: "";
+        position: absolute;
+        width: 280px;
+        height: 280px;
+        border-radius: 40px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 90, 122, 0.2),
+          rgba(76, 211, 255, 0.05)
+        );
+        filter: blur(0.5px);
+        z-index: 0;
+      }
+
+      .page::before {
+        top: 10%;
+        right: -80px;
+        transform: rotate(-12deg);
+      }
+
+      .page::after {
+        bottom: 5%;
+        left: -120px;
+        transform: rotate(18deg);
+      }
+
+      .shell {
+        max-width: 980px;
+        margin: 0 auto;
+        display: grid;
+        gap: 28px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .topbar {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .topbar-left {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        padding-top: 2px;
+      }
+
+      .tag {
+        align-self: flex-start;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.75);
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      html[data-theme="dark"] .tag {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      h1 {
+        font-family: "Noto Sans SC", "Inter", "PingFang SC", sans-serif;
+        font-size: clamp(2.1rem, 4vw, 3.4rem);
+        margin: 0;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        font-weight: 800;
+      }
+
+      .title-break {
+        display: block;
+      }
+
+      header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1rem;
+        max-width: 680px;
+      }
+
+      .panel {
+        background: linear-gradient(180deg, var(--card2), var(--card));
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        padding: 28px;
+        display: grid;
+        gap: 22px;
+        backdrop-filter: blur(10px);
+      }
+
+      .input-block {
+        display: grid;
+        gap: 14px;
+      }
+
+      label {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 110px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        padding: 16px 18px;
+        font-size: 1rem;
+        font-family: "Inter", "Noto Sans SC", "PingFang SC", sans-serif;
+        background: rgba(15, 23, 42, 0.03);
+        color: var(--ink);
+        resize: vertical;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      html[data-theme="dark"] textarea {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px var(--glow);
+      }
+
+      .actions {
+        display: grid;
+        gap: 16px;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        min-width: 160px;
+      }
+
+      .control-group label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      .control-group--wide {
+        flex: 1 1 220px;
+        min-width: 220px;
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      button {
+        border: none;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 14px 30px var(--glow);
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 42px var(--glow);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      .ghost {
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--muted);
+        border: 1px solid var(--line);
+        box-shadow: none;
+      }
+
+      html[data-theme="dark"] .ghost {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      select.ghost,
+      input.ghost {
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--ink);
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-family: "Inter", "Noto Sans SC", "PingFang SC", sans-serif;
+      }
+
+      select.ghost {
+        cursor: pointer;
+      }
+
+      input.ghost::placeholder {
+        color: rgba(94, 96, 117, 0.8);
+      }
+
+      .range-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      html[data-theme="dark"] .range-wrap {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .range-wrap span {
+        font-size: 0.85rem;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .range-wrap input[type="range"] {
+        accent-color: var(--accent);
+        width: 140px;
+      }
+
+      .output {
+        border-radius: 18px;
+        border: 1px dashed rgba(15, 23, 42, 0.16);
+        padding: 16px;
+        background: rgba(15, 23, 42, 0.03);
+        font-size: 1rem;
+        line-height: 1.7;
+        min-height: 120px;
+        white-space: pre-wrap;
+        position: relative;
+        overflow: hidden;
+      }
+
+      html[data-theme="dark"] .output {
+        background: rgba(0, 0, 0, 0.16);
+        border: 1px dashed rgba(255, 255, 255, 0.18);
+      }
+
+      .output .empty {
+        color: var(--muted);
+      }
+
+      .output.ready::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(76, 211, 255, 0.22),
+          transparent
+        );
+        animation: sweep 1.1s ease forwards;
+      }
+
+      .cards {
+        display: grid;
+        gap: 12px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        background: var(--card);
+        border-radius: 16px;
+        padding: 14px 14px 12px;
+        position: relative;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+      }
+
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 0.95rem;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .card p,
+      .card pre {
+        margin: 0;
+        color: var(--ink);
+        line-height: 1.7;
+        white-space: pre-wrap;
+        font-family: "Inter", "Noto Sans SC", "PingFang SC", sans-serif;
+      }
+
+      .card .mini {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        border: 1px solid var(--line);
+        background: rgba(15, 23, 42, 0.04);
+        color: var(--muted);
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+
+      html[data-theme="dark"] .card .mini {
+        background: rgba(0, 0, 0, 0.25);
+      }
+
+      .card .mini:hover {
+        color: var(--ink);
+        border-color: var(--accent);
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--muted);
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+
+      html[data-theme="dark"] .chip {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .chip:hover {
+        border-color: var(--accent);
+        color: var(--ink);
+      }
+
+      .output-head {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .export {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .export .export-btn {
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      html[data-theme="dark"] .export .export-btn {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .tips {
+        display: grid;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .tips span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .tips span::before {
+        content: "•";
+        color: var(--accent);
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      @keyframes sweep {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      @media (max-width: 720px) {
+        .panel {
+          padding: 20px;
+        }
+
+        footer {
+          flex-direction: column;
+        }
+      }
+
+      /* ===== 互动引流组件 ===== */
+
+      /* 使用人数横幅 */
+      .usage-banner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 11px 20px;
+        background: linear-gradient(90deg, rgba(37,99,235,0.07), rgba(124,58,237,0.07));
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        font-size: 0.87rem;
+        color: var(--muted);
+        text-align: center;
+        backdrop-filter: blur(8px);
+      }
+
+      .usage-banner strong {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .usage-banner .fire {
+        animation: firePulse 2s ease-in-out infinite;
+        display: inline-block;
+      }
+
+      @keyframes firePulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+      }
+
+      /* 生成后分享条 */
+      .share-bar {
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+        padding: 18px 22px;
+        background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(124,58,237,0.05));
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        animation: fadeUp 0.4s ease forwards;
+      }
+
+      .share-bar.visible {
+        display: flex;
+      }
+
+      .share-bar-title {
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .share-bar-btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .share-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 18px;
+        border-radius: 999px;
+        font-size: 0.87rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid var(--line);
+        transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+        background: var(--card);
+        color: var(--ink);
+        font-family: "Noto Sans SC", "Inter", "PingFang SC", sans-serif;
+      }
+
+      html[data-theme="dark"] .share-btn {
+        background: rgba(255,255,255,0.04);
+      }
+
+      .share-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px var(--glow);
+        border-color: var(--accent);
+      }
+
+      .share-btn.primary-share {
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: #fff;
+        border: none;
+        box-shadow: 0 8px 24px var(--glow);
+      }
+
+      .share-btn.primary-share:hover {
+        box-shadow: 0 12px 32px var(--glow);
+      }
+
+      /* 右下角悬浮按钮 */
+      .fab {
+        position: fixed;
+        right: 24px;
+        bottom: 28px;
+        z-index: 900;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 22px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: #fff;
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 8px 30px rgba(37,99,235,0.38);
+        transition: transform 0.2s, box-shadow 0.2s, opacity 0.35s;
+        opacity: 0;
+        pointer-events: none;
+        font-family: "Noto Sans SC", "Inter", "PingFang SC", sans-serif;
+      }
+
+      .fab.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .fab:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 44px rgba(37,99,235,0.48);
+      }
+
+      .fab:active {
+        transform: translateY(0);
+      }
+
+      /* 分享弹窗遮罩 */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.52);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+        padding: 20px;
+      }
+
+      .modal-overlay.open {
+        display: flex;
+      }
+
+      .modal-box {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 32px 28px;
+        max-width: 420px;
+        width: 100%;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.28);
+        position: relative;
+        border: 1px solid var(--line);
+        animation: popUp 0.3s ease forwards;
+      }
+
+      html[data-theme="dark"] .modal-box {
+        background: #0f1729;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(15,23,42,0.05);
+        cursor: pointer;
+        color: var(--muted);
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: none;
+        padding: 0;
+        transition: background 0.18s;
+      }
+
+      html[data-theme="dark"] .modal-close {
+        background: rgba(255,255,255,0.06);
+      }
+
+      .modal-close:hover {
+        background: rgba(15,23,42,0.1);
+      }
+
+      .modal-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+        margin: 0 0 6px;
+        color: var(--ink);
+      }
+
+      .modal-sub {
+        font-size: 0.86rem;
+        color: var(--muted);
+        margin: 0 0 20px;
+      }
+
+      .modal-url-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: rgba(37,99,235,0.06);
+        border: 1px solid rgba(37,99,235,0.18);
+        margin-bottom: 20px;
+        font-size: 0.82rem;
+        color: var(--accent);
+        font-family: "Inter", monospace;
+        word-break: break-all;
+        cursor: pointer;
+        transition: background 0.18s;
+      }
+
+      .modal-url-row:hover {
+        background: rgba(37,99,235,0.1);
+      }
+
+      .modal-actions {
+        display: grid;
+        gap: 10px;
+      }
+
+      .modal-action-btn {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        cursor: pointer;
+        text-align: left;
+        transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+        box-shadow: none;
+        font-family: "Noto Sans SC", "Inter", "PingFang SC", sans-serif;
+      }
+
+      html[data-theme="dark"] .modal-action-btn {
+        background: rgba(255,255,255,0.04);
+      }
+
+      .modal-action-btn:hover {
+        border-color: var(--accent);
+        transform: translateX(4px);
+        box-shadow: 0 4px 16px var(--glow);
+      }
+
+      .modal-action-btn .btn-icon {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+        line-height: 1;
+      }
+
+      .modal-action-btn .btn-label {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .modal-action-btn .btn-label strong {
+        font-size: 0.92rem;
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .modal-action-btn .btn-label span {
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      .modal-action-btn.copied .btn-label strong {
+        color: var(--accent);
+      }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes popUp {
+        from { opacity: 0; transform: scale(0.94) translateY(12px); }
+        to   { opacity: 1; transform: scale(1) translateY(0); }
+      }
+
+      @media (max-width: 480px) {
+        .fab .fab-label { display: none; }
+        .fab { padding: 14px 16px; }
+        .modal-box { padding: 24px 18px; }
+      }
+
+    /* ===== 清溪关注引导区 ===== */
+    .qx-cta-wrap {
+      background: linear-gradient(135deg, #6c3de0 0%, #9b5cf0 100%);
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+    .qx-cta-box { max-width: 640px; margin: 0 auto; }
+    .qx-cta-eyebrow { font-size: 13px; color: rgba(255,255,255,.72); letter-spacing: .08em; margin-bottom: 12px; }
+    .qx-cta-title { font-size: clamp(22px,4vw,30px); font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .qx-cta-sub { font-size: 15px; color: rgba(255,255,255,.85); margin-bottom: 28px; }
+    .qx-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+    .qx-btn-xhs, .qx-btn-dy {
+      display: inline-block; padding: 13px 28px; border-radius: 50px;
+      font-size: 15px; font-weight: 600; text-decoration: none;
+      transition: opacity .2s, transform .15s;
+    }
+    .qx-btn-xhs:hover, .qx-btn-dy:hover { opacity: .88; transform: translateY(-2px); }
+    .qx-btn-xhs { background: #ff2442; color: #fff; }
+    .qx-btn-dy { background: rgba(255,255,255,.18); color: #fff; border: 1.5px solid rgba(255,255,255,.5); }
+    .qx-cta-note { font-size: 13px; color: rgba(255,255,255,.8); margin-bottom: 20px; }
+    .qx-biz { font-size: 12px; color: rgba(255,255,255,.6); padding-top: 16px; border-top: 1px solid rgba(255,255,255,.15); }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="shell">
+        <!-- 使用人数横幅 -->
+        <div class="usage-banner">
+          <span class="fire">🔥</span>
+          已帮助 <strong id="usageCount">12,847</strong> 人写出有战略高度的年终汇报 &nbsp;·&nbsp; 完全免费
+        </div>
+
+        <header class="topbar">
+          <div class="topbar-left">
+            <span class="tag">YEAR-END REPORT</span>
+            <h1>
+              3分钟把杂事写成可交付的年终汇报
+              <span class="title-break">（PPT可直接用）</span>
+            </h1>
+            <p>
+              自动生成：一句话总结｜亮点3条｜STAR项目｜指标证据链｜OKR明年计划｜30秒口播。复制即可交差。
+            </p>
+          </div>
+          <div class="topbar-right">
+            <button
+              id="themeToggle"
+              class="ghost"
+              type="button"
+              aria-label="切换主题"
+            >
+              🌙 深色
+            </button>
+          </div>
+        </header>
+
+        <section class="panel">
+          <div class="input-block">
+            <label for="plainInput">原始描述</label>
+            <textarea
+              id="plainInput"
+              placeholder="例如：今年跟了3个项目，协调产品/研发/法务，写了6份材料，救过2次线上故障，做了流程优化和SOP，但不知道怎么写成亮点。"
+            ></textarea>
+          </div>
+          <div class="actions">
+            <div class="controls">
+              <div class="control-group">
+                <label for="mode">模式</label>
+                <select id="mode" class="ghost">
+                  <option value="buzz">黑话一句话</option>
+                  <option value="weekly">周报结构</option>
+                  <option value="annual" selected>年终汇报四件套</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="role">角色</label>
+                <select id="role" class="ghost">
+                  <option value="通用">通用</option>
+                  <option value="产品">产品</option>
+                  <option value="运营">运营</option>
+                  <option value="项目负责人">项目负责人</option>
+                  <option value="行政/HR">行政/HR</option>
+                  <option value="研发">研发</option>
+                  <option value="销售">销售</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="intensity">黑话强度</label>
+                <div class="range-wrap">
+                  <span>强度</span>
+                  <input id="intensity" type="range" min="0" max="100" value="65" />
+                </div>
+              </div>
+              <div class="control-group control-group--wide">
+                <label for="hot">热搜关键词（可选）</label>
+                <input
+                  id="hot"
+                  class="ghost"
+                  placeholder="裁员/绩效/晋升/降本/35岁/转岗"
+                />
+              </div>
+            </div>
+            <div class="buttons">
+              <button id="generateBtn">生成年终汇报</button>
+              <button id="copyBtn" class="ghost">复制结果</button>
+            </div>
+          </div>
+          <div id="output" class="output">
+            <div class="empty">等待你的输入，让总结更有“战略味”。</div>
+          </div>
+          <div class="tips">
+            <span>常见词汇会自动翻译成“黑话”，再补齐结构化表达。</span>
+            <span>多试几次会触发不同的表达模板。</span>
+          </div>
+        </section>
+
+        <!-- 生成后分享条（初始隐藏） -->
+        <div id="shareBar" class="share-bar">
+          <div class="share-bar-title">💡 觉得有用？发给正在写年终总结的同事 👇</div>
+          <div class="share-bar-btns">
+            <button class="share-btn primary-share" id="shareCopyPhrase" type="button">📋 复制推荐话术</button>
+            <button class="share-btn" id="shareCopyLink" type="button">🔗 复制工具链接</button>
+            <button class="share-btn" id="shareOpenModal" type="button">📤 更多分享方式</button>
+          </div>
+        </div>
+
+        <footer>
+          <span>专注「成果导向」叙事，别忘了给自己加戏。</span>
+        </footer>
+      </section>
+    </main>
+
+    <!-- 清溪关注引导区 -->
+    <div class="qx-cta-wrap">
+      <div class="qx-cta-box">
+        <div class="qx-cta-eyebrow">✦ 跟着清溪一起用AI</div>
+        <div class="qx-cta-title">每周更新，真实在用的AI工具</div>
+        <div class="qx-cta-sub">用AI做内容的亲身记录 · 帮你少走弯路</div>
+        <div class="qx-cta-btns">
+          <a class="qx-btn-xhs" href="https://xhslink.com/m/15zyxo67w0J" target="_blank">📕 关注小红书</a>
+          <a class="qx-btn-dy" href="https://v.douyin.com/jUdv0B2yNdw/" target="_blank">🎵 关注抖音</a>
+        </div>
+        <div class="qx-cta-note">关注小红书后私信 <strong>「工具包」</strong> → 免费领 Prompt合集 + 工具清单 + 爆款选题模板</div>
+        <div class="qx-biz">商务合作 · ✉️ zhangxin19940203@gmail.com · 💬 微信 qingxi20250501</div>
+      </div>
+    </div>
+
+    <!-- 右下角悬浮分享按钮 -->
+    <button class="fab" id="fabShare" type="button" aria-label="分享工具">
+      📤 <span class="fab-label">分享给同事</span>
+    </button>
+
+    <!-- 分享弹窗 -->
+    <div class="modal-overlay" id="shareModal" role="dialog" aria-modal="true" aria-label="分享工具">
+      <div class="modal-box">
+        <button class="modal-close" id="modalClose" type="button" aria-label="关闭">✕</button>
+        <div class="modal-title">把这个工具分享给同事 🎉</div>
+        <div class="modal-sub">免费 · 无需登录 · 3分钟生成年终汇报 · PPT直接用</div>
+        <div class="modal-url-row" id="modalUrlRow" title="点击复制链接">
+          🔗 qingxihub.com/year-end/
+        </div>
+        <div class="modal-actions">
+          <button class="modal-action-btn" id="modalCopyPhrase" type="button">
+            <span class="btn-icon">📋</span>
+            <div class="btn-label">
+              <strong>复制微信/朋友圈话术</strong>
+              <span>一键发群，帮同事3分钟搞定年终汇报</span>
+            </div>
+          </button>
+          <button class="modal-action-btn" id="modalCopyLink" type="button">
+            <span class="btn-icon">🔗</span>
+            <div class="btn-label">
+              <strong>复制工具链接</strong>
+              <span>直接把链接发给需要的人</span>
+            </div>
+          </button>
+          <button class="modal-action-btn" id="modalCopyXHS" type="button">
+            <span class="btn-icon">📕</span>
+            <div class="btn-label">
+              <strong>复制小红书发帖文案</strong>
+              <span>含封面文案、正文、标签，去小红书粘贴即可</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const templateSets = {
+        buzz: {
+          soft: [
+            ({ topic, action, result, value, rolePrefix }) =>
+              `${rolePrefix}本周围绕${topic}推进${action}，完成${result}，对${value}形成支撑。`,
+            ({ topic, action, result, value, rolePrefix }) =>
+              `${rolePrefix}聚焦${topic}，完成${action}与阶段性产出${result}，推动${value}。`,
+            ({ topic, action, result, value, rolePrefix }) =>
+              `${rolePrefix}在${topic}上推进${action}，形成${result}，持续提升${value}。`,
+          ],
+          hard: [
+            ({ topic, action, result, value, synergy, rolePrefix, hotTag }) =>
+              `${rolePrefix}围绕${topic}，本周聚焦${action}，通过${synergy}推进关键任务闭环，形成${result}沉淀，持续强化${value}${hotTag ? `，${hotTag}` : ""}。`,
+            ({ topic, action, result, value, synergy, rolePrefix, hotTag }) =>
+              `${rolePrefix}以${topic}为牵引，本周完成${action}与阶段性验证，借助${synergy}提升协同效率，输出${result}，为${value}打底${hotTag ? `，${hotTag}` : ""}。`,
+            ({ topic, action, result, value, synergy, rolePrefix, hotTag }) =>
+              `${rolePrefix}围绕${topic}展开攻坚，本周持续迭代${action}，推动${synergy}协同，达成${result}目标，进一步强化${value}${hotTag ? `，${hotTag}` : ""}。`,
+          ],
+        },
+        weekly: {
+          soft: [
+            ({
+              topic,
+              action,
+              result,
+              value,
+              synergy,
+              rolePrefix,
+              hotTag,
+            }) =>
+              `本周目标：${rolePrefix}围绕${topic}推进${action}。\n本周进展：完成${result}，对${value}有帮助${hotTag ? `，${hotTag}` : ""}。\n问题与风险：${synergy}仍需加强，资源节奏需进一步对齐。\n下周计划：聚焦${value}，继续推进${action}。`,
+          ],
+          hard: [
+            ({
+              topic,
+              action,
+              result,
+              value,
+              synergy,
+              rolePrefix,
+              hotBrief,
+            }) =>
+              `本周目标：${rolePrefix}锁定${topic}关键抓手，聚焦${action}。\n本周进展：通过${synergy}完成${result}闭环，强化${value}${hotBrief ? `，同步关注${hotBrief}` : ""}。\n问题与风险：跨域协同与资源投入存在波动，需要提前预案。\n下周计划：围绕${value}推进二次验证，沉淀可复用方法论。`,
+            ({
+              topic,
+              action,
+              result,
+              value,
+              synergy,
+              rolePrefix,
+              hotTag,
+            }) =>
+              `本周目标：${rolePrefix}围绕${topic}进行策略推进，聚焦${action}。\n本周进展：借助${synergy}完成${result}沉淀${hotTag ? `，${hotTag}` : ""}。\n问题与风险：协同节奏不一、资源边界需进一步明确。\n下周计划：对${value}相关事项做阶段复盘，持续拉通关键人。`,
+          ],
+        },
+      };
+
+      const actionPoolGroups = {
+        规划推进: [
+          "核心需求梳理",
+          "需求澄清",
+          "口径统一",
+          "拆解任务",
+          "排期推进",
+          "重点事项推进",
+          "关键路径拉通",
+          "里程碑管理",
+          "项目管理",
+          "场景化拆解",
+        ],
+        风险闭环: ["风险识别", "风险预案", "问题闭环", "最小闭环验证"],
+        数据实验: ["数据分析", "埋点方案", "漏斗优化", "A/B测试", "灰度发布"],
+        协同管理: [
+          "方案评审",
+          "对齐共识",
+          "阶段性共识对齐",
+          "跨部门协作",
+          "资源协调",
+          "向上管理",
+          "Stakeholder管理",
+        ],
+        质量效率: ["高频痛点优化", "成本控制", "效率提升", "质量保障", "SLA保障"],
+        体系沉淀: ["体系搭建", "流程标准化", "SOP沉淀", "模板化", "组件化", "自动化"],
+      };
+
+      const resultPoolGroups = {
+        报告文档: [
+          "周报模板",
+          "述职PPT",
+          "复盘报告",
+          "项目里程碑表",
+          "风险清单",
+          "问题台账",
+          "会议纪要",
+          "决策记录",
+          "FAQ",
+        ],
+        产品交付: [
+          "PRD",
+          "测试用例",
+          "上线Checklist",
+          "交付模板",
+          "阶段性里程碑",
+          "可扩展方案",
+        ],
+        数据资产: ["数据看板", "埋点文档", "A/B测试记录", "工单闭环记录"],
+        方法机制: ["可复用的方法论", "标准化流程", "SOP文档", "协作机制"],
+      };
+
+      const valuePoolGroups = {
+        组织效率: ["组织效率提升", "交付确定性", "组织协同效率", "降本增效"],
+        增长效率: ["转化提升", "留存提升", "客单提升", "活跃提升", "业务增长动能"],
+        体验质量: ["用户体验提升", "稳定性提升", "可用性提升", "NPS提升"],
+        长期价值: ["战略落地能力", "长期增长动能", "核心竞争力", "长期复利资产"],
+        业务确定: ["业务确定性"],
+      };
+
+      const synergyPoolGroups = {
+        协同机制: [
+          "跨团队协同机制",
+          "跨部门协作",
+          "对齐共识",
+          "关键人对齐与快速决策",
+          "Stakeholder管理",
+          "向上管理",
+        ],
+        交付协作: [
+          "资源整合与敏捷迭代",
+          "场景化验证与闭环复盘",
+          "数据驱动复盘",
+          "里程碑对齐",
+          "风险共识与联动",
+        ],
+      };
+
+      const basePools = {
+        actionPool: Object.values(actionPoolGroups).flat(),
+        resultPool: Object.values(resultPoolGroups).flat(),
+        valuePool: Object.values(valuePoolGroups).flat(),
+        synergyPool: Object.values(synergyPoolGroups).flat(),
+      };
+
+      const rolePools = {
+        产品: {
+          actionPool: ["需求优先级梳理", "用户旅程优化", "版本节奏管理"],
+          resultPool: ["产品路线图", "体验优化清单", "实验结论"],
+          valuePool: ["用户增长", "留存提升", "商业化效率"],
+          synergyPool: ["研发评审协同", "设计共创", "数据分析闭环"],
+        },
+        运营: {
+          actionPool: ["活动策划落地", "内容矩阵运营", "渠道拉新"],
+          resultPool: ["转化漏斗优化", "活动复盘报告", "增长策略"],
+          valuePool: ["用户活跃提升", "转化率提升", "品牌声量"],
+          synergyPool: ["市场资源联动", "渠道协同投放", "用户反馈闭环"],
+        },
+        项目负责人: {
+          actionPool: ["里程碑推进", "风险清单管理", "资源排期协调"],
+          resultPool: ["项目交付节点", "风险收敛方案", "协作机制"],
+          valuePool: ["交付确定性", "团队协作效率", "资源利用率"],
+          synergyPool: ["多方干系人对齐", "决策机制保障", "跨部门协同"],
+        },
+        "行政/HR": {
+          actionPool: ["招聘流程优化", "绩效管理支持", "员工关怀活动"],
+          resultPool: ["制度优化方案", "人才梯队搭建", "文化共识沉淀"],
+          valuePool: ["组织健康度", "人才密度", "员工满意度"],
+          synergyPool: ["业务部门协同", "管理层对齐", "流程规范化"],
+        },
+        研发: {
+          actionPool: ["技术方案评审", "性能优化", "工程化改造"],
+          resultPool: ["技术债治理清单", "性能指标提升", "架构演进方案"],
+          valuePool: ["系统稳定性", "研发效率", "可维护性"],
+          synergyPool: ["产品需求对齐", "测试联动", "技术评审闭环"],
+        },
+        销售: {
+          actionPool: ["重点客户推进", "销售漏斗管理", "解决方案打磨"],
+          resultPool: ["签单转化路径", "客户案例沉淀", "报价方案"],
+          valuePool: ["营收增长", "客户满意度", "市场份额"],
+          synergyPool: ["市场-产品联动", "交付协同", "商机评审机制"],
+        },
+      };
+
+      const fallbackTopics = ["现有业务节奏", "核心目标", "重点事项", "关键环节"];
+
+      const annualPools = {
+        verbPool: [
+          "牵引",
+          "推动",
+          "落地",
+          "拉通",
+          "优化",
+          "沉淀",
+          "交付",
+          "攻坚",
+          "打磨",
+          "迭代",
+        ],
+        projectPool: [
+          "增长飞轮",
+          "核心体验升级",
+          "交付效率提升",
+          "客户成功推进",
+          "平台化建设",
+          "成本结构优化",
+          "流程再造",
+          "策略模型升级",
+        ],
+        metricNamePool: [
+          "转化率",
+          "留存率",
+          "活跃度",
+          "交付周期",
+          "缺陷率",
+          "响应时长",
+          "成本",
+          "满意度",
+          "签约转化",
+          "复购率",
+        ],
+        metricValuePool: [
+          "同比 +__%",
+          "环比 +__%",
+          "完成率 __%",
+          "下降 __%",
+          "提升 __%",
+          "缩短 __ 天",
+          "节省 __ 小时/周",
+        ],
+        evidencePool: [
+          "数据看板",
+          "里程碑验收",
+          "复盘报告",
+          "用户访谈",
+          "OKR对齐记录",
+          "工单闭环",
+          "A/B测试记录",
+          "财务对账",
+        ],
+        riskPool: [
+          "需求波动",
+          "资源约束",
+          "协同成本",
+          "交付节奏不稳",
+          "指标口径不一",
+        ],
+        tradeoffPool: [
+          "效率与质量",
+          "短期收益与长期建设",
+          "范围扩张与风险控制",
+          "速度与稳定性",
+        ],
+        actionPool: [
+          "建立预警机制",
+          "明确边界与优先级",
+          "提前设定节奏",
+          "强化关键人对齐",
+          "拆解阶段目标",
+          "固化决策机制",
+        ],
+        assetPool: ["SOP", "模板", "机制", "组件", "脚手架", "知识库"],
+        okrActionPool: [
+          "推进试点",
+          "完善指标口径",
+          "拉通关键协作",
+          "固化流程",
+          "规模化落地",
+        ],
+      };
+
+      const phraseMap = [
+        { pattern: /摸鱼|划水/g, replacement: "低成本探索与能量补给" },
+        {
+          pattern: /没干啥|没干什么|没做啥/g,
+          replacement: "处于观察期并完成资源调度",
+        },
+        { pattern: /开会|对齐/g, replacement: "多方共识建立" },
+        { pattern: /沟通|协调/g, replacement: "跨团队协同拉通" },
+        { pattern: /写文档|写文案/g, replacement: "标准化资产沉淀" },
+        { pattern: /修.?bug|修复/g, replacement: "稳定性专项优化" },
+        { pattern: /测试|自测/g, replacement: "质量验证" },
+        { pattern: /上线|发布/g, replacement: "版本迭代交付" },
+        { pattern: /改版|重构/g, replacement: "体验升级与架构优化" },
+        { pattern: /学习|研究/g, replacement: "能力结构化升级" },
+        { pattern: /加班|通宵/g, replacement: "关键节点保障" },
+      ];
+
+      const output = document.getElementById("output");
+      const input = document.getElementById("plainInput");
+      const generateBtn = document.getElementById("generateBtn");
+      const copyBtn = document.getElementById("copyBtn");
+      const modeSelect = document.getElementById("mode");
+      const roleSelect = document.getElementById("role");
+      const intensityInput = document.getElementById("intensity");
+      const hotInput = document.getElementById("hot");
+      let lastCopyText = "";
+
+      const pick = (list) => list[Math.floor(Math.random() * list.length)];
+      const pickMany = (list, count) => {
+        const bucket = [...list];
+        const picked = [];
+        while (picked.length < count && bucket.length) {
+          const index = Math.floor(Math.random() * bucket.length);
+          picked.push(bucket.splice(index, 1)[0]);
+        }
+        return picked;
+      };
+      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+      const getIntensity = () =>
+        clamp(Number(intensityInput.value || 0) / 100, 0, 1);
+
+      const buzzify = (text, intensity) => {
+        let mapped = text;
+        phraseMap.forEach(({ pattern, replacement }) => {
+          if (Math.random() < intensity) {
+            mapped = mapped.replace(pattern, replacement);
+          }
+        });
+        return mapped;
+      };
+
+      const normalizeTopic = (text, intensity) => {
+        const trimmed = text.trim();
+        if (!trimmed) {
+          return pick(fallbackTopics);
+        }
+        const buzzed = buzzify(trimmed, intensity);
+        const topic = buzzed.length ? buzzed : trimmed;
+        if (topic.length > 32) {
+          return `“${topic.slice(0, 28)}…”`;
+        }
+        return `“${topic}”`;
+      };
+
+      const normalizeHot = (text) => {
+        const trimmed = text.trim();
+        if (!trimmed) {
+          return "";
+        }
+        const parts = trimmed.split(/[\\/、,，\s]+/).filter(Boolean);
+        if (!parts.length) {
+          return "";
+        }
+        return parts.slice(0, 3).join("、");
+      };
+
+      const getPool = (poolName, role) => {
+        const base = basePools[poolName] ?? [];
+        const extra = rolePools[role]?.[poolName] ?? [];
+        return base.concat(extra);
+      };
+
+      const pickTemplateList = (mode, intensity) => {
+        const set = templateSets[mode] ?? templateSets.buzz;
+        if (intensity < 0.35) {
+          return set.soft;
+        }
+        if (intensity > 0.7) {
+          return set.hard;
+        }
+        return set.soft.concat(set.hard);
+      };
+
+      const buildAnnualSummary = () => {
+        const intensity = getIntensity();
+        const role = roleSelect.value;
+        const hot = normalizeHot(hotInput.value);
+        const hotKey = hotInput.value.trim();
+        const isRisk = /裁员|优化|降本|冻结|缩编/.test(hotKey);
+        const isPerf = /绩效|晋升|加薪|调薪/.test(hotKey);
+        const isAge = /35岁/.test(hotKey);
+        const rolePrefix = role === "通用" ? "" : `${role}视角下，`;
+        const topic = normalizeTopic(input.value, intensity);
+        const actionPoolBase = getPool("actionPool", role);
+        const resultPool = getPool("resultPool", role);
+        const valuePoolBase = getPool("valuePool", role);
+        const synergyPool = getPool("synergyPool", role);
+        const actionBoost = [];
+        if (isRisk) {
+          actionBoost.push("成本控制", "风险预案", "SLA保障");
+        }
+        if (isPerf) {
+          actionBoost.push("关键路径拉通", "里程碑管理", "对齐共识");
+        }
+        if (isAge) {
+          actionBoost.push("SOP沉淀", "模板化", "组件化");
+        }
+        const actionPool = actionBoost.length
+          ? actionBoost.concat(actionPoolBase)
+          : actionPoolBase;
+        const valueBoost = [];
+        if (isRisk) {
+          valueBoost.push("降本增效", "交付确定性", "稳定性提升", "可用性提升");
+        }
+        if (isPerf) {
+          valueBoost.push("转化提升", "留存提升", "活跃提升", "营收增长", "业务增长动能");
+        }
+        if (isAge) {
+          valueBoost.push("长期复利资产", "可迁移能力", "可复制方法论");
+        }
+        const valuePool = valueBoost.length
+          ? valueBoost.concat(valuePoolBase)
+          : valuePoolBase;
+        const riskPool = isRisk
+          ? ["资源约束", "成本压力", "交付节奏不稳", "指标口径不一", "合规风险"]
+          : isPerf
+          ? ["指标波动", "目标拆解不足", "协同成本", "节奏不稳"]
+          : annualPools.riskPool;
+        const tone =
+          intensity > 0.7 ? "hard" : intensity < 0.35 ? "soft" : "mix";
+        const tonePick = (soft, hard) => {
+          if (tone === "soft") {
+            return soft;
+          }
+          if (tone === "hard") {
+            return hard;
+          }
+          return pick([soft, hard]);
+        };
+        const metricName = pick(annualPools.metricNamePool);
+        const metricValue = pick(annualPools.metricValuePool);
+        const summaryLead = tonePick("年度围绕", "战略聚焦");
+        const summaryVerb = tonePick("推进", "牵引");
+        const summaryTail = tonePick("形成成效", "形成闭环");
+        const hotNote = hot ? `，同步关注${hot}等外部变量` : "";
+        const bossSummary = `${rolePrefix}${summaryLead}${topic}，${summaryVerb}${pick(
+          valuePool
+        )}，以${pick(actionPool)}为抓手${summaryTail}${hotNote}。`;
+
+        const highlights = Array.from({ length: 3 }, (_, index) => {
+          const verb = pick(annualPools.verbPool);
+          return `${index + 1}. ${verb}${topic}相关${pick(
+            actionPool
+          )}，产出${pick(resultPool)}，${pick(
+            annualPools.metricNamePool
+          )}${pick(annualPools.metricValuePool)}（口径占位）。`;
+        });
+
+        const projectCount = intensity > 0.6 ? 3 : 2;
+        const projects = Array.from({ length: projectCount }, (_, index) => {
+          const projectName = pick(annualPools.projectPool);
+          return `${index + 1}. 项目｜${projectName}（STAR）：S ${
+            topic
+          }场景；T ${pick(actionPool)}；A 通过${pick(
+            synergyPool
+          )}推进；R 形成${pick(resultPool)}，${pick(
+            annualPools.metricNamePool
+          )}${pick(annualPools.metricValuePool)}（口径占位）。`;
+        });
+
+        const metrics = [
+          `1. 指标：${metricName}${metricValue}（口径占位）；证据：${pick(
+            annualPools.evidencePool
+          )}。`,
+          `2. 指标：${pick(annualPools.metricNamePool)}${pick(
+            annualPools.metricValuePool
+          )}（口径占位）；证据：${pick(annualPools.evidencePool)}。`,
+        ];
+
+        const reviews = [
+          `风险：${pick(riskPool)}导致节奏波动，采取${pick(
+            annualPools.actionPool
+          )}进行约束。`,
+          `权衡：在${pick(annualPools.tradeoffPool)}之间做取舍，通过${pick(
+            synergyPool
+          )}实现阶段性平衡。`,
+        ];
+
+        const assets = [
+          `沉淀${pickMany(annualPools.assetPool, 2).join(" / ")}，形成可复用交付资产。`,
+          `固化${pick(annualPools.assetPool)}与${pick(
+            annualPools.assetPool
+          )}，提升交付一致性与复用率。`,
+        ];
+
+        const okrs = Array.from({ length: 3 }, (_, index) => {
+          return `O${index + 1}：聚焦${pick(
+            valuePool
+          )}；KR：${pick(annualPools.metricNamePool)}${pick(
+            annualPools.metricValuePool
+          )}（口径占位）；动作：${pick(annualPools.okrActionPool)}。`;
+        });
+
+        const pitch30 = `${rolePrefix}今年围绕${topic}推进${pick(
+          actionPool
+        )}与${pick(
+          synergyPool
+        )}协同，形成${pick(
+          resultPool
+        )}闭环，推动${pick(valuePool)}，并关注${metricName}指标走势。`;
+        const pitch60 = `${rolePrefix}全年以${topic}为主线，聚焦${pick(
+          actionPool
+        )}和关键路径拉通，通过${pick(
+          synergyPool
+        )}形成交付闭环，沉淀${pick(
+          resultPool
+        )}并建立${pick(
+          annualPools.evidencePool
+        )}的证据链。围绕${pick(
+          valuePool
+        )}持续优化，在${pick(
+          annualPools.metricNamePool
+        )}${pick(annualPools.metricValuePool)}（口径占位）的目标下推进节奏。`;
+
+        const keywords = [
+          "年终总结",
+          "述职汇报",
+          "周报",
+          "复盘",
+          "KPI",
+          "OKR",
+          "里程碑",
+          "关键路径",
+          "风险预案",
+          "协同对齐",
+          "交付闭环",
+          "SOP",
+          "模板沉淀",
+          "数据看板",
+          "埋点",
+          "A/B测试",
+          "灰度发布",
+        ];
+        const roleTag = role === "通用" ? "职场" : role;
+        const longtails = [
+          `${roleTag} 年终总结`,
+          `${roleTag} 述职汇报 PPT`,
+          `${roleTag} KPI 复盘`,
+          `${pick(annualPools.metricNamePool)} 提升`,
+          "里程碑 管理",
+          "风险 预案",
+          "交付 闭环",
+          "跨部门 协同",
+          "SOP 模板",
+          "数据看板 埋点 A/B测试",
+        ];
+
+        return {
+          chips: keywords.slice(0, 10),
+          sections: [
+            { title: "年度一句话总结（Boss Summary）", body: bossSummary },
+            {
+              title: "可搜索关键词（长尾）",
+              body: longtails.map((term) => `- ${term}`).join("\n"),
+            },
+            { title: "年度亮点（3条）", body: highlights.join("\n") },
+            { title: "代表项目（STAR/闭环）", body: projects.join("\n") },
+            { title: "关键指标与证据链", body: metrics.join("\n") },
+            { title: "问题与复盘（风险/权衡/取舍）", body: reviews.join("\n") },
+            {
+              title: "能力/资产沉淀（SOP/模板/机制/组件）",
+              body: assets.join("\n"),
+            },
+            { title: "明年3个目标（OKR）", body: okrs.join("\n") },
+            {
+              title: "口播版本（30秒 / 1分钟）",
+              body: `30秒口播：${pitch30}\n1分钟口播：${pitch60}`,
+            },
+          ],
+        };
+      };
+
+      const buildSummary = () => {
+        const mode = modeSelect.value;
+        if (mode === "annual") {
+          return buildAnnualSummary();
+        }
+        const intensity = getIntensity();
+        const role = roleSelect.value;
+        const hot = normalizeHot(hotInput.value);
+        const hotTag = hot ? `结合${hot}等外部变量` : "";
+        const topic = normalizeTopic(input.value, intensity);
+        const rolePrefix = role === "通用" ? "" : `${role}视角下，`;
+        const actionPool = getPool("actionPool", role);
+        const resultPool = getPool("resultPool", role);
+        const valuePool = getPool("valuePool", role);
+        const synergyPool = getPool("synergyPool", role);
+        const templateList = pickTemplateList(mode, intensity);
+        const template = pick(templateList);
+        return template({
+          topic,
+          action: pick(actionPool),
+          result: pick(resultPool),
+          value: pick(valuePool),
+          synergy: pick(synergyPool),
+          hotTag,
+          hotBrief: hot,
+          rolePrefix,
+        });
+      };
+
+      const formatAnnualText = (data) => {
+        if (!data) {
+          return "";
+        }
+        const chips = (data.chips || []).map((chip) => `#${chip}`).join(" ");
+        const sections = (data.sections || []).map(
+          (section, index) => `${index + 1}. ${section.title}\n${section.body}`
+        );
+        return [
+          chips ? `【关键词】${chips}` : "",
+          "【可复制结构】PPT/飞书/Word 直接贴",
+          ...sections,
+        ]
+          .filter(Boolean)
+          .join("\n\n");
+      };
+
+      const formatAnnualMarkdown = (data) => {
+        if (!data) {
+          return "";
+        }
+        const chips = (data.chips || []).map((chip) => `#${chip}`).join(" ");
+        const sections = (data.sections || []).map(
+          (section, index) =>
+            `### ${index + 1}. ${section.title}\n${section.body}`
+        );
+        return [`**关键词** ${chips}`, ...sections].filter(Boolean).join("\n\n");
+      };
+
+      const downloadText = (filename, content) => {
+        const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+      };
+
+      const renderAnnual = (data) => {
+        output.innerHTML = "";
+
+        const head = document.createElement("div");
+        head.className = "output-head";
+
+        const chipsWrap = document.createElement("div");
+        chipsWrap.className = "chips";
+        if (data.chips && data.chips.length) {
+          data.chips.forEach((keyword) => {
+            const el = document.createElement("span");
+            el.className = "chip";
+            el.textContent = `#${keyword}`;
+            el.title = "点击复制关键词 / 或写入热搜框";
+            el.addEventListener("click", async () => {
+              const hot = normalizeHot(hotInput.value);
+              const next = hot ? `${hot}、${keyword}` : keyword;
+              hotInput.value = normalizeHot(next);
+              try {
+                await navigator.clipboard.writeText(`#${keyword}`);
+              } catch {}
+              flash();
+            });
+            chipsWrap.appendChild(el);
+          });
+        }
+
+        const exportWrap = document.createElement("div");
+        exportWrap.className = "export";
+
+        const txtBtn = document.createElement("button");
+        txtBtn.type = "button";
+        txtBtn.className = "chip export-btn";
+        txtBtn.textContent = "导出 TXT";
+        txtBtn.addEventListener("click", () => {
+          downloadText("年终汇报.txt", formatAnnualText(data));
+        });
+
+        const mdBtn = document.createElement("button");
+        mdBtn.type = "button";
+        mdBtn.className = "chip export-btn";
+        mdBtn.textContent = "导出 Markdown";
+        mdBtn.addEventListener("click", () => {
+          downloadText("年终汇报.md", formatAnnualMarkdown(data));
+        });
+
+        exportWrap.appendChild(txtBtn);
+        exportWrap.appendChild(mdBtn);
+
+        head.appendChild(chipsWrap);
+        head.appendChild(exportWrap);
+        output.appendChild(head);
+
+        const cards = document.createElement("div");
+        cards.className = "cards";
+
+        data.sections.forEach((section, index) => {
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const h3 = document.createElement("h3");
+          h3.textContent = `${index + 1}. ${section.title}`;
+
+          const pre = document.createElement("pre");
+          pre.textContent = section.body;
+
+          const mini = document.createElement("button");
+          mini.className = "mini";
+          mini.type = "button";
+          mini.textContent = "复制本段";
+          mini.addEventListener("click", async () => {
+            try {
+              await navigator.clipboard.writeText(
+                `${section.title}\n${section.body}`
+              );
+              mini.textContent = "已复制✓";
+              setTimeout(() => (mini.textContent = "复制本段"), 900);
+            } catch {
+              mini.textContent = "复制失败";
+              setTimeout(() => (mini.textContent = "复制本段"), 900);
+            }
+          });
+
+          card.appendChild(h3);
+          card.appendChild(mini);
+          card.appendChild(pre);
+          cards.appendChild(card);
+        });
+
+        output.appendChild(cards);
+      };
+
+      const flash = () => {
+        output.classList.remove("ready");
+        void output.offsetWidth;
+        output.classList.add("ready");
+      };
+
+      const updateGenerateLabel = () => {
+        const mode = modeSelect.value;
+        const labelMap = {
+          buzz: "生成黑话总结",
+          weekly: "生成周报",
+          annual: "生成年终汇报",
+        };
+        generateBtn.textContent = labelMap[mode] || "生成黑话总结";
+      };
+
+      modeSelect.addEventListener("change", updateGenerateLabel);
+
+      generateBtn.addEventListener("click", () => {
+        const mode = modeSelect.value;
+        const result = buildSummary();
+        if (mode === "annual" && result && typeof result === "object") {
+          renderAnnual(result);
+          lastCopyText = formatAnnualText(result);
+        } else {
+          output.textContent = result;
+          lastCopyText = result;
+        }
+        flash();
+      });
+
+      copyBtn.addEventListener("click", async () => {
+        const isAnnual = output.querySelector(".card") !== null;
+        const text = (lastCopyText || output.textContent).trim();
+        if (!text || text.startsWith("等待")) {
+          if (isAnnual) {
+            const original = copyBtn.textContent;
+            copyBtn.textContent = "请先生成";
+            setTimeout(() => (copyBtn.textContent = original), 900);
+          } else {
+            output.textContent = "请先生成结果，再尝试复制。";
+          }
+          flash();
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(text);
+          if (isAnnual) {
+            const original = copyBtn.textContent;
+            copyBtn.textContent = "已复制✓";
+            setTimeout(() => (copyBtn.textContent = original), 900);
+          } else {
+            output.textContent = `已复制：${text}`;
+          }
+        } catch (error) {
+          if (isAnnual) {
+            const original = copyBtn.textContent;
+            copyBtn.textContent = "复制失败";
+            setTimeout(() => (copyBtn.textContent = original), 900);
+          } else {
+            output.textContent = "复制失败了，手动选中也可以。";
+          }
+        }
+        flash();
+      });
+
+      updateGenerateLabel();
+
+      // ===== 互动引流功能 =====
+
+      const TOOL_URL = 'https://qingxihub.com/year-end/';
+      const BASE_COUNT = 12847;
+      const USAGE_KEY = 'report_usage_v2';
+
+      // — 使用人数动态计数 —
+      const usageCountEl = document.getElementById('usageCount');
+      const refreshUsageDisplay = () => {
+        const local = parseInt(localStorage.getItem(USAGE_KEY) || '0', 10);
+        usageCountEl.textContent = (BASE_COUNT + local).toLocaleString('zh-CN');
+      };
+      refreshUsageDisplay();
+
+      const incrementUsage = () => {
+        const local = parseInt(localStorage.getItem(USAGE_KEY) || '0', 10);
+        localStorage.setItem(USAGE_KEY, String(local + 1));
+        refreshUsageDisplay();
+      };
+
+      // — 分享话术 —
+      const SHARE_PHRASE =
+        '🎯 打工人互助：发现一个超好用的免费工具！\n' +
+        '3分钟把今年干的事写成有战略高度的年终汇报，PPT可以直接用。\n' +
+        '还能调"黑话强度"，老板喜欢什么风格就出什么风格 😂\n' +
+        '产品/运营/研发/HR/销售都有专属模板，完全免费。\n' +
+        '🔗 ' + TOOL_URL;
+
+      const XHS_PHRASE =
+        '打工人年终总结救星！\n' +
+        '3分钟把杂事写成可交付的年终汇报，PPT直接用 ✅\n\n' +
+        '只需输入你今年干了啥，自动生成：\n' +
+        '✅ 一句话总结（有战略高度）\n' +
+        '✅ 亮点3条（STAR结构）\n' +
+        '✅ 指标证据链\n' +
+        '✅ OKR明年计划\n' +
+        '✅ 30秒述职口播稿\n\n' +
+        '黑话强度还能自己调！\n' +
+        '产品/运营/研发/HR/销售都有专属角色模板。\n\n' +
+        '🔗 ' + TOOL_URL + '\n\n' +
+        '评论区说说你的职位，我帮你看对应模板效果 👇\n' +
+        '#年终总结 #打工人神器 #职场干货 #年终汇报 #免费工具 #职场黑话';
+
+      // — 通用复制函数（处理按钮状态） —
+      const copyToClipboard = async (text, btn, doneText) => {
+        try {
+          await navigator.clipboard.writeText(text);
+          const strongEl = btn.querySelector('strong');
+          if (strongEl) {
+            const orig = strongEl.textContent;
+            strongEl.textContent = doneText;
+            btn.classList.add('copied');
+            setTimeout(() => { strongEl.textContent = orig; btn.classList.remove('copied'); }, 1800);
+          } else {
+            const orig = btn.textContent;
+            btn.textContent = doneText;
+            setTimeout(() => { btn.textContent = orig; }, 1800);
+          }
+          return true;
+        } catch { return false; }
+      };
+
+      // — DOM 引用 —
+      const shareBar    = document.getElementById('shareBar');
+      const fabShare    = document.getElementById('fabShare');
+      const shareModal  = document.getElementById('shareModal');
+
+      // — 弹窗开关 —
+      const openShareModal  = () => shareModal.classList.add('open');
+      const closeShareModal = () => shareModal.classList.remove('open');
+
+      document.getElementById('modalClose')?.addEventListener('click', closeShareModal);
+      shareModal?.addEventListener('click', (e) => { if (e.target === shareModal) closeShareModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeShareModal(); });
+
+      fabShare?.addEventListener('click', openShareModal);
+      document.getElementById('shareOpenModal')?.addEventListener('click', openShareModal);
+
+      // — 弹窗内 URL 行点击复制 —
+      document.getElementById('modalUrlRow')?.addEventListener('click', async (e) => {
+        const el = e.currentTarget;
+        const ok = await navigator.clipboard.writeText(TOOL_URL).then(() => true).catch(() => false);
+        if (ok) {
+          const orig = el.textContent;
+          el.textContent = '✓ 链接已复制！';
+          el.style.color = 'var(--accent)';
+          setTimeout(() => { el.textContent = orig; el.style.color = ''; }, 1600);
+        }
+      });
+
+      // — 弹窗按钮 —
+      document.getElementById('modalCopyPhrase')?.addEventListener('click', (e) =>
+        copyToClipboard(SHARE_PHRASE, e.currentTarget, '✓ 话术已复制！'));
+
+      document.getElementById('modalCopyLink')?.addEventListener('click', (e) =>
+        copyToClipboard(TOOL_URL, e.currentTarget, '✓ 链接已复制！'));
+
+      document.getElementById('modalCopyXHS')?.addEventListener('click', async (e) => {
+        const ok = await copyToClipboard(XHS_PHRASE, e.currentTarget, '✓ 文案已复制！');
+        if (ok) {
+          setTimeout(() => alert('小红书文案已复制 📕\n\n打开小红书 → 点击「+」→ 新建笔记 → 粘贴即可！'), 300);
+        }
+      });
+
+      // — 分享条按钮 —
+      document.getElementById('shareCopyPhrase')?.addEventListener('click', async (e) => {
+        const btn = e.currentTarget;
+        const ok = await navigator.clipboard.writeText(SHARE_PHRASE).then(() => true).catch(() => false);
+        if (ok) {
+          const orig = btn.textContent;
+          btn.textContent = '✓ 话术已复制！';
+          setTimeout(() => { btn.textContent = orig; }, 1800);
+        }
+      });
+
+      document.getElementById('shareCopyLink')?.addEventListener('click', async (e) => {
+        const btn = e.currentTarget;
+        const ok = await navigator.clipboard.writeText(TOOL_URL).then(() => true).catch(() => false);
+        if (ok) {
+          const orig = btn.textContent;
+          btn.textContent = '✓ 链接已复制！';
+          setTimeout(() => { btn.textContent = orig; }, 1800);
+        }
+      });
+
+      // — 生成按钮：完成后显示分享组件并计数 —
+      generateBtn.addEventListener('click', () => {
+        setTimeout(() => {
+          const hasText = output.textContent.trim() && !output.querySelector('.empty');
+          const hasCards = !!output.querySelector('.card');
+          if (hasText || hasCards) {
+            shareBar.classList.add('visible');
+            fabShare.classList.add('visible');
+            incrementUsage();
+          }
+        }, 200);
+      });
+
+      // ===== Theme Toggle (default: light, optional: dark) =====
+      const themeToggle = document.getElementById("themeToggle");
+      const THEME_KEY = "report_theme";
+
+      const applyTheme = (theme) => {
+        document.documentElement.setAttribute("data-theme", theme);
+        if (themeToggle) {
+          themeToggle.textContent = theme === "dark" ? "☀️ 浅色" : "🌙 深色";
+        }
+      };
+
+      const savedTheme = localStorage.getItem(THEME_KEY);
+      applyTheme(savedTheme === "dark" ? "dark" : "light");
+
+      themeToggle?.addEventListener("click", () => {
+        const current =
+          document.documentElement.getAttribute("data-theme") || "light";
+        const next = current === "dark" ? "light" : "dark";
+        localStorage.setItem(THEME_KEY, next);
+        applyTheme(next);
+      });
+    </script>
+  </body>
+</html>
