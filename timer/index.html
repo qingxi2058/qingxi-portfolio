@@ -53,6 +53,21 @@
     }
     </script>
 
+    <!-- ✅ Google Analytics（替换 G-XXXXXXXXXX 为你的真实ID）-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L13LVT0J8F"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L13LVT0J8F');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -132,7 +147,7 @@
             <span>轻微提醒</span>
             <div class="toggle-row">
               <input type="checkbox" id="remindThirty" />
-              <span>距离下班 30 分钟时提示</span>
+              <span>30 分钟前提醒</span>
             </div>
           </label>
         </div>
@@ -151,42 +166,6 @@
         </div>
         <div class="today-note">按你的月薪和工作时长自动换算</div>
       </main>
-
-      <!-- ✅ 分享海报模板（隐藏，仅截图用） -->
-      <div id="posterCard" aria-hidden="true">
-        <div class="pc-grid"></div>
-        <div class="pc-glow pc-glow-1"></div>
-        <div class="pc-glow pc-glow-2"></div>
-        <div class="pc-inner">
-          <div class="pc-header">
-            <div class="pc-brand">
-              <div class="pc-brand-dot"></div>
-              <span>⏱ 到点提醒</span>
-            </div>
-            <div class="pc-date" id="pcDate">2026年3月30日</div>
-          </div>
-          <div class="pc-main">
-            <div class="pc-status" id="pcStatus">距离下班还有</div>
-            <div class="pc-time" id="pcTime">00:00:00</div>
-          </div>
-          <div class="pc-progress-wrap">
-            <div class="pc-progress-bar"><div class="pc-progress-fill" id="pcFill" style="width:0%"></div></div>
-            <div class="pc-progress-label" id="pcPct">今日进度 0%</div>
-          </div>
-          <div class="pc-earn" id="pcEarn">
-            <span class="pc-earn-label">今日已赚</span>
-            <strong class="pc-earn-val" id="pcEarnVal">0.00</strong>
-            <span class="pc-earn-unit">元</span>
-          </div>
-          <div class="pc-footer">
-            <div class="pc-tags">
-              <span class="pc-tag">#打工人摸鱼</span>
-              <span class="pc-tag">#下班倒计时</span>
-            </div>
-            <div class="pc-url">qingxihub.com/timer</div>
-          </div>
-        </div>
-      </div>
 
       <div class="toast" id="toast" aria-live="polite"></div>
       <div class="barrage" id="barrage" aria-hidden="true"></div>
@@ -254,13 +233,13 @@
             <span class="fab-item-icon">🎵</span>
             <span class="fab-item-text">抖音</span>
           </a>
-          <a class="fab-item fab-wallpaper" href="wallpaper.html" target="_blank">
+          <a class="fab-item fab-wallpaper" href="wallpaper.html?guide=1" target="_blank">
             <span class="fab-item-icon">🖥️</span>
-            <span class="fab-item-text">动态壁纸</span>
+            <span class="fab-item-text">动态壁纸教程</span>
           </a>
           <button class="fab-item fab-install" id="installAppBtn" type="button">
             <span class="fab-item-icon">📲</span>
-            <span class="fab-item-text">安装到桌面</span>
+            <span class="fab-item-text">一键安装桌面版</span>
           </button>
           <button class="fab-item fab-wx" onclick="toggleQR(event)">
             <span class="fab-item-icon">💼</span>
@@ -274,9 +253,8 @@
         <div class="share-row">
           <span class="share-label">👋 发给同事，一起摸鱼</span>
           <div class="share-buttons">
-            <a class="share-btn share-wallpaper" href="wallpaper.html" target="_blank" id="wallpaperBtn">🖥️ 动态壁纸</a>
-            <button class="share-btn share-save" id="savePosterBtn" onclick="handleSavePoster()">🖼 保存桌面图</button>
-            <button class="share-btn share-install" id="installShareBtn" onclick="triggerInstallFromFooter()">📲 安装到桌面</button>
+            <a class="share-btn share-wallpaper" href="wallpaper.html?guide=1" target="_blank" id="wallpaperBtn">🖥️ 动态壁纸教程</a>
+            <button class="share-btn share-install" id="installShareBtn" type="button">📲 一键安装桌面版</button>
             <button class="share-btn share-copy" id="copyLinkBtn" onclick="handleCopyLink()">🔗 复制链接</button>
             <button class="share-btn share-mail" onclick="handleEmailShare()">✉️ 邮件发送</button>
             <button class="share-btn share-xhs" id="copyXhsBtn" onclick="handleCopyXhsShare()">📕 小红书文案</button>
@@ -288,7 +266,7 @@
               target="_blank" rel="noopener noreferrer">🌐 微博分享</a>
           </div>
         </div>
-        <p class="share-note">想把它当成实时小工具放在电脑上，请点“安装到桌面”，不是只保存图片。</p>
+        <p class="share-note">安装桌面应用：先点“一键安装桌面版”，若没弹窗再点地址栏右上角⬇︎。动态壁纸：点“动态壁纸教程”按提示操作。</p>
         <div class="contact-band">
           <button class="contact-chip" type="button" onclick="copyWechat()">💬 微信：qingxi20250501</button>
           <a class="contact-chip" href="mailto:zhangxin19940203@gmail.com?subject=下班倒计时合作咨询">✉️ 邮箱联系</a>
@@ -317,7 +295,6 @@
       </div>
     </div>
 
-    <script src="../assets/vendor/html2canvas.min.js"></script>
     <script src="app.js"></script>
     <script>
       // 悬浮按钮开关
@@ -435,13 +412,6 @@
         window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
       }
 
-      function triggerInstallFromFooter() {
-        var installBtn = document.getElementById('installAppBtn');
-        if (installBtn) {
-          installBtn.click();
-        }
-      }
-
       function handleCopyXhsShare() {
         var text =
           '打工人桌面摸鱼神器分享给你：\\n' +
@@ -475,71 +445,6 @@
         }, 2500);
       }
 
-      function handleSavePoster() {
-        var btn = document.getElementById('savePosterBtn');
-        if (typeof html2canvas === 'undefined') {
-          showToast('暂时没法保存图片，刷新后再试一次');
-          return;
-        }
-        var original = btn.textContent;
-        btn.textContent = '⏳ 正在生成';
-
-        // ── 填充海报内容 ──
-        try {
-          var p = getBeijingNowParts();
-          var weekdays = ['日','一','二','三','四','五','六'];
-          document.getElementById('pcDate').textContent =
-            p.year + '年' + p.month + '月' + p.day + '日 · 星期' + weekdays[new Date().getDay()];
-          document.getElementById('pcTime').textContent =
-            document.getElementById('countdown').textContent;
-          document.getElementById('pcStatus').textContent =
-            document.getElementById('status').textContent;
-
-          var bt = getBeijingTimes();
-          var elapsed = Math.min(Math.max(bt.nowEpoch - (bt.targetEpoch - 8*3600000), 0), 8*3600000);
-          var pct = Math.round(elapsed / (8*3600000) * 100);
-          document.getElementById('pcFill').style.width = Math.min(pct,100) + '%';
-          document.getElementById('pcPct').textContent = '今日进度 ' + Math.min(pct,100) + '%';
-
-          var earnedText = document.getElementById('todayEarned').textContent;
-          var pcEarn = document.getElementById('pcEarn');
-          if (salaryVisible && earnedText !== '****') {
-            pcEarn.style.display = 'flex';
-            document.getElementById('pcEarnVal').textContent = earnedText;
-          } else {
-            pcEarn.style.display = 'none';
-          }
-        } catch(e) {}
-
-        // ── 截图海报 ──
-        var poster = document.getElementById('posterCard');
-        poster.style.left = '0';
-        poster.style.top = '-9999px';
-
-        html2canvas(poster, {
-          backgroundColor: '#050d14',
-          scale: 2,
-          useCORS: true,
-          width: 800,
-          height: 1000,
-          windowWidth: 800,
-          windowHeight: 1000
-        }).then(function(canvas) {
-          poster.style.left = '-9999px';
-          poster.style.top = '0';
-          var link = document.createElement('a');
-          link.download = '下班倒计时-分享图.png';
-          link.href = canvas.toDataURL('image/png');
-          link.click();
-          btn.textContent = '✅ 已保存';
-          setTimeout(function() { btn.textContent = original; }, 2200);
-        }).catch(function() {
-          poster.style.left = '-9999px';
-          poster.style.top = '0';
-          btn.textContent = original;
-          showToast('保存图片失败了，刷新页面后再试一次');
-        });
-      }
     </script>
   </body>
 </html>

@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>下班倒计时 · 动态壁纸</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Manrope:wght@300;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --neon: #39ff14;
@@ -566,6 +569,7 @@
     const SETTINGS_KEY = 'offwork-clock-settings';
     const WORK_HOURS_PER_DAY = 8;
     const WORK_DAYS_PER_MONTH = 22;
+    const BEIJING_OFFSET_MS = 8 * 60 * 60 * 1000;
 
     let endHour = 18, endMinute = 0;
     let barrageTimer = null;
@@ -588,19 +592,14 @@
     setInterval(loadSettings, 30000);
 
     function getBeijingParts() {
-      const fmt = new Intl.DateTimeFormat('en-US', {
-        timeZone: 'Asia/Shanghai',
-        year: 'numeric', month: '2-digit', day: '2-digit',
-        hour: '2-digit', minute: '2-digit', second: '2-digit',
-        hour12: false
-      });
-      const map = {};
-      for (const p of fmt.formatToParts(new Date())) {
-        if (p.type !== 'literal') map[p.type] = p.value;
-      }
+      const beijingDate = new Date(Date.now() + BEIJING_OFFSET_MS);
       return {
-        year: +map.year, month: +map.month, day: +map.day,
-        hour: +map.hour, minute: +map.minute, second: +map.second
+        year: beijingDate.getUTCFullYear(),
+        month: beijingDate.getUTCMonth() + 1,
+        day: beijingDate.getUTCDate(),
+        hour: beijingDate.getUTCHours(),
+        minute: beijingDate.getUTCMinutes(),
+        second: beijingDate.getUTCSeconds()
       };
     }
 
@@ -698,6 +697,11 @@
       if (!e || e.target === document.getElementById('helpOverlay')) {
         document.getElementById('helpOverlay').classList.remove('show');
       }
+    }
+
+    const guideMode = new URLSearchParams(location.search).get('guide') === '1';
+    if (guideMode) {
+      document.getElementById('helpOverlay').classList.add('show');
     }
 
     function copyWallpaperUrl() {

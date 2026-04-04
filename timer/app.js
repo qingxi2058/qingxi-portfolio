@@ -11,6 +11,7 @@ const toastEl = document.querySelector("#toast");
 const barrageEl = document.querySelector("#barrage");
 const bodyEl = document.body;
 const installAppBtn = document.querySelector("#installAppBtn");
+const installShareBtn = document.querySelector("#installShareBtn");
 
 const SETTINGS_KEY = "offwork-clock-settings";
 const MONEY_MASK = "****";
@@ -18,6 +19,7 @@ const THIRTY_MINUTES_MS = 30 * 60 * 1000;
 const WORK_DAYS_PER_MONTH = 22;
 const HOURS_PER_DAY = 8;
 const WORK_MINUTES_PER_MONTH = WORK_DAYS_PER_MONTH * HOURS_PER_DAY * 60;
+const BEIJING_OFFSET_MS = 8 * 60 * 60 * 1000;
 const barrageLines = [
   "快滚回家搞副业！",
   "还不走？老板给你加钱了吗？快滚去搞副业！",
@@ -35,6 +37,7 @@ let salaryVisible = false;
 let storedSalaryValue = "";
 let lastThirtyReminderKey = null;
 let deferredInstallPrompt = null;
+let installPromptWaiters = [];
 
 function parseTime(value) {
   if (!value || !value.includes(":")) {
@@ -48,30 +51,14 @@ function parseTime(value) {
 }
 
 function getBeijingNowParts() {
-  const formatter = new Intl.DateTimeFormat("en-US", {
-    timeZone: "Asia/Shanghai",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false
-  });
-  const parts = formatter.formatToParts(new Date());
-  const map = {};
-  for (const part of parts) {
-    if (part.type !== "literal") {
-      map[part.type] = part.value;
-    }
-  }
+  const beijingDate = new Date(Date.now() + BEIJING_OFFSET_MS);
   return {
-    year: Number(map.year),
-    month: Number(map.month),
-    day: Number(map.day),
-    hour: Number(map.hour),
-    minute: Number(map.minute),
-    second: Number(map.second)
+    year: beijingDate.getUTCFullYear(),
+    month: beijingDate.getUTCMonth() + 1,
+    day: beijingDate.getUTCDate(),
+    hour: beijingDate.getUTCHours(),
+    minute: beijingDate.getUTCMinutes(),
+    second: beijingDate.getUTCSeconds()
   };
 }
 
@@ -137,10 +124,67 @@ function showToast(message) {
 }
 
 function updateInstallButtonVisibility(visible) {
-  if (!installAppBtn) {
+  const installButtons = [installAppBtn, installShareBtn].filter(Boolean);
+  if (!installButtons.length) {
     return;
   }
-  installAppBtn.classList.toggle("is-ready", visible);
+  for (const button of installButtons) {
+    button.classList.toggle("is-ready", visible);
+  }
+}
+
+function isChromiumBrowser() {
+  const ua = navigator.userAgent || "";
+  const isChrome = /Chrome|Edg|OPR/.test(ua);
+  const notIOS = !/CriOS|FxiOS/.test(ua);
+  return isChrome && notIOS;
+}
+
+async function tryInstallApp() {
+  const promptEvent = deferredInstallPrompt || (await waitForInstallPrompt(1800));
+  if (promptEvent) {
+    deferredInstallPrompt = promptEvent;
+    promptEvent.prompt();
+    const installResult = await promptEvent.userChoice
+      .catch(() => null)
+      .finally(() => {
+        deferredInstallPrompt = null;
+        updateInstallButtonVisibility(false);
+      });
+    if (installResult && installResult.outcome === "dismissed") {
+      showToast("你刚才取消了安装，再点一次可以继续");
+    }
+    return;
+  }
+
+  if (isStandaloneMode()) {
+    showToast("已经安装好了，桌面或应用列表里可以直接打开");
+    return;
+  }
+
+  if (isChromiumBrowser()) {
+    showToast("没弹窗时：点地址栏右上角⬇︎，再点“安装应用”");
+    return;
+  }
+
+  showToast("当前浏览器不支持一键安装，请改用 Chrome 或 Edge 打开");
+}
+
+function waitForInstallPrompt(timeoutMs = 1500) {
+  if (deferredInstallPrompt) {
+    return Promise.resolve(deferredInstallPrompt);
+  }
+  return new Promise((resolve) => {
+    const timer = window.setTimeout(() => {
+      installPromptWaiters = installPromptWaiters.filter((item) => item !== resolver);
+      resolve(null);
+    }, timeoutMs);
+    const resolver = (event) => {
+      window.clearTimeout(timer);
+      resolve(event);
+    };
+    installPromptWaiters.push(resolver);
+  });
 }
 
 function isStandaloneMode() {
@@ -148,6 +192,10 @@ function isStandaloneMode() {
     window.matchMedia("(display-mode: standalone)").matches ||
     window.navigator.standalone === true
   );
+}
+
+function syncStandaloneLayout() {
+  bodyEl.classList.toggle("standalone-app", isStandaloneMode());
 }
 
 function registerServiceWorker() {
@@ -328,6 +376,10 @@ if (remindThirtyInput) {
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
   deferredInstallPrompt = event;
+  for (const resolver of installPromptWaiters) {
+    resolver(event);
+  }
+  installPromptWaiters = [];
   updateInstallButtonVisibility(true);
 });
 
@@ -338,26 +390,26 @@ window.addEventListener("appinstalled", () => {
 });
 
 if (installAppBtn) {
-  installAppBtn.addEventListener("click", async () => {
-    if (deferredInstallPrompt) {
-      deferredInstallPrompt.prompt();
-      await deferredInstallPrompt.userChoice.catch(() => null);
-      deferredInstallPrompt = null;
-      updateInstallButtonVisibility(false);
-      return;
-    }
+  installAppBtn.addEventListener("click", () => {
+    void tryInstallApp();
+  });
+}
 
-    if (isStandaloneMode()) {
-      showToast("已经安装好了，桌面或应用列表里可以直接打开");
-      return;
-    }
-
-    showToast("请点浏览器地址栏里的安装图标，或在菜单里选“安装应用”");
+if (installShareBtn) {
+  installShareBtn.addEventListener("click", () => {
+    void tryInstallApp();
   });
 }
 
 registerServiceWorker();
 updateInstallButtonVisibility(false);
+syncStandaloneLayout();
+const displayModeQuery = window.matchMedia("(display-mode: standalone)");
+if (displayModeQuery.addEventListener) {
+  displayModeQuery.addEventListener("change", syncStandaloneLayout);
+} else if (displayModeQuery.addListener) {
+  displayModeQuery.addListener(syncStandaloneLayout);
+}
 
 window.setInterval(tick, 200);
 window.setTimeout(tick, 0);
