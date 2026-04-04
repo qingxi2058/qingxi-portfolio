@@ -1,3 +1,7 @@
+html {
+  min-height: 100%;
+}
+
 :root {
   color-scheme: only light;
   --bg-1: #0a1b25;
@@ -27,7 +31,7 @@ body {
   background: radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 50%),
     linear-gradient(135deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 body::before,
@@ -89,7 +93,7 @@ body.offwork .earnings strong {
 }
 
 .app {
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
   padding: 36px 40px 48px;
@@ -98,7 +102,7 @@ body.offwork .earnings strong {
 
 @media (min-width: 1024px) {
   .app {
-    min-height: 92vh;
+    min-height: auto;
   }
 }
 
@@ -257,7 +261,8 @@ body.offwork .earnings strong {
 }
 
 .display {
-  flex: 1;
+  flex: 0 0 auto;
+  min-height: clamp(380px, 56vh, 620px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -543,6 +548,7 @@ body.offwork .earnings strong {
   }
 
   .display {
+    min-height: 320px;
     justify-content: flex-start;
     gap: 12px;
     padding-top: 8px;
