@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>离职信生成器｜体面告别打工人必备</title>
+<meta name="description" content="输入基本信息，30秒生成一封让老板沉默的离职信。正式体面、情绪发泄、老板沉默、滴水不漏，四种模式随心选。">
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --sub: #666;
+    --border: #e5e5e5;
+    --primary: #2d6a4f;
+    --primary-light: #e8f5ee;
+    --accent: #ff6b35;
+    --radius: 12px;
+    --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+  [data-theme="dark"] {
+    --bg: #111;
+    --card: #1e1e1e;
+    --text: #f0f0f0;
+    --sub: #999;
+    --border: #333;
+    --primary: #52b788;
+    --primary-light: #1a2f24;
+    --accent: #ff8c5a;
+    --shadow: 0 2px 16px rgba(0,0,0,0.4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+  a { color: var(--primary); text-decoration: none; }
+
+  /* Header */
+  .header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+  .header-logo {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .header-logo span { color: var(--primary); }
+  .header-nav { display: flex; align-items: center; gap: 16px; }
+  .header-nav a { font-size: 13px; color: var(--sub); }
+  .theme-btn {
+    background: var(--border);
+    border: none;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text);
+    transition: background 0.2s;
+  }
+  .theme-btn:hover { background: var(--primary-light); }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 52px 20px 36px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--primary);
+  }
+  .hero p {
+    font-size: 16px;
+    color: var(--sub);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .hero-count {
+    font-size: 13px;
+    color: var(--sub);
+    margin-top: 6px;
+  }
+  .hero-count strong { color: var(--accent); }
+
+  /* Mode Tabs */
+  .mode-section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px 12px;
+  }
+  .mode-label {
+    font-size: 12px;
+    color: var(--sub);
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .mode-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .mode-tab {
+    padding: 8px 16px;
+    border-radius: 24px;
+    border: 1.5px solid var(--border);
+    background: var(--card);
+    color: var(--sub);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .mode-tab:hover { border-color: var(--primary); color: var(--primary); }
+  .mode-tab.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+  .mode-desc {
+    font-size: 12px;
+    color: var(--sub);
+    margin-top: 8px;
+    min-height: 18px;
+    transition: color 0.2s;
+  }
+
+  /* Form Card */
+  .form-card {
+    max-width: 720px;
+    margin: 16px auto;
+    padding: 0 20px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  label .optional {
+    font-weight: 400;
+    color: var(--sub);
+    margin-left: 4px;
+  }
+  input, select, textarea {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: var(--text);
+    font-family: inherit;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+  select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+
+  /* Intensity */
+  .intensity-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .intensity-row label { font-size: 13px; font-weight: 600; white-space: nowrap; }
+  input[type="range"] {
+    flex: 1;
+    height: 4px;
+    border: none;
+    background: var(--border);
+    border-radius: 2px;
+    padding: 0;
+    accent-color: var(--primary);
+    cursor: pointer;
+  }
+  .intensity-val {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 24px;
+    text-align: right;
+  }
+
+  /* Generate Btn */
+  .gen-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    letter-spacing: 0.5px;
+  }
+  .gen-btn:hover { opacity: 0.9; }
+  .gen-btn:active { transform: scale(0.98); }
+  .gen-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Result */
+  .result-section {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    padding: 0 20px;
+    display: none;
+  }
+  .result-section.show { display: block; }
+  .result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .result-header h2 { font-size: 16px; font-weight: 700; }
+  .result-meta { font-size: 12px; color: var(--sub); }
+
+  .result-box {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text);
+    white-space: pre-wrap;
+    word-break: break-word;
+    box-shadow: var(--shadow);
+    min-height: 200px;
+  }
+  .result-box.typing::after {
+    content: '▋';
+    animation: blink 0.8s infinite;
+    color: var(--primary);
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .action-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .action-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .action-btn.primary-btn {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .action-btn.primary-btn:hover { opacity: 0.88; }
+  .action-btn.copied { background: #52b788; border-color: #52b788; color: #fff; }
+
+  /* Share hint */
+  .share-hint {
+    margin-top: 16px;
+    background: var(--primary-light);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--sub);
+    line-height: 1.7;
+  }
+  .share-hint strong { color: var(--primary); }
+
+  /* Tips */
+  .tips-section {
+    max-width: 720px;
+    margin: 0 auto 48px;
+    padding: 0 20px;
+  }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .tip-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .tip-card .tip-icon { font-size: 22px; margin-bottom: 8px; }
+  .tip-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .tip-card p { font-size: 12px; color: var(--sub); line-height: 1.6; }
+
+  /* Author Card */
+  .author-section {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    padding: 0 20px;
+  }
+  .author-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: var(--shadow);
+  }
+  .author-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .author-info { flex: 1; }
+  .author-info h3 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+  .author-info p { font-size: 12px; color: var(--sub); line-height: 1.6; }
+  .author-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .author-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 4px 10px;
+    border-radius: 20px;
+    transition: opacity 0.2s;
+  }
+  .author-link:hover { opacity: 0.8; }
+  @media (max-width: 480px) {
+    .author-card { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 12px;
+    color: var(--sub);
+    border-top: 1px solid var(--border);
+    line-height: 2;
+  }
+  footer a { color: var(--sub); }
+  footer a:hover { color: var(--primary); }
+
+  /* Divider */
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-logo">💼 <span>清溪AI</span> · 离职信生成器</div>
+  <div class="header-nav">
+    <a href="https://qingxihub.com" target="_blank">主页</a>
+    <a href="https://qingxihub.com/tools/" target="_blank">工具箱</a>
+    <button class="theme-btn" onclick="toggleTheme()">🌙 深色</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">🔥 打工人必备 · 完全免费</div>
+  <h1>离职信生成器<br><em>体面告别，一键搞定</em></h1>
+  <p>输入基本信息，30秒生成一封<strong>让老板无话可说</strong>的离职信。<br>
+  正式体面、情绪发泄、老板沉默、滴水不漏，四种风格随心选。</p>
+  <div class="hero-count">已帮助 <strong>8,241</strong> 位打工人优雅离场 🎉</div>
+</section>
+
+<!-- Mode Tabs -->
+<div class="mode-section">
+  <div class="mode-label">选择风格</div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" data-mode="formal" onclick="setMode(this)">🎩 正式体面</button>
+    <button class="mode-tab" data-mode="emotion" onclick="setMode(this)">😤 情绪发泄</button>
+    <button class="mode-tab" data-mode="silent" onclick="setMode(this)">😶 老板沉默</button>
+    <button class="mode-tab" data-mode="safe" onclick="setMode(this)">🛡️ 滴水不漏</button>
+  </div>
+  <div class="mode-desc" id="modeDesc">职业、得体、感谢到位，离职后不留把柄，适合继续混职场的你。</div>
+</div>
+
+<!-- Form -->
+<div class="form-card">
+  <div class="card">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="company">公司名称</label>
+        <input type="text" id="company" placeholder="例：字节跳动" maxlength="40" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label for="position">你的职位</label>
+        <input type="text" id="position" placeholder="例：内容运营" maxlength="40" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label for="years">在职时长</label>
+        <select id="years">
+          <option value="不到半年">不到半年</option>
+          <option value="半年" >半年左右</option>
+          <option value="一年" selected>约一年</option>
+          <option value="两年">两年左右</option>
+          <option value="三年">三年左右</option>
+          <option value="五年以上">五年以上</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="recipient">收件人</label>
+        <select id="recipient">
+          <option value="HR">HR（人力资源）</option>
+          <option value="直属上级">直属上级</option>
+          <option value="老板">老板本人</option>
+          <option value="领导和HR">领导和HR</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label for="reason">真实离职原因 <span class="optional">（选填，AI会帮你包装）</span></label>
+        <textarea id="reason" placeholder="例：钱少事多、管理混乱、天天加班不给加班费、老板画饼……说真话，AI帮你翻译成体面话。"></textarea>
+      </div>
+      <div class="form-group full">
+        <label for="highlight">想带走的印象 <span class="optional">（选填）</span></label>
+        <input type="text" id="highlight" placeholder="例：负责任、执行力强、带过XX项目……" maxlength="80" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="intensity-row">
+      <label>🌡️ 强度</label>
+      <input type="range" id="intensity" min="1" max="5" value="3" oninput="updateIntensity(this.value)">
+      <div class="intensity-val" id="intensityVal">3</div>
+    </div>
+
+    <button class="gen-btn" id="genBtn" onclick="generate()">✍️ 生成离职信</button>
+  </div>
+</div>
+
+<!-- Result -->
+<div class="result-section" id="resultSection">
+  <div class="result-header">
+    <h2>你的离职信 👇</h2>
+    <div class="result-meta" id="resultMeta"></div>
+  </div>
+  <div class="result-box" id="resultBox"></div>
+  <div class="action-row">
+    <button class="action-btn primary-btn" id="copyBtn" onclick="copyResult()">📋 复制全文</button>
+    <button class="action-btn" onclick="regenerate()">🔄 换一版</button>
+    <button class="action-btn" onclick="copyShareText()">📤 复制推荐话术</button>
+    <button class="action-btn" onclick="copyLink()">🔗 复制工具链接</button>
+  </div>
+  <div class="share-hint">
+    💡 <strong>觉得好用？</strong> 发给也在憋离职信的同事，或者截图发小红书 / 抖音，@清溪AI 让我看到你的反馈 ❤️
+  </div>
+</div>
+
+<!-- Tips -->
+<div class="tips-section">
+  <div class="section-title">📌 离职那些事</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">⏰</div>
+      <h3>提前多久说？</h3>
+      <p>普通员工提前30天，试用期提前3天，管理岗通常提前1-3个月，看劳动合同约定。</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📄</div>
+      <h3>离职信要签字吗？</h3>
+      <p>最好打印签字+日期，发邮件同时保留截图，避免日后扯皮，记录时间节点。</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💰</div>
+      <h3>工资结算要注意</h3>
+      <p>离职当月工资、年假折现、绩效奖金要核清楚，离职前截图留存工资单记录。</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🤐</div>
+      <h3>真实原因要说吗？</h3>
+      <p>不用。"个人职业发展规划"是万能答案，不要在离职信里留下影响背调的内容。</p>
+    </div>
+  </div>
+</div>
+
+<!-- Author Card -->
+<div class="author-section">
+  <div class="author-card">
+    <div class="author-avatar">🪴</div>
+    <div class="author-info">
+      <h3>清溪 · AI产品 / 内容增长</h3>
+      <p>10年内容增长经验 · 3年AI实践 · 80w+累计操盘粉丝<br>持续做AI工具、工作流和轻量产品，欢迎关注交流 👇</p>
+      <div class="author-links">
+        <a class="author-link" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank">📕 小红书</a>
+        <a class="author-link" href="https://v.douyin.com/fZNLm0iCwfA/" target="_blank">🎵 抖音</a>
+        <a class="author-link" href="https://qingxihub.com" target="_blank">🌐 主页</a>
+        <a class="author-link" href="mailto:zhangxin19940203@gmail.com">✉️ 邮件</a>
+        <a class="author-link" href="https://qingxihub.com/tools/" target="_blank">🧠 工具箱</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 <a href="https://qingxihub.com" target="_blank">清溪AI</a> ·
+  <a href="https://qingxihub.com/tools/" target="_blank">AI工具箱</a> ·
+  <a href="https://qingxihub.com/year-end/" target="_blank">年终总结生成器</a> ·
+  <a href="https://qingxihub.com/timer/" target="_blank">下班倒计时</a>
+</footer>
+
+<script>
+// ========== State ==========
+let currentMode = 'formal';
+let variantSeed = 0;
+
+const modeDescs = {
+  formal: '职业、得体、感谢到位，离职后不留把柄，适合继续混职场的你。',
+  emotion: '把那些没说出口的话说出来，发泄归发泄，AI帮你控制在不翻车的边界内。',
+  silent: '话少、精准、意味深长，三句话让老板陷入沉默，自我反省。',
+  safe: '滴水不漏，无懈可击，背调友好，律师看了都说好。'
+};
+
+const modeTags = {
+  formal: '正式体面版',
+  emotion: '情绪发泄版',
+  silent: '老板沉默版',
+  safe: '滴水不漏版'
+};
+
+function setMode(el) {
+  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  currentMode = el.dataset.mode;
+  document.getElementById('modeDesc').textContent = modeDescs[currentMode];
+  // hide result when mode changes
+  document.getElementById('resultSection').classList.remove('show');
+}
+
+function updateIntensity(v) {
+  document.getElementById('intensityVal').textContent = v;
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.querySelector('.theme-btn').textContent = isDark ? '🌙 深色' : '☀️ 浅色';
+}
+
+// ========== Templates ==========
+function getDate() {
+  const d = new Date();
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+}
+
+function pickFrom(arr, seed) {
+  return arr[(variantSeed + seed) % arr.length];
+}
+
+function buildLetter(data) {
+  const { company, position, years, recipient, reason, highlight, intensity, mode } = data;
+  const date = getDate();
+  const co = company || '贵公司';
+  const pos = position || '本职位';
+  const yr = years;
+  const rec = recipient || 'HR';
+  const lvl = parseInt(intensity);
+
+  // -------- FORMAL --------
+  if (mode === 'formal') {
+    const openings = [
+      `尊敬的${rec}，\n\n您好！`,
+      `您好，\n\n感谢您百忙之中阅读这封信。`,
+      `您好！\n\n非常感谢${co}给予我的发展机会。`
+    ];
+    const bodies = [
+      `在${co}担任${pos}的${yr}里，我收获了宝贵的经验和成长，与团队共同经历了许多难忘的时刻。${highlight ? `在此期间，我${highlight}，为团队贡献了自己的力量。` : ''}经过慎重思考，我决定因个人职业发展规划，申请离职。`,
+      `在过去${yr}的工作中，我深刻体会到了${co}的企业文化，也在${pos}岗位上积累了丰富的实战经验。${highlight ? `我始终努力做到${highlight}。` : ''}基于对个人未来发展方向的考量，我决定提出离职申请。`,
+      `在${co}工作的${yr}时间里，感谢公司和团队对我的信任与支持。${highlight ? `我在担任${pos}期间做到了${highlight}，希望为团队留下积极的印象。` : ''}现因个人原因，我郑重申请离职。`
+    ];
+    const closes = [
+      `我将认真完成交接工作，确保业务平稳过渡，不给团队造成困扰。\n\n再次感谢公司${yr}来的培养与支持，祝${co}越来越好！\n\n此致\n敬礼`,
+      `离职前我会尽职完成工作交接，保障项目顺利推进。非常感谢大家的帮助，希望未来有机会再次合作。\n\n祝公司发展蒸蒸日上！\n\n此致\n敬礼`,
+      `我承诺在离职前做好完整交接，让后续工作无缝衔接。感谢这段时间所有同事的关照，期待与大家在未来保持联系。\n\n祝好！`
+    ];
+    return `${pickFrom(openings, 0)}\n\n${pickFrom(bodies, 1)}\n\n${pickFrom(closes, 2)}\n\n${pos} ${data.name || '张三'}\n${date}`;
+  }
+
+  // -------- EMOTION --------
+  if (mode === 'emotion') {
+    const intensePhrases = [
+      ['我在这里付出了真心，只是换来了失望。', '某些管理方式让我无法认同，我尝试过改变，但最终选择离开。', '这不是我想要的工作环境。'][Math.min(lvl-1, 2)],
+      ['老实说，这份工作和我当初的期待相差甚远。', '加班是常态，认可是稀缺资源，我决定把时间还给自己。', '我终于想通了——不值得的地方，一天都不多待。'][Math.min(lvl-1, 2)],
+      ['我曾经很努力，也确实认真过。', '但我意识到，努力需要用对地方。', '离开，是对自己最大的尊重。'][Math.min(lvl-1, 2)]
+    ];
+    const body = `${rec}，您好。\n\n在${co}担任${pos}的${yr}里，${pickFrom(intensePhrases, 0)}\n\n${reason ? `关于离职原因，我想直说：${reason.length > 50 ? reason.substring(0,50)+'……' : reason}这些是我做出决定的真实原因。` : '我选择不再解释，只是选择离开。'}\n\n${highlight ? `我在这段时间${highlight}，这点我问心无愧。` : '我问心无愧地离开。'}\n\n交接工作我会认真完成，但内心已经告别。\n\n再见。\n\n${date}`;
+    return body;
+  }
+
+  // -------- SILENT --------
+  if (mode === 'silent') {
+    const variants = [
+      `${rec}，\n\n我决定离职。\n\n在${co}工作的${yr}，我已经尽力了。\n\n谢谢。\n\n${date}`,
+      `${rec}，您好。\n\n经深思熟虑，我申请离职。\n\n在担任${pos}的${yr}里，我已全力完成本职工作。\n\n交接按规定进行。\n\n${highlight ? `我带走的，是${highlight}的自己。` : '我带走的，是这段经历。'}\n\n此致\n${date}`,
+      `您好。\n\n我要离职了。\n\n感谢${co}给我的${yr}。\n\n有些话说了没用，不如不说。\n\n我只知道，是时候了。\n\n${date}`
+    ];
+    return pickFrom(variants, variantSeed);
+  }
+
+  // -------- SAFE --------
+  if (mode === 'safe') {
+    const opens = [
+      `尊敬的${rec}：\n\n您好！本人${position || '本人'}现正式提出离职申请。`,
+      `您好，\n\n根据劳动合同相关规定，本人正式提前通知离职。`,
+      `${rec}，您好。\n\n经认真考虑个人职业规划，本人决定申请离职，特此书面告知。`
+    ];
+    const core = `在${co}担任${pos}工作${yr}，期间恪尽职守，依规完成各项工作任务。${highlight ? `本人在任期间${highlight}，相关工作成果均已留存归档。` : '所有工作记录均已按要求归档保存。'}\n\n本人申请离职原因为个人职业发展规划调整，与公司无关，特此声明。\n\n离职申请日期：${date}\n请按公司规定安排工作交接，本人将全力配合，确保业务连续性。离职手续、社保/公积金转移、工资结算等，请HR部门依法依规办理。`;
+    const close = `如有任何问题，请通过正式渠道与本人联系。\n\n此致\n敬礼\n\n申请人：${data.name || '___'}\n日期：${date}`;
+    return `${pickFrom(opens, 0)}\n\n${core}\n\n${close}`;
+  }
+}
+
+// ========== Generate ==========
+function generate() {
+  const company = document.getElementById('company').value.trim();
+  const position = document.getElementById('position').value.trim();
+  const years = document.getElementById('years').value;
+  const recipient = document.getElementById('recipient').value;
+  const reason = document.getElementById('reason').value.trim();
+  const highlight = document.getElementById('highlight').value.trim();
+  const intensity = document.getElementById('intensity').value;
+
+  const data = { company, position, years, recipient, reason, highlight, intensity, mode: currentMode };
+
+  const btn = document.getElementById('genBtn');
+  btn.disabled = true;
+  btn.textContent = '生成中…';
+
+  const resultSection = document.getElementById('resultSection');
+  const resultBox = document.getElementById('resultBox');
+  const resultMeta = document.getElementById('resultMeta');
+
+  resultSection.classList.add('show');
+  resultBox.classList.add('typing');
+  resultBox.textContent = '';
+
+  // Simulate typing effect
+  const letter = buildLetter(data);
+  resultMeta.textContent = `${modeTags[currentMode]} · 强度 ${intensity}`;
+
+  let i = 0;
+  const speed = Math.max(8, Math.floor(2000 / letter.length));
+  const timer = setInterval(() => {
+    resultBox.textContent += letter[i];
+    i++;
+    if (i >= letter.length) {
+      clearInterval(timer);
+      resultBox.classList.remove('typing');
+      btn.disabled = false;
+      btn.textContent = '✍️ 生成离职信';
+      resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, speed);
+}
+
+function regenerate() {
+  variantSeed = (variantSeed + 1) % 3;
+  generate();
+}
+
+// ========== Copy / Share ==========
+function copyResult() {
+  const text = document.getElementById('resultBox').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ 已复制！';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 复制全文';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+function copyShareText() {
+  const share = `我用这个工具生成了离职信，再也不用苦想措辞了！\n\n正式体面/情绪发泄/老板沉默/滴水不漏四种风格，30秒搞定～\n\n👉 https://qingxihub.com/resign/\n\n@清溪AI`;
+  navigator.clipboard.writeText(share).then(() => alert('推荐话术已复制，去小红书/抖音发吧 🎉'));
+}
+
+function copyLink() {
+  navigator.clipboard.writeText('https://qingxihub.com/resign/').then(() => alert('链接已复制！'));
+}
+
+// Smooth scroll for generate button
+document.getElementById('genBtn').addEventListener('keydown', e => {
+  if (e.key === 'Enter') generate();
+});
+</script>
+</body>
+</html>
