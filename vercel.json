@@ -103,6 +103,14 @@
     {
       "source": "/home/",
       "destination": "/index.html"
+    },
+    {
+      "source": "/resign",
+      "destination": "/resign/index.html"
+    },
+    {
+      "source": "/resign/",
+      "destination": "/resign/index.html"
     }
   ]
 }
