@@ -318,6 +318,147 @@ a { color: inherit; text-decoration: none; }
   font-size: 13px;
 }
 
+/* ===== 合作服务区 ===== */
+.service-section {
+  padding: 18px 0 0;
+}
+.service-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f5f3ff 100%);
+  border: 1px solid rgba(91, 103, 255, 0.14);
+  box-shadow: 0 20px 50px rgba(91, 103, 255, 0.08);
+  padding: 36px;
+  border-radius: var(--radius-xl);
+}
+.service-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.service-title {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  margin-bottom: 8px;
+}
+.service-sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.svc-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 20px 18px;
+  transition: box-shadow .2s, transform .2s;
+}
+.svc-item:hover {
+  box-shadow: 0 8px 24px rgba(91, 103, 255, 0.12);
+  transform: translateY(-2px);
+}
+.svc-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.svc-name {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.svc-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.svc-tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  font-size: 11px;
+  font-weight: 600;
+}
+.service-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 22px 24px;
+  background: rgba(91, 103, 255, 0.06);
+  border: 1px solid rgba(91, 103, 255, 0.12);
+  border-radius: var(--radius-md);
+}
+.service-cta-left {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.service-cta-left strong {
+  display: block;
+  font-size: 16px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.service-cta-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.cta-btn-main {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #5b67ff, #8c72ff);
+  white-space: nowrap;
+}
+.cta-btn-wechat {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+@media (max-width: 960px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .service-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 @media (max-width: 960px) {
   .hero-grid,
   .track-grid,
@@ -361,6 +502,7 @@ a { color: inherit; text-decoration: none; }
       <div class="nav-links">
         <a href="#works">代表作品</a>
         <a href="#tracks">核心方向</a>
+        <a href="#collab">合作服务</a>
         <a href="/portfolio/">案例详情</a>
         <a href="https://github.com/qingxi2058" target="_blank" rel="noopener">GitHub</a>
       </div>
@@ -370,7 +512,7 @@ a { color: inherit; text-decoration: none; }
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <h1>内容增长 × <span class="accent">AI产品</span> × 项目落地</h1>
+        <h1>用AI，<span class="accent">帮你做增长 · 出产品 · 搭流程</span></h1>
         <p class="lead">围绕 AI 应用、内容增长与工作流搭建，持续交付可上线、可体验、可迭代的产品与项目。</p>
         <p class="summary">过往覆盖品牌传播、内容矩阵与项目统筹。当前重点放在 AI 产品、小程序、轻量 Web 应用和工作流落地。</p>
         <div class="badge-row">
@@ -497,6 +639,61 @@ a { color: inherit; text-decoration: none; }
             <a class="chip-link" href="/year-end/">在线体验</a>
             <a class="chip-link alt" href="https://github.com/qingxi2058/qingxi-year-end-report" target="_blank" rel="noopener">GitHub</a>
           </div>
+        </div>
+
+        <div class="work-card">
+          <h3>离职信生成器</h3>
+          <p>输入公司、职位和真实原因，30秒生成体面离职信。正式体面、情绪发泄、老板沉默、滴水不漏四种风格。</p>
+          <div class="work-meta">Web 工具 + 打工人情绪共鸣</div>
+          <div class="work-actions">
+            <a class="chip-link" href="/resign/">在线体验</a>
+            <a class="chip-link alt" href="https://github.com/qingxi2058/qingxi-portfolio/tree/main/resign" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 合作服务区 -->
+  <section class="service-section" id="collab">
+    <div class="wrap service-card">
+      <div class="service-eyebrow">✦ 合作服务</div>
+      <div class="service-title">有项目想聊？这里是合作入口</div>
+      <div class="service-sub">我可以帮你解决 AI 落地、内容增长和产品快速交付的问题。</div>
+      <div class="service-grid">
+        <div class="svc-item">
+          <div class="svc-icon">🤖</div>
+          <div class="svc-name">AI工作流定制</div>
+          <div class="svc-desc">把内容生产、选题、剪辑或日常提效流程 AI 化，交付可跑通的完整方案。</div>
+          <span class="svc-tag">品牌 / 团队</span>
+        </div>
+        <div class="svc-item">
+          <div class="svc-icon">📈</div>
+          <div class="svc-name">内容增长咨询</div>
+          <div class="svc-desc">小红书 / 抖音账号冷启动、选题节奏、爆款复盘，有10年实操经验背书。</div>
+          <span class="svc-tag">IP / MCN / 品牌</span>
+        </div>
+        <div class="svc-item">
+          <div class="svc-icon">🎯</div>
+          <div class="svc-name">联名内容合作</div>
+          <div class="svc-desc">我的受众是职场 / AI / 打工人群体，欢迎品牌联名测评或定制内容种草。</div>
+          <span class="svc-tag">广告 / 种草</span>
+        </div>
+        <div class="svc-item">
+          <div class="svc-icon">⚡</div>
+          <div class="svc-name">轻量产品落地</div>
+          <div class="svc-desc">从想法到上线，帮你快速做出可体验的 Web 工具或小程序原型，验证想法。</div>
+          <span class="svc-tag">创业 / 产品团队</span>
+        </div>
+      </div>
+      <div class="service-cta">
+        <div class="service-cta-left">
+          <strong>感兴趣？直接联系我</strong>
+          说明你的需求和预算，我会在 24 小时内回复。
+        </div>
+        <div class="service-cta-btns">
+          <a class="cta-btn-main" href="mailto:zhangxin19940203@gmail.com">✉️ 发邮件</a>
+          <div class="cta-btn-wechat">💬 微信 qingxi20250501</div>
         </div>
       </div>
     </div>
