@@ -91,19 +91,27 @@ img { display: block; max-width: 100%; }
 }
 .nav-links a:hover { color: var(--ink); }
 .nav-cta {
-  min-height: 48px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0 22px;
   border-radius: 999px;
-  background: #fff;
-  border: 1px solid rgba(107,100,255,0.18);
-  color: var(--primary-dark);
-  box-shadow: 0 10px 24px rgba(107,100,255,0.10);
+  background: var(--primary);
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 4px 16px rgba(107,100,255,0.28);
+  transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+.nav-cta:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 6px 24px rgba(107,100,255,0.38);
+  transform: translateY(-1px);
 }
 .hero {
-  padding: 64px 0 24px;
+  padding: 56px 0 20px;
 }
 .hero-shell {
   background: rgba(255,255,255,0.76);
@@ -111,6 +119,15 @@ img { display: block; max-width: 100%; }
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
   padding: 42px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-shell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--primary), #8b73ff 50%, #ff9368);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 .hero-copy {
   max-width: 860px;
@@ -246,7 +263,7 @@ img { display: block; max-width: 100%; }
   line-height: 1.7;
 }
 .section {
-  padding: 22px 0 0;
+  padding: 20px 0 0;
 }
 .section-shell {
   background: rgba(255,255,255,0.78);
@@ -950,8 +967,8 @@ img { display: block; max-width: 100%; }
         <span class="step">3. 直接拿清单或继续聊</span>
       </div>
       <div class="contact-actions">
-        <a class="btn primary" href="https://xhslink.com/m/15zyxo67w0J" target="_blank" rel="noopener">先去小红书</a>
-        <a class="btn" href="mailto:zhangxin19940203@gmail.com">邮箱联系</a>
+        <a class="btn primary" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noopener">去小红书</a>
+        <a class="btn" href="https://v.douyin.com/fZNLm0iCwfA/" target="_blank" rel="noopener">去抖音</a>
       </div>
     </div>
   </section>
@@ -962,7 +979,7 @@ img { display: block; max-width: 100%; }
       <h2>如果你想做 AI 落地、内容增长或轻量产品验证，可以从这里开始聊。</h2>
       <p>适合品牌、团队、创业者，也适合已经有方向但还没有把东西做出来的人。先说需求，再确认方向，再给方案，再开始做。</p>
       <div class="contact-actions">
-        <a class="btn primary" href="mailto:zhangxin19940203@gmail.com">发邮件</a>
+        <a class="btn primary" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noopener">小红书私信</a>
         <span class="btn">微信：qingxi20250501</span>
       </div>
     </div>
@@ -974,6 +991,8 @@ img { display: block; max-width: 100%; }
       <a href="/tools/">AI工具箱</a>
       <a href="/daily/">问问日常</a>
       <a href="/drama/">AI短剧助手</a>
+      <a href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noopener">小红书</a>
+      <a href="https://v.douyin.com/fZNLm0iCwfA/" target="_blank" rel="noopener">抖音</a>
       <a href="https://github.com/qingxi2058" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
