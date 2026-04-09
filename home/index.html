@@ -3,756 +3,979 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>张清溪 · AI产品与内容增长</title>
-<meta name="description" content="张清溪的个人主页。聚焦 AI 产品、内容增长、工作流落地与代表作品。"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E✨%3C/text%3E%3C/svg%3E"/>
+<title>清溪AI · 工具、案例、教程与合作入口</title>
+<meta name="description" content="清溪AI公开主页。集中展示在线工具、项目案例、AI实战方向与微信承接入口。"/>
 <style>
 :root {
-  --bg: #f7f8fc;
-  --paper: rgba(255,255,255,.9);
-  --card: #ffffff;
-  --ink: #162033;
-  --muted: #6f7892;
-  --line: rgba(24,32,51,.08);
-  --brand: #5b67ff;
-  --brand-soft: #eef0ff;
-  --accent: #ff8a6c;
-  --shadow: 0 20px 50px rgba(42, 56, 92, 0.08);
+  --primary: #6b64ff;
+  --primary-dark: #534bdf;
+  --primary-soft: #ece9ff;
+  --ink: #1f2144;
+  --muted: #656d88;
+  --line: #e3def5;
+  --card: rgba(255,255,255,0.94);
+  --page: linear-gradient(180deg, #f8f6ff 0%, #f5f4ff 38%, #fffaf6 100%);
+  --shadow: 0 18px 48px rgba(73, 58, 148, 0.08);
   --radius-xl: 28px;
   --radius-lg: 20px;
   --radius-md: 14px;
-  --max: 1120px;
+  --max: 1180px;
   --font: -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", system-ui, sans-serif;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font);
   color: var(--ink);
+  line-height: 1.75;
   background:
-    radial-gradient(circle at top left, rgba(91, 103, 255, 0.12), transparent 32%),
-    radial-gradient(circle at top right, rgba(255, 138, 108, 0.10), transparent 28%),
-    linear-gradient(180deg, #fbfbfe 0%, #f5f7fb 45%, #f7f8fc 100%);
-  line-height: 1.7;
+    radial-gradient(circle at left top, rgba(107,100,255,0.14), transparent 28%),
+    radial-gradient(circle at right top, rgba(255,183,147,0.16), transparent 26%),
+    var(--page);
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; }
-
+img { display: block; max-width: 100%; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
-
 .nav {
   position: sticky;
   top: 0;
-  z-index: 30;
-  border-bottom: 1px solid rgba(220, 226, 238, 0.8);
-  background: rgba(255,255,255,.72);
-  backdrop-filter: blur(18px);
+  z-index: 60;
+  background: rgba(248,246,255,0.86);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(227,222,245,0.8);
 }
 .nav-inner {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 16px 24px;
+  min-height: 78px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 20px;
 }
 .brand {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -.02em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 800;
 }
-.brand span { color: var(--brand); }
+.brand-mark {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary), #ff9d73);
+  box-shadow: 0 0 0 7px rgba(107,100,255,0.12);
+}
+.brand small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 18px;
   flex-wrap: wrap;
 }
 .nav-links a {
-  font-size: 14px;
-  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+  color: #4f5772;
 }
 .nav-links a:hover { color: var(--ink); }
-
+.nav-cta {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(107,100,255,0.18);
+  color: var(--primary-dark);
+  box-shadow: 0 10px 24px rgba(107,100,255,0.10);
+}
 .hero {
-  padding: 88px 0 48px;
+  padding: 64px 0 24px;
 }
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap: 24px;
-  align-items: stretch;
-}
-.hero-copy,
-.hero-panel,
-.section-card,
-.work-card,
-.contact-card {
-  background: var(--paper);
-  border: 1px solid var(--line);
+.hero-shell {
+  background: rgba(255,255,255,0.76);
+  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
+  padding: 42px;
 }
 .hero-copy {
-  padding: 40px;
-  border-radius: var(--radius-xl);
+  max-width: 860px;
 }
-.hero-copy h1 {
-  font-size: clamp(26px, 4.1vw, 42px);
-  line-height: 1.1;
-  letter-spacing: -.05em;
-  margin-bottom: 18px;
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(107,100,255,0.12);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
-.hero-copy .accent {
-  background: linear-gradient(135deg, #5561ff 10%, #b56cff 58%, #ff8a6c 100%);
+.hero h1 {
+  margin-top: 18px;
+  font-size: clamp(32px, 4.4vw, 56px);
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+}
+.hero h1 .accent {
+  background: linear-gradient(135deg, var(--primary-dark), #8a67ff 52%, #ff9368 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
-.hero-copy .lead {
+.hero-lead {
+  margin-top: 18px;
+  color: #454d68;
   font-size: 17px;
-  color: #4e5875;
-  max-width: 660px;
+  line-height: 1.9;
+  max-width: 760px;
 }
-.hero-copy .summary {
-  margin-top: 16px;
-  font-size: 14px;
+.hero-note {
+  margin-top: 14px;
   color: var(--muted);
-  max-width: 640px;
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 760px;
 }
-.badge-row {
-  margin-top: 24px;
+.hero-pills,
+.hero-actions,
+.mini-links,
+.project-tags,
+.project-links,
+.column-actions,
+.contact-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-.badge {
-  padding: 8px 14px;
+.hero-pills { margin-top: 22px; }
+.pill,
+.tag {
+  padding: 8px 13px;
   border-radius: 999px;
-  background: rgba(255,255,255,.9);
-  border: 1px solid rgba(91, 103, 255, 0.12);
-  color: #5d6784;
-  font-size: 12px;
-  font-weight: 600;
+  background: rgba(107,100,255,0.08);
+  border: 1px solid rgba(107,100,255,0.12);
+  color: #5b56da;
+  font-size: 13px;
+  font-weight: 700;
 }
-.cta-row {
-  margin-top: 28px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
+.hero-actions { margin-top: 24px; }
 .btn {
+  min-height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0 18px;
-  border-radius: 14px;
+  padding: 0 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(107,100,255,0.12);
+  background: rgba(255,255,255,0.94);
+  color: var(--ink);
   font-size: 14px;
   font-weight: 700;
-  border: 1px solid rgba(24,32,51,.08);
-  background: #fff;
 }
 .btn.primary {
-  color: #fff;
   border: none;
-  background: linear-gradient(135deg, #5b67ff, #8c72ff);
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), #8b73ff);
 }
-
-.hero-panel {
-  padding: 28px;
-  border-radius: var(--radius-xl);
+.mini-entry {
+  margin-top: 28px;
   display: grid;
-  gap: 14px;
-}
-.panel-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  grid-template-columns: minmax(0, 1.08fr) 240px;
   gap: 16px;
 }
-.panel-head small {
-  color: var(--brand);
-  font-weight: 700;
-  letter-spacing: .08em;
+.mini-entry-copy,
+.mini-entry-qr {
+  background: #fff;
+  border: 1px solid rgba(227,222,245,0.9);
+  border-radius: 22px;
+  padding: 22px 24px;
 }
-.panel-head strong {
-  font-size: 15px;
-}
-.metric-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-.metric {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 18px;
-}
-.metric .num {
+.mini-entry-copy h2 {
   font-size: 24px;
+  line-height: 1.35;
   font-weight: 800;
-  line-height: 1.1;
 }
-.metric .num.blue { color: var(--brand); }
-.metric .num.orange { color: var(--accent); }
-.metric .num.green { color: #16a56b; }
-.metric .label {
-  margin-top: 4px;
+.mini-entry-copy p {
+  margin-top: 10px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 15px;
+  line-height: 1.8;
 }
-
+.mini-entry-qr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.mini-entry-qr img {
+  width: min(100%, 170px);
+  margin: 0 auto;
+  border-radius: 18px;
+  background: #fff;
+}
+.mini-entry-qr strong {
+  display: block;
+  margin-top: 12px;
+  font-size: 16px;
+}
+.mini-entry-qr span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
 .section {
-  padding: 18px 0 0;
+  padding: 22px 0 0;
 }
-.section-card {
-  padding: 28px;
+.section-shell {
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(255,255,255,0.75);
   border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: 34px;
 }
 .section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 26px;
 }
 .section-head h2 {
-  font-size: 26px;
-  letter-spacing: -.03em;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 800;
 }
 .section-head p {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.track-grid,
-.works-grid,
-.contact-grid {
-  display: grid;
-  gap: 16px;
-}
-.track-grid {
-  grid-template-columns: repeat(3, 1fr);
-}
-.track {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 22px;
-}
-.track strong,
-.work-card h3 {
-  font-size: 17px;
-}
-.track p,
-.work-card p,
-.contact-card p {
   margin-top: 8px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 1.8;
 }
-
-.works-grid {
-  grid-template-columns: repeat(2, 1fr);
+.column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
-.work-card {
+.column-card {
+  min-height: 100%;
   padding: 24px;
-  border-radius: var(--radius-lg);
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid rgba(227,222,245,0.9);
 }
-.work-meta {
-  margin-top: 10px;
-  color: var(--brand);
-  font-size: 12px;
-  font-weight: 700;
+.soft-purple { background: linear-gradient(180deg, rgba(107,100,255,0.10), rgba(255,255,255,0.98)); }
+.soft-orange { background: linear-gradient(180deg, rgba(255,158,114,0.11), rgba(255,255,255,0.98)); }
+.soft-mint { background: linear-gradient(180deg, rgba(181,241,221,0.30), rgba(255,255,255,0.98)); }
+.soft-yellow { background: linear-gradient(180deg, rgba(255,235,182,0.38), rgba(255,255,255,0.98)); }
+.column-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  background: rgba(255,255,255,0.86);
 }
-.work-note {
+.column-card h3 {
+  margin-top: 14px;
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+.column-card p {
   margin-top: 10px;
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.75;
 }
-.work-actions {
+.column-list {
   margin-top: 16px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 8px;
 }
+.column-list span {
+  padding: 9px 13px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.84);
+  color: #50586f;
+  font-size: 13px;
+  font-weight: 600;
+}
+.column-actions { margin-top: 18px; }
 .chip-link {
+  min-height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 38px;
   padding: 0 14px;
   border-radius: 999px;
-  background: var(--brand-soft);
-  color: var(--brand);
+  background: rgba(107,100,255,0.10);
+  color: var(--primary);
   font-size: 13px;
   font-weight: 700;
 }
 .chip-link.alt {
-  background: rgba(24,32,51,.06);
-  color: #33405d;
+  background: rgba(44,46,94,0.06);
+  color: #4d5570;
 }
-
-.contact-grid {
-  grid-template-columns: repeat(6, 1fr);
-}
-.contact-card {
-  padding: 18px;
-  border-radius: 18px;
-  text-align: center;
-}
-.contact-card strong {
-  display: block;
-  font-size: 15px;
-}
-.contact-card.plain {
-  background: var(--card);
-}
-
-.footer {
-  padding: 34px 0 56px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* ===== 合作服务区 ===== */
-.service-section {
-  padding: 18px 0 0;
-}
-.service-card {
-  background: linear-gradient(145deg, #ffffff 0%, #f5f3ff 100%);
-  border: 1px solid rgba(91, 103, 255, 0.14);
-  box-shadow: 0 20px 50px rgba(91, 103, 255, 0.08);
-  padding: 36px;
+.project-section {
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(255,255,255,0.74);
   border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: 34px;
 }
-.service-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--brand-soft);
-  color: var(--brand);
+.section-eyebrow {
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  padding: 6px 14px;
-  border-radius: 999px;
-  margin-bottom: 16px;
-}
-.service-title {
-  font-size: clamp(20px, 3vw, 28px);
   font-weight: 800;
-  letter-spacing: -.04em;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--primary);
   margin-bottom: 8px;
 }
-.service-sub {
-  color: var(--muted);
+.section-title {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.section-sub {
+  margin-top: 8px;
   font-size: 14px;
-  margin-bottom: 28px;
+  color: var(--muted);
+  line-height: 1.8;
 }
-.service-grid {
+.projects-grid {
+  margin-top: 26px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 28px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
-.svc-item {
+.project-card {
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 20px 18px;
-  transition: box-shadow .2s, transform .2s;
+  border-radius: 18px;
+  overflow: hidden;
 }
-.svc-item:hover {
-  box-shadow: 0 8px 24px rgba(91, 103, 255, 0.12);
-  transform: translateY(-2px);
+.project-card.featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #f2f1ff, #f7f6ff);
+  border-color: #d6d1f8;
 }
-.svc-icon {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-.svc-name {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  color: var(--ink);
-}
-.svc-desc {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.65;
-}
-.svc-tag {
+.project-body { padding: 22px; }
+.project-featured-badge {
   display: inline-block;
-  margin-top: 10px;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: var(--brand-soft);
-  color: var(--brand);
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 800;
+  letter-spacing: .04em;
+  margin-bottom: 12px;
 }
-.service-cta {
+.project-meta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  padding: 22px 24px;
-  background: rgba(91, 103, 255, 0.06);
-  border: 1px solid rgba(91, 103, 255, 0.12);
-  border-radius: var(--radius-md);
+  gap: 8px;
+  margin-bottom: 8px;
 }
-.service-cta-left {
+.project-icon { font-size: 20px; }
+.project-title {
+  font-size: 18px;
+  font-weight: 800;
+}
+.project-highlight {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.project-desc {
+  color: #4d5570;
   font-size: 14px;
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+.project-note {
+  color: #7b8298;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.project-links { margin-top: 14px; }
+.proj-link {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 13px;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.proj-link.secondary {
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid var(--line);
+}
+.about-text {
+  color: #4f5772;
+  font-size: 15px;
+  line-height: 1.9;
+  max-width: 980px;
+}
+.about-text p + p { margin-top: 14px; }
+.wechat-box,
+.collab-box {
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: 34px;
+}
+.wechat-box h2,
+.collab-box h2 {
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.wechat-box p,
+.collab-box p {
+  margin-top: 10px;
   color: var(--muted);
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.85;
 }
-.service-cta-left strong {
-  display: block;
-  font-size: 16px;
-  color: var(--ink);
-  margin-bottom: 2px;
-}
-.service-cta-btns {
+.steps {
+  margin-top: 16px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  flex-shrink: 0;
 }
-.cta-btn-main {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 22px;
-  border-radius: 12px;
-  font-size: 14px;
+.step {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(107,100,255,0.10);
+  color: #545e78;
+  font-size: 13px;
   font-weight: 700;
-  color: #fff;
-  background: linear-gradient(135deg, #5b67ff, #8c72ff);
-  white-space: nowrap;
 }
-.cta-btn-wechat {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 18px;
-  border-radius: 12px;
+.contact-actions { margin-top: 20px; }
+.footer {
+  padding: 44px 0 56px;
+  text-align: center;
+  color: var(--muted);
   font-size: 14px;
-  font-weight: 600;
-  color: var(--ink);
-  background: #fff;
-  border: 1px solid var(--line);
-  white-space: nowrap;
 }
-
-@media (max-width: 960px) {
-  .service-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .service-cta {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.footer-links {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
 }
-
-@media (max-width: 960px) {
-  .hero-grid,
-  .track-grid,
-  .works-grid,
-  .contact-grid {
+@media (max-width: 980px) {
+  .mini-entry,
+  .column-grid,
+  .projects-grid {
     grid-template-columns: 1fr;
   }
+  .project-card.featured { grid-column: span 1; }
   .nav-inner {
     align-items: flex-start;
     flex-direction: column;
+    padding: 14px 24px;
   }
 }
-
-/* ===== 清溪关注引导区 ===== */
-.qx-cta-wrap {
-  background: linear-gradient(135deg, #6c3de0 0%, #9b5cf0 100%);
-  padding: 56px 24px 48px;
-  text-align: center;
+@media (max-width: 680px) {
+  .wrap, .nav-inner { padding-left: 16px; padding-right: 16px; }
+  .hero { padding-top: 46px; }
+  .hero-shell,
+  .section-shell,
+  .project-section,
+  .wechat-box,
+  .collab-box { padding: 22px; }
+  .hero h1 { font-size: 30px; line-height: 1.2; }
+  .section-head h2,
+  .section-title,
+  .wechat-box h2,
+  .collab-box h2 { font-size: 24px; }
 }
-.qx-cta-box { max-width: 640px; margin: 0 auto; }
-.qx-cta-eyebrow { font-size: 13px; color: rgba(255,255,255,.72); letter-spacing: .08em; margin-bottom: 12px; }
-.qx-cta-title { font-size: clamp(20px,4vw,30px); font-weight: 700; color: #fff; margin-bottom: 8px; }
-.qx-cta-sub { font-size: 15px; color: rgba(255,255,255,.85); margin-bottom: 28px; }
-.qx-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
-.qx-btn-xhs, .qx-btn-dy {
-  display: inline-block; padding: 13px 28px; border-radius: 50px;
-  font-size: 15px; font-weight: 600; text-decoration: none;
-  transition: opacity .2s, transform .15s;
-}
-.qx-btn-xhs:hover, .qx-btn-dy:hover { opacity: .88; transform: translateY(-2px); }
-.qx-btn-xhs { background: #ff2442; color: #fff; }
-.qx-btn-dy { background: rgba(255,255,255,.18); color: #fff; border: 1.5px solid rgba(255,255,255,.5); }
-.qx-cta-note { font-size: 13px; color: rgba(255,255,255,.8); margin-bottom: 20px; }
-.qx-biz { font-size: 12px; color: rgba(255,255,255,.6); padding-top: 16px; border-top: 1px solid rgba(255,255,255,.15); }
 </style>
 </head>
 <body>
   <nav class="nav">
     <div class="nav-inner">
-      <div class="brand">张清溪 <span>AI / Growth</span></div>
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <div>
+          清溪AI
+          <small>Tools · Cases · Tutorials</small>
+        </div>
+      </div>
       <div class="nav-links">
-        <a href="#works">代表作品</a>
-        <a href="#tracks">核心方向</a>
-        <a href="#collab">合作服务</a>
-        <a href="/portfolio/">案例详情</a>
-        <a href="https://github.com/qingxi2058" target="_blank" rel="noopener">GitHub</a>
+        <a href="#columns">专栏导航</a>
+        <a href="#projects">实用AI工具</a>
+        <a href="#tools">热门工具</a>
+        <a href="#guides">教程方向</a>
+        <a href="#wechat">加微信</a>
+        <a href="#collab" class="nav-cta">合作入口</a>
       </div>
     </div>
   </nav>
 
   <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <h1>用AI，<span class="accent">帮你做增长 · 出产品 · 搭流程</span></h1>
-        <p class="lead">围绕 AI 应用、内容增长与工作流搭建，持续交付可上线、可体验、可迭代的产品与项目。</p>
-        <p class="summary">过往覆盖品牌传播、内容矩阵与项目统筹。当前重点放在 AI 产品、小程序、轻量 Web 应用和工作流落地。</p>
-        <div class="badge-row">
-          <span class="badge">10年内容增长经验</span>
-          <span class="badge">3年AI实践</span>
-          <span class="badge">80w+累计操盘粉丝</span>
-          <span class="badge">10亿+内容总阅读</span>
-          <span class="badge">持续做产品</span>
+    <div class="wrap">
+      <div class="hero-shell">
+        <div class="hero-copy">
+          <h1><span class="accent">内容✖️增长✖️AI✖️营销</span></h1>
+          <p class="hero-lead">把能直接体验、能直接理解、也更适合对外转发的内容，整理成一个清楚的入口。</p>
+          <div class="hero-pills">
+            <span class="pill">在线工具</span>
+            <span class="pill">项目案例</span>
+            <span class="pill">AI实战</span>
+            <span class="pill">微信承接</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn primary" href="#projects">先看项目案例</a>
+            <a class="btn" href="#columns">看专栏导航</a>
+          </div>
         </div>
-        <div class="cta-row">
-          <a class="btn primary" href="#works">代表项目</a>
-          <a class="btn" href="/portfolio/">案例详情</a>
-        </div>
-      </div>
 
-      <div class="hero-panel">
-        <div class="panel-head">
-          <small>FOCUS</small>
-          <strong>当前聚焦的三个方向</strong>
-        </div>
-        <div class="metric-grid">
-          <div class="metric">
-            <div class="num blue">AI产品</div>
-            <div class="label">小程序、网页工具、体验型产品</div>
+        <div class="mini-entry">
+          <div class="mini-entry-copy">
+            <span class="eyebrow">问问日常</span>
+            <h2>问问日常</h2>
+            <p>根据八字、星座和解梦给出轻量提醒，让日常多一点趣味，也帮人把焦虑放松一点。</p>
+            <div class="mini-links" style="margin-top:18px;">
+              <a class="btn primary" href="/daily/">打开介绍页</a>
+              <a class="btn" href="#wechat">加微信沟通</a>
+            </div>
           </div>
-          <div class="metric">
-            <div class="num orange">工作流</div>
-            <div class="label">把内容生产和日常提效做成流程</div>
-          </div>
-          <div class="metric">
-            <div class="num green">内容增长</div>
-            <div class="label">围绕产品持续输出内容和案例</div>
-          </div>
-          <div class="metric">
-            <div class="num blue">对外表达</div>
-            <div class="label">社媒、GitHub、作品集同步建设</div>
+          <div class="mini-entry-qr">
+            <img src="/assets/images/wenwen-mini-code-20260409.png" alt="问问日常小程序码"/>
+            <strong>微信搜索：问问日常</strong>
+            <span>扫码直接打开</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="tracks">
-    <div class="wrap section-card">
+  <section class="section" id="columns">
+    <div class="wrap section-shell">
       <div class="section-head">
-        <div>
-          <h2>核心方向</h2>
-          <p>从需求拆解到上线交付，强调结果、效率和可持续迭代。</p>
-        </div>
+        <h2>专栏导航</h2>
+        <p>首页按用途分区。这样新用户不会迷路，老粉也知道自己该点哪里。</p>
       </div>
-      <div class="track-grid">
-        <div class="track">
-          <strong>做产品原型</strong>
-          <p>围绕真实场景做轻量产品，从需求拆解到上线，把想法做成可体验的页面或小程序。</p>
-        </div>
-        <div class="track">
-          <strong>做工作流和提效</strong>
-          <p>把内容生成、整理、分发和导出串起来，让日常工作更快、也更稳定。</p>
-        </div>
-        <div class="track">
-          <strong>做对外展示</strong>
-          <p>把项目放到网页、作品集和 GitHub 上，让别人能直接看、直接点、直接判断价值。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="works">
-    <div class="wrap section-card">
-      <div class="section-head">
-        <div>
-          <h2>代表项目</h2>
-          <p>部分项目可直接在线体验，完整案例可进入详情页查看。</p>
-        </div>
-      </div>
-      <div class="works-grid">
-        <div class="work-card">
-          <h3>AI短剧助手</h3>
-          <p>围绕短剧创作场景，打通剧本、分镜、提示词和导出流程，持续往产品化方向迭代。</p>
-          <div class="work-meta">小程序 + Web + 产品骨架</div>
-          <div class="work-note">正式体验：微信小程序搜索「AI短剧助手」；网页部分为演示版。</div>
-          <div class="work-actions">
-            <a class="chip-link" href="/drama/">在线体验</a>
-            <a class="chip-link alt" href="./assets/media/ai-short-drama-demo.mp4" target="_blank" rel="noopener">录屏演示</a>
-            <a class="chip-link alt" href="/portfolio/">案例详情</a>
-          </div>
-        </div>
-
-        <div class="work-card">
-          <h3>问问日常</h3>
-          <p>把今日提醒、计划节奏、梦境关键词和行动海报收进一个更轻量的日常工具里。</p>
-          <div class="work-meta">小程序方向 + Web 页面</div>
-          <div class="work-actions">
-            <a class="chip-link" href="/daily/">在线体验</a>
-            <a class="chip-link alt" href="/portfolio/">案例详情</a>
-          </div>
-        </div>
-
-        <div class="work-card">
+      <div class="column-grid">
+        <article class="column-card soft-purple">
+          <div class="column-icon">🔧</div>
           <h3>AI工具箱</h3>
-          <p>把常用 AI 工具按场景整理，做成更轻量、更清楚的导航站，强调开箱即用。</p>
-          <div class="work-meta">工具整理 + 信息架构</div>
-          <div class="work-actions">
-            <a class="chip-link" href="/tools/">在线体验</a>
-            <a class="chip-link alt" href="https://github.com/qingxi2058/qingxi-ai-toolbox" target="_blank" rel="noopener">GitHub</a>
+          <p>把最好上手、最好传播、最容易立刻感受到价值的网页工具集中放在这里。</p>
+          <div class="column-list">
+            <span>下班倒计时</span>
+            <span>离职信生成器</span>
+            <span>年终总结生成器</span>
+            <span>AI工具导航站</span>
+          </div>
+          <div class="column-actions">
+            <a class="chip-link" href="#tools">去看工具</a>
+            <a class="chip-link alt" href="/tools/">打开工具导航</a>
+          </div>
+        </article>
+
+        <article class="column-card soft-orange">
+          <div class="column-icon">📚</div>
+          <h3>Prompt模板</h3>
+          <p>把真正能省时间、能直接拿来赚钱或提效的模板做成一个更清楚的入口。</p>
+          <div class="column-list">
+            <span>爆款标题模板</span>
+            <span>视频脚本模板</span>
+            <span>热点分析模板</span>
+            <span>小红书文案模板</span>
+          </div>
+          <div class="column-actions">
+            <a class="chip-link" href="#wechat">微信领清单</a>
+            <a class="chip-link alt" href="https://xhslink.com/m/15zyxo67w0J" target="_blank" rel="noopener">去小红书</a>
+          </div>
+        </article>
+
+        <article class="column-card soft-mint">
+          <div class="column-icon">🎬</div>
+          <h3>教程视频</h3>
+          <p>想学怎么做，不想只看结果，就从这里开始。内容会持续更新，不做堆链接式目录。</p>
+          <div class="column-list">
+            <span>Claude Code 教程</span>
+            <span>OpenClaw 教程</span>
+            <span>Multi-Agent 协作</span>
+            <span>AI工具实操</span>
+          </div>
+          <div class="column-actions">
+            <a class="chip-link" href="#guides">查看方向</a>
+            <a class="chip-link alt" href="https://v.douyin.com/-AnTCADzYG0/" target="_blank" rel="noopener">看抖音</a>
+          </div>
+        </article>
+
+        <article class="column-card soft-yellow">
+          <div class="column-icon">🏆</div>
+          <h3>公开案例</h3>
+          <p>只放适合公开看的案例，重点讲体验和结果，不在首页展开履历和私密内容。</p>
+          <div class="column-list">
+            <span>AI短剧助手</span>
+            <span>问问日常</span>
+            <span>内容采集工作流</span>
+            <span>AI工具箱</span>
+          </div>
+          <div class="column-actions">
+            <a class="chip-link" href="#projects">看项目案例</a>
+            <a class="chip-link alt" href="#collab">咨询合作</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="wrap project-section">
+      <div class="section-eyebrow">⚡ Projects</div>
+      <div class="section-title">实用AI工具</div>
+      <div class="section-sub">从轻量工具到小程序落地，优先展示能直接看、能直接点、能直接理解的项目。</div>
+
+      <div class="projects-grid">
+        <div class="project-card featured">
+          <div class="project-body">
+            <div class="project-featured-badge">最新上线</div>
+            <div class="project-meta">
+              <span class="project-icon">🛠️</span>
+              <span class="project-title">AI工具箱</span>
+            </div>
+            <div class="project-highlight">场景分类 · 开箱即用</div>
+            <div class="project-desc">把常用 AI 工具按场景整理到一个入口里，适合第一次来的人快速找到自己能直接用的东西。</div>
+            <div class="project-note">适合拿来做总入口，也适合挂在内容页和主页里承接新流量。</div>
+            <div class="project-tags">
+              <span class="tag">导航站</span>
+              <span class="tag">信息整理</span>
+              <span class="tag">工具合集</span>
+              <span class="tag">Web应用</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="/tools/">在线体验</a>
+            </div>
           </div>
         </div>
 
-        <div class="work-card">
-          <h3>下班倒计时</h3>
-          <p>把下班时间和月薪换算做成有情绪张力的轻量工具，适合传播，也适合快速体验。</p>
-          <div class="work-meta">Web 工具 + 情绪共鸣</div>
-          <div class="work-actions">
-            <a class="chip-link" href="/timer/">在线体验</a>
-            <a class="chip-link alt" href="/portfolio/">案例详情</a>
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-icon">🧭</span>
+              <span class="project-title">AI小白学习导航站</span>
+            </div>
+            <div class="project-highlight">小白 AI 学习导航站 · 即将上线</div>
+            <div class="project-desc">给刚开始学 AI 的人一个不乱刷、能一页找齐方向的导航站，重点是把工具、教程和学习路径理清楚。</div>
+            <div class="project-tags">
+              <span class="tag">学习导航</span>
+              <span class="tag">教程入口</span>
+              <span class="tag">即将上线</span>
+            </div>
+            <div class="project-links"><span class="proj-link secondary">预留位置</span></div>
           </div>
         </div>
 
-        <div class="work-card">
-          <h3>年终总结生成器</h3>
-          <p>把零散工作内容快速整理成可交付汇报，适合一眼看懂价值、立刻使用的轻量工具。</p>
-          <div class="work-meta">Web 工具 + 职场场景</div>
-          <div class="work-actions">
-            <a class="chip-link" href="/year-end/">在线体验</a>
-            <a class="chip-link alt" href="https://github.com/qingxi2058/qingxi-year-end-report" target="_blank" rel="noopener">GitHub</a>
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-icon">📱</span>
+              <span class="project-title">问问日常</span>
+            </div>
+            <div class="project-highlight">AI 日常节奏助手 · 已可对外打开</div>
+            <div class="project-desc">把“今天先做什么、未来几天怎么排、结果怎么整理”做成更容易打开、更适合转发的小程序。网页负责解释，小程序负责真正使用。</div>
+            <div class="project-tags">
+              <span class="tag">小程序</span>
+              <span class="tag">轻产品</span>
+              <span class="tag">MVP</span>
+              <span class="tag">日常提醒</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="/daily/">在线体验</a>
+            </div>
           </div>
         </div>
 
-        <div class="work-card">
-          <h3>离职信生成器</h3>
-          <p>输入公司、职位和真实原因，30秒生成体面离职信。正式体面、情绪发泄、老板沉默、滴水不漏四种风格。</p>
-          <div class="work-meta">Web 工具 + 打工人情绪共鸣</div>
-          <div class="work-actions">
-            <a class="chip-link" href="/resign/">在线体验</a>
-            <a class="chip-link alt" href="https://github.com/qingxi2058/qingxi-portfolio/tree/main/resign" target="_blank" rel="noopener">GitHub</a>
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-icon">🎭</span>
+              <span class="project-title">AI短剧助手</span>
+            </div>
+            <div class="project-highlight">小程序 + Web 演示</div>
+            <div class="project-desc">围绕短剧创作场景，把剧本、分镜、提示词到出片流程串成一个更容易演示的产品入口。</div>
+            <div class="project-tags">
+              <span class="tag">小程序</span>
+              <span class="tag">Web</span>
+              <span class="tag">AI创作</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="/drama/">在线体验</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-icon">⚡</span>
+              <span class="project-title">知天道 Agent</span>
+            </div>
+            <div class="project-highlight">场景拆解 → 提示词设计 → 产品化</div>
+            <div class="project-desc">围绕垂直场景完成需求拆解、提示词设计和多轮对话结构搭建，验证产品化路径。</div>
+            <div class="project-tags">
+              <span class="tag">Agent</span>
+              <span class="tag">提示词</span>
+              <span class="tag">产品化</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://bailian.console.aliyun.com/share/0a05c6e8875a4d53b4cfa4f08d12ed31" target="_blank" rel="noopener">在线体验</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-icon">🔗</span>
+              <span class="project-title">Coze 小红书图文自动化</span>
+            </div>
+            <div class="project-highlight">图文生产自动化</div>
+            <div class="project-desc">从选题整理到图文生成一站式完成，更适合展示“AI不是点子，而是流程”的那一类项目。</div>
+            <div class="project-tags">
+              <span class="tag">自动化</span>
+              <span class="tag">内容工作流</span>
+              <span class="tag">Coze</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://www.coze.cn/store/agent/7554598430317297706?bot_id=true" target="_blank" rel="noopener">在线体验</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-icon">🌊</span>
+              <span class="project-title">n8n YouTube 出海工作流</span>
+            </div>
+            <div class="project-highlight">关键词驱动 | 自动生成与发布</div>
+            <div class="project-desc">基于 n8n 搭建关键词驱动的视频生成与发布流程，适合展示工作流思维和自动化落地。</div>
+            <div class="project-tags">
+              <span class="tag">n8n</span>
+              <span class="tag">YouTube</span>
+              <span class="tag">视频自动化</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="/assets/media/n8n-demo.mp4" target="_blank" rel="noopener">录屏演示</a>
+              <a class="proj-link secondary" href="/assets/images/n8n-flow.png" target="_blank" rel="noopener">查看流程图</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-icon">📥</span>
+              <span class="project-title">内容采集自动化工作流</span>
+            </div>
+            <div class="project-highlight">手机一键触发 | 自动同步</div>
+            <div class="project-desc">围绕内容研究场景设计采集与归档流程，重点不在花哨，而在真正可跑和可复用。</div>
+            <div class="project-tags">
+              <span class="tag">内容研究</span>
+              <span class="tag">自动化</span>
+              <span class="tag">归档</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 合作服务区 -->
-  <section class="service-section" id="collab">
-    <div class="wrap service-card">
-      <div class="service-eyebrow">✦ 合作服务</div>
-      <div class="service-title">有项目想聊？这里是合作入口</div>
-      <div class="service-sub">我可以帮你解决 AI 落地、内容增长和产品快速交付的问题。</div>
-      <div class="service-grid">
-        <div class="svc-item">
-          <div class="svc-icon">🤖</div>
-          <div class="svc-name">AI工作流定制</div>
-          <div class="svc-desc">把内容生产、选题、剪辑或日常提效流程 AI 化，交付可跑通的完整方案。</div>
-          <span class="svc-tag">品牌 / 团队</span>
+  <section class="section" id="tools">
+    <div class="wrap project-section">
+      <div class="section-eyebrow">🧰 Tools</div>
+      <div class="section-title">热门工具</div>
+      <div class="section-sub">先体验，再决定要不要继续关注、拿模板，或者直接联系我做类似东西。</div>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta"><span class="project-icon">😮‍💨</span><span class="project-title">到点提醒 · 下班倒计时</span></div>
+            <div class="project-highlight">打工人情绪共鸣工具</div>
+            <div class="project-desc">用时间和钱的双重倒计时，把情绪共鸣做得更直接，也更适合传播。</div>
+            <div class="project-tags"><span class="tag">创意工具</span><span class="tag">Claude Code</span><span class="tag">高传播</span></div>
+            <div class="project-links"><a class="proj-link" href="/timer/">在线体验</a><a class="proj-link secondary" href="https://github.com/qingxi2058/qingxi-countdown-timer" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
         </div>
-        <div class="svc-item">
-          <div class="svc-icon">📈</div>
-          <div class="svc-name">内容增长咨询</div>
-          <div class="svc-desc">小红书 / 抖音账号冷启动、选题节奏、爆款复盘，有10年实操经验背书。</div>
-          <span class="svc-tag">IP / MCN / 品牌</span>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta"><span class="project-icon">✍️</span><span class="project-title">年终总结生成器</span></div>
+            <div class="project-highlight">3 分钟出稿 | 复制即用</div>
+            <div class="project-desc">把零散工作内容快速整理成能直接交付的总结文本，一看就知道怎么用。</div>
+            <div class="project-tags"><span class="tag">职场工具</span><span class="tag">Web应用</span><span class="tag">AI写作</span></div>
+            <div class="project-links"><a class="proj-link" href="/year-end/">在线体验</a><a class="proj-link secondary" href="https://github.com/qingxi2058/qingxi-year-end-report" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
         </div>
-        <div class="svc-item">
-          <div class="svc-icon">🎯</div>
-          <div class="svc-name">联名内容合作</div>
-          <div class="svc-desc">我的受众是职场 / AI / 打工人群体，欢迎品牌联名测评或定制内容种草。</div>
-          <span class="svc-tag">广告 / 种草</span>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta"><span class="project-icon">💼</span><span class="project-title">离职信生成器</span></div>
+            <div class="project-highlight">30 秒生成 | 四种风格</div>
+            <div class="project-desc">把正式体面、情绪发泄、老板沉默、滴水不漏四种风格做成一个很容易立刻想试的页面。</div>
+            <div class="project-tags"><span class="tag">职场工具</span><span class="tag">Web应用</span><span class="tag">情绪共鸣</span></div>
+            <div class="project-links"><a class="proj-link" href="/resign/">在线体验</a><a class="proj-link secondary" href="https://github.com/qingxi2058/qingxi-portfolio/tree/main/resign" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
         </div>
-        <div class="svc-item">
-          <div class="svc-icon">⚡</div>
-          <div class="svc-name">轻量产品落地</div>
-          <div class="svc-desc">从想法到上线，帮你快速做出可体验的 Web 工具或小程序原型，验证想法。</div>
-          <span class="svc-tag">创业 / 产品团队</span>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta"><span class="project-icon">🌤️</span><span class="project-title">周一不想上班生成器</span></div>
+            <div class="project-highlight">轻量传播 | 情绪出口</div>
+            <div class="project-desc">给打工人一个轻松又好分享的情绪出口，几秒生成适合周一发圈发群的文案。</div>
+            <div class="project-tags"><span class="tag">情绪共鸣</span><span class="tag">轻工具</span><span class="tag">内容传播</span></div>
+            <div class="project-links"><a class="proj-link" href="https://qingxi-monday.vercel.app/" target="_blank" rel="noopener">在线体验</a><a class="proj-link secondary" href="https://github.com/qingxi2058/qingxi-monday" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
         </div>
-      </div>
-      <div class="service-cta">
-        <div class="service-cta-left">
-          <strong>感兴趣？直接联系我</strong>
-          说明你的需求和预算，我会在 24 小时内回复。
-        </div>
-        <div class="service-cta-btns">
-          <a class="cta-btn-main" href="mailto:zhangxin19940203@gmail.com">✉️ zhangxin19940203@gmail.com</a>
-          <div class="cta-btn-wechat">💬 微信 qingxi20250501</div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta"><span class="project-icon">🧠</span><span class="project-title">焦虑外包</span></div>
+            <div class="project-highlight">情绪出口 | 可立即体验</div>
+            <div class="project-desc">把脑子里反复转的焦虑先倒给 AI，适合压力大、想快速清理思路的人。</div>
+            <div class="project-tags"><span class="tag">情绪疏导</span><span class="tag">AI工具</span><span class="tag">轻量应用</span></div>
+            <div class="project-links"><a class="proj-link" href="https://qingxi-anxiety.vercel.app/" target="_blank" rel="noopener">在线体验</a><a class="proj-link secondary" href="https://github.com/qingxi2058/qingxi-anxiety" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap section-card">
+  <section class="section" id="guides">
+    <div class="wrap project-section">
+      <div class="section-eyebrow">🎓 Tutorials</div>
+      <div class="section-title">教程方向</div>
+      <div class="section-sub">这部分不只是放视频链接，更是告诉新粉丝应该从哪里开始学。</div>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta"><span class="project-icon">⌨️</span><span class="project-title">Claude Code 系列</span></div>
+            <div class="project-desc">适合想把想法直接做成页面、工具和工作流的人。重点会放在“怎么真正做出来”。</div>
+            <div class="project-tags"><span class="tag">从想法到上线</span><span class="tag">实战型</span></div>
+            <div class="project-links"><a class="proj-link" href="https://xhslink.com/m/15zyxo67w0J" target="_blank" rel="noopener">去小红书看更新</a></div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta"><span class="project-icon">🧩</span><span class="project-title">OpenClaw / 多 Agent 协作</span></div>
+            <div class="project-desc">适合已经会一点工具，但还不会把多个角色、多个流程串起来的人。</div>
+            <div class="project-tags"><span class="tag">协作流程</span><span class="tag">提效升级</span></div>
+            <div class="project-links"><a class="proj-link" href="https://v.douyin.com/-AnTCADzYG0/" target="_blank" rel="noopener">去抖音看视频</a></div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta"><span class="project-icon">🔍</span><span class="project-title">AI工具实操</span></div>
+            <div class="project-desc">把常见 AI 工具拆成更容易复用的步骤，不讲空话，直接讲怎么拿去做内容、做产品、做增长。</div>
+            <div class="project-tags"><span class="tag">实操清单</span><span class="tag">减少踩坑</span></div>
+            <div class="project-links"><a class="proj-link" href="#wechat">加微信领资料</a></div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta"><span class="project-icon">🗂️</span><span class="project-title">更新说明</span></div>
+            <div class="project-desc">教程区会继续补，不需要在首页一次性堆满。先把方向写清楚，比堆很多旧视频更重要。</div>
+            <div class="project-tags"><span class="tag">持续更新</span><span class="tag">不是资料坟场</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap section-shell">
       <div class="section-head">
-        <div>
-          <h2>更多入口</h2>
-          <p>作品、内容平台与联系方式都放在这里。</p>
-        </div>
+        <h2>关于清溪</h2>
+        <p>这里写“我现在在做什么”，不写求职向的履历展开。</p>
       </div>
-      <div class="contact-grid">
-        <a class="contact-card" href="/portfolio/">
-          <strong>完整作品集</strong>
-          <p>项目、数据、经历和方法论</p>
-        </a>
-        <a class="contact-card" href="https://github.com/qingxi2058" target="_blank" rel="noopener">
-          <strong>GitHub</strong>
-          <p>项目仓库和产品目录</p>
-        </a>
-        <a class="contact-card" href="https://www.xiaohongshu.com/user/profile/5a4858224eacab31e51122a3" target="_blank" rel="noopener">
-          <strong>小红书</strong>
-          <p>清溪AI</p>
-        </a>
-        <a class="contact-card" href="https://v.douyin.com/-AnTCADzYG0/" target="_blank" rel="noopener">
-          <strong>抖音</strong>
-          <p>清溪AI</p>
-        </a>
-        <div class="contact-card plain">
-          <strong>Email</strong>
-          <p>zhangxin19940203@gmail.com</p>
-        </div>
-        <div class="contact-card plain">
-          <strong>微信</strong>
-          <p>qingxi20250501</p>
-        </div>
+      <div class="about-text">
+        <p>我现在主要在做三件事：把 AI 工具做成更容易被普通人用起来的页面，把内容增长方法做成更容易复制的流程，把抽象想法尽快做成可体验的产品。</p>
+        <p>如果你是粉丝，这里最适合你直接拿工具、模板和教程；如果你是品牌、团队或者创业者，这里也能快速判断我适不适合帮你做 AI 落地、内容增长和轻量产品验证。</p>
+        <p>公开主页只保留适合对外展示的内容。更完整、更私密的项目细节，我会在沟通后按需要发你，不在首页摊开。</p>
       </div>
     </div>
   </section>
 
-  <!-- 清溪关注引导区 -->
-  <div class="qx-cta-wrap">
-    <div class="qx-cta-box">
-      <div class="qx-cta-eyebrow">✦ 跟着清溪一起用AI</div>
-      <div class="qx-cta-title">每周更新，真实在用的AI工具</div>
-      <div class="qx-cta-sub">用AI做内容的亲身记录 · 帮你少走弯路</div>
-      <div class="qx-cta-btns">
-        <a class="qx-btn-xhs" href="https://www.xiaohongshu.com/user/profile/5a4858224eacab31e51122a3" target="_blank" rel="noopener">📕 关注小红书</a>
-        <a class="qx-btn-dy" href="https://v.douyin.com/-AnTCADzYG0/" target="_blank" rel="noopener">🎵 关注抖音</a>
+  <section class="section" id="wechat">
+    <div class="wrap wechat-box">
+      <span class="eyebrow">微信承接区</span>
+      <h2>先加微信，再拿资料和模板，会更快。</h2>
+      <p>如果你想要工具清单、Prompt 模板、教程目录，或者想聊合作，直接加微信最省时间。这里不做“自己找半天”的迷路式入口。</p>
+      <div class="steps">
+        <span class="step">1. 加微信：qingxi20250501</span>
+        <span class="step">2. 私信关键词：工具包 / 模板</span>
+        <span class="step">3. 直接拿清单或继续聊</span>
       </div>
-      <div class="qx-cta-note">关注小红书后私信 <strong>「工具包」</strong> → 免费领 Prompt合集 + 工具清单 + 爆款选题模板</div>
-      <div class="qx-biz">商务合作 · ✉️ zhangxin19940203@gmail.com · 💬 微信 qingxi20250501</div>
+      <div class="contact-actions">
+        <a class="btn primary" href="https://xhslink.com/m/15zyxo67w0J" target="_blank" rel="noopener">先去小红书</a>
+        <a class="btn" href="mailto:zhangxin19940203@gmail.com">邮箱联系</a>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <section class="section" id="collab">
+    <div class="wrap collab-box">
+      <span class="eyebrow">合作入口</span>
+      <h2>如果你想做 AI 落地、内容增长或轻量产品验证，可以从这里开始聊。</h2>
+      <p>适合品牌、团队、创业者，也适合已经有方向但还没有把东西做出来的人。先说需求，再确认方向，再给方案，再开始做。</p>
+      <div class="contact-actions">
+        <a class="btn primary" href="mailto:zhangxin19940203@gmail.com">发邮件</a>
+        <span class="btn">微信：qingxi20250501</span>
+      </div>
+    </div>
+  </section>
 
   <div class="footer">
-    张清溪 · AI产品 / 内容增长 / 项目落地
+    清溪AI · 工具、案例、教程、合作入口
+    <div class="footer-links">
+      <a href="/tools/">AI工具箱</a>
+      <a href="/daily/">问问日常</a>
+      <a href="/drama/">AI短剧助手</a>
+      <a href="https://github.com/qingxi2058" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </div>
 </body>
 </html>
