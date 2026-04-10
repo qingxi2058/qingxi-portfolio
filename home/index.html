@@ -105,6 +105,7 @@ img { display: block; max-width: 100%; }
   box-shadow: 0 4px 16px rgba(107,100,255,0.28);
   transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
 }
+.nav-links .nav-cta { color: #fff; }
 .nav-cta:hover {
   background: var(--primary-dark);
   box-shadow: 0 6px 24px rgba(107,100,255,0.38);
@@ -390,13 +391,15 @@ img { display: block; max-width: 100%; }
   border: 1px solid var(--line);
   border-radius: 18px;
   overflow: hidden;
+  display: flex;
+  height: 100%;
 }
-.project-card.featured {
-  grid-column: span 2;
-  background: linear-gradient(135deg, #f2f1ff, #f7f6ff);
-  border-color: #d6d1f8;
+.project-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
-.project-body { padding: 22px; }
 .project-featured-badge {
   display: inline-block;
   padding: 4px 9px;
@@ -437,7 +440,7 @@ img { display: block; max-width: 100%; }
   line-height: 1.7;
   margin-bottom: 14px;
 }
-.project-links { margin-top: 14px; }
+.project-links { margin-top: auto; padding-top: 14px; }
 .proj-link {
   min-height: 36px;
   display: inline-flex;
@@ -519,7 +522,6 @@ img { display: block; max-width: 100%; }
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  .project-card.featured { grid-column: span 1; }
   .nav-inner {
     align-items: flex-start;
     flex-direction: column;
@@ -682,9 +684,8 @@ img { display: block; max-width: 100%; }
       <div class="section-sub">从轻量工具到小程序落地，优先展示能直接看、能直接点、能直接理解的项目。</div>
 
       <div class="projects-grid">
-        <div class="project-card featured">
+        <div class="project-card">
           <div class="project-body">
-            <div class="project-featured-badge">最新上线</div>
             <div class="project-meta">
               <span class="project-icon">🛠️</span>
               <span class="project-title">AI工具箱</span>
@@ -720,25 +721,6 @@ img { display: block; max-width: 100%; }
             </div>
             <div class="project-links">
               <a class="proj-link" href="https://qingxi-ai-guide.vercel.app/" target="_blank" rel="noopener">在线体验</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-icon">🎨</span>
-              <span class="project-title">完整作品集</span>
-            </div>
-            <div class="project-highlight">项目总入口 · 方便集中查看</div>
-            <div class="project-desc">把已经做出来、能直接打开、能直接理解的项目统一放到作品集页里，适合第一次快速了解我都做过什么。</div>
-            <div class="project-tags">
-              <span class="tag">作品集</span>
-              <span class="tag">总入口</span>
-              <span class="tag">案例展示</span>
-            </div>
-            <div class="project-links">
-              <a class="proj-link" href="/portfolio/">在线体验</a>
             </div>
           </div>
         </div>
@@ -796,7 +778,7 @@ img { display: block; max-width: 100%; }
               <span class="tag">产品化</span>
             </div>
             <div class="project-links">
-              <a class="proj-link" href="https://bailian.console.aliyun.com/share/0a05c6e8875a4d53b4cfa4f08d12ed31" target="_blank" rel="noopener">在线体验</a>
+              <a class="proj-link" href="#collab">微信聊案例</a>
             </div>
           </div>
         </div>
@@ -1010,7 +992,6 @@ img { display: block; max-width: 100%; }
   <div class="footer">
     清溪AI · 工具、案例、教程、合作入口
     <div class="footer-links">
-      <a href="/portfolio/">完整作品集</a>
       <a href="/tools/">AI工具箱</a>
       <a href="https://qingxi-ai-guide.vercel.app/" target="_blank" rel="noopener">AI起航导航站</a>
       <a href="/daily/">问问日常</a>
