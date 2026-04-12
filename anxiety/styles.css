@@ -1,0 +1,261 @@
+:root {
+  --teal-1: #effaf8;
+  --teal-2: #d7f1ea;
+  --teal-3: #6dc9b3;
+  --teal-4: #13856f;
+  --teal-5: #0d5b4d;
+  --text: #1f3430;
+  --muted: #64807a;
+  --line: rgba(19, 133, 111, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", sans-serif;
+  color: var(--text);
+}
+
+.anxiety-theme {
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 48%, #e8eaf6 100%);
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 28px;
+  padding: 34px 28px 28px;
+  box-shadow: 0 24px 68px rgba(13, 91, 77, 0.16);
+  text-align: center;
+}
+
+.hero-emoji {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 30px;
+  color: var(--teal-4);
+}
+
+.subtitle {
+  margin: 10px 0 22px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.chip-row.compact {
+  margin-bottom: 18px;
+}
+
+.chip {
+  border: 1px solid rgba(19, 133, 111, 0.18);
+  background: #f7fcfb;
+  color: var(--teal-5);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.chip:hover,
+.btn:hover,
+.mini-copy:hover {
+  transform: translateY(-1px);
+}
+
+.text-area {
+  width: 100%;
+  min-height: 132px;
+  border: 2px solid rgba(19, 133, 111, 0.12);
+  border-radius: 16px;
+  padding: 16px;
+  font: inherit;
+  font-size: 15px;
+  resize: vertical;
+  outline: none;
+  margin-bottom: 16px;
+}
+
+.text-area:focus {
+  border-color: rgba(19, 133, 111, 0.32);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 18px;
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--teal-4), var(--teal-3));
+  color: white;
+  box-shadow: 0 12px 28px rgba(19, 133, 111, 0.2);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--teal-5);
+  border: 1px solid rgba(19, 133, 111, 0.18);
+}
+
+.hint {
+  min-height: 20px;
+  margin: 10px 0 0;
+  color: #3e9e4f;
+  font-size: 13px;
+}
+
+.result-panel {
+  margin-top: 18px;
+  text-align: left;
+}
+
+.result-main {
+  background: linear-gradient(180deg, #f5fdfa 0%, #ebf9f5 100%);
+  border-radius: 20px;
+  padding: 22px 20px;
+}
+
+.result-tag {
+  margin: 0 0 8px;
+  color: var(--teal-4);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.result-text {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.6;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.detail-panel {
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #f8fcfb;
+  border: 1px solid var(--line);
+}
+
+.detail-item + .detail-item {
+  margin-top: 14px;
+}
+
+.detail-item span {
+  display: block;
+  color: var(--teal-4);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.detail-item p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.mini-copy {
+  margin-top: 10px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(19, 133, 111, 0.12);
+  color: var(--teal-5);
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.footer {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(19, 133, 111, 0.12);
+}
+
+.footer p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.footer strong {
+  color: var(--teal-4);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--teal-5);
+  background: #edf8f5;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+@media (max-width: 560px) {
+  .card {
+    padding: 28px 18px 22px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .result-text {
+    font-size: 20px;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
