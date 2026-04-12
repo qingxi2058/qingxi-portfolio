@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>焦虑外包AI</title>
+    <meta
+      name="description"
+      content="把最近最烦的那件事写下来，让 AI 先帮你理一理，再给你一句可以直接发出去的话。"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%231f8c78'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34' fill='white'%3E%E7%84%A6%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="anxiety-theme">
+    <main class="shell">
+      <section class="card">
+        <div class="hero-emoji">🌊</div>
+        <h1>焦虑外包AI</h1>
+        <p class="subtitle">不是安慰你，是先替你把这件事理一理</p>
+
+        <div class="chip-row compact" id="trend-list"></div>
+
+        <textarea
+          id="anxiety-input"
+          class="text-area"
+          placeholder="输入最近让你焦虑的事..."
+        ></textarea>
+
+        <div class="chip-row">
+          <button class="chip" data-chip="老板临时让我今晚前交方案">工作压顶</button>
+          <button class="chip" data-chip="投了很多简历，但一直没有回复">求职悬着</button>
+          <button class="chip" data-chip="这个月开销太多，心里一直悬着">钱不够用</button>
+          <button class="chip" data-chip="我怕一句话没说好，把关系搞僵">关系拉扯</button>
+        </div>
+
+        <div class="button-row">
+          <button id="analyze-button" class="btn btn-primary">外包给 AI 🤖</button>
+          <button id="copy-report" class="btn btn-secondary">📋 复制结果</button>
+          <button id="share-report" class="btn btn-secondary">📤 分享</button>
+        </div>
+        <p id="copied-hint" class="hint" hidden>已复制</p>
+
+        <section id="result-panel" class="result-panel" hidden>
+          <div class="result-main">
+            <p class="result-tag" id="result-category"></p>
+            <p class="result-text" id="result-judgement"></p>
+          </div>
+
+          <div class="detail-panel">
+            <article class="detail-item">
+              <span>换个想法</span>
+              <p id="result-reframe"></p>
+            </article>
+            <article class="detail-item">
+              <span>今天只做这一步</span>
+              <p id="result-next-step"></p>
+            </article>
+            <article class="detail-item">
+              <span>你可以直接发的话</span>
+              <p id="result-message"></p>
+              <button id="copy-message" class="mini-copy">复制这一条</button>
+            </article>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <p>我是 <strong>清溪</strong>，关注我获取更多 AI 提效技巧</p>
+          <div class="footer-links">
+            <a href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noreferrer">📕 小红书</a>
+            <a href="https://v.douyin.com/fZNLm0iCwfA/" target="_blank" rel="noreferrer">🎬 抖音</a>
+            <a href="https://qingxihub.com/tools" target="_blank" rel="noreferrer">🛠️ AI工具箱</a>
+          </div>
+        </footer>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
