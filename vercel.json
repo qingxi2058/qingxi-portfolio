@@ -73,6 +73,30 @@
       "destination": "/year-end/index.html"
     },
     {
+      "source": "/monday",
+      "destination": "/monday/index.html"
+    },
+    {
+      "source": "/monday/",
+      "destination": "/monday/index.html"
+    },
+    {
+      "source": "/anxiety",
+      "destination": "/anxiety/index.html"
+    },
+    {
+      "source": "/anxiety/",
+      "destination": "/anxiety/index.html"
+    },
+    {
+      "source": "/viral-skill",
+      "destination": "/viral-skill/index.html"
+    },
+    {
+      "source": "/viral-skill/",
+      "destination": "/viral-skill/index.html"
+    },
+    {
       "source": "/tools",
       "destination": "/tools/index.html"
     },
@@ -103,6 +127,14 @@
     {
       "source": "/home/",
       "destination": "/index.html"
+    },
+    {
+      "source": "/guide",
+      "destination": "/guide/index.html"
+    },
+    {
+      "source": "/guide/",
+      "destination": "/guide/index.html"
     },
     {
       "source": "/resign",

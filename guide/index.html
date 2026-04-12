@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>清溪AI · AI小白指南</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='82'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
+<style>
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --violet: #7c3aed;
+  --pink: #db2777;
+  --cyan: #0891b2;
+  --green: #059669;
+  --amber: #d97706;
+  --red: #dc2626;
+  --bg: #f8faff;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --nav-h: 58px;
+  --r: 12px;
+  --shadow: 0 4px 24px rgba(99,102,241,0.12);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+}
+
+/* ───── TOP NAV ───── */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: var(--nav-h);
+  background: rgba(255,255,255,0.97); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(99,102,241,0.12);
+  display: flex; align-items: center; padding: 0 28px; gap: 16px;
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+}
+.nav-brand {
+  font-size: 17px; font-weight: 900; color: #0f172a;
+  display: flex; align-items: center; gap: 7px;
+  text-decoration: none; flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+.nav-brand-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #7c3aed);
+}
+.nav-tabs {
+  margin-left: auto;
+  display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  padding: 7px 15px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  color: #64748b; background: none; border: none;
+  cursor: pointer; white-space: nowrap; transition: all 0.15s;
+}
+.nav-tab:hover { color: #6366f1; background: #f5f3ff; }
+.nav-tab.active {
+  color: white; background: #6366f1;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.35);
+}
+
+/* ───── HERO ───── */
+.hero {
+  background: linear-gradient(145deg, #4338ca 0%, #6d28d9 40%, #2563eb 100%);
+  padding: 52px 24px 40px; text-align: center; position: relative; overflow: hidden;
+  margin-top: var(--nav-h);
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 70% at 85% 20%, rgba(196,181,253,0.28) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(147,197,253,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 40% at 50% 100%, rgba(99,102,241,0.2) 0%, transparent 50%);
+}
+.hero-inner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(129,140,248,0.18); border: 1px solid rgba(129,140,248,0.3);
+  color: #c7d2fe; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+  padding: 5px 14px; border-radius: 20px; margin-bottom: 22px;
+}
+.hero-eyebrow i {
+  width: 6px; height: 6px; border-radius: 50%; background: #818cf8;
+  animation: blink 1.6s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.hero h1 {
+  font-size: clamp(26px, 5.5vw, 44px); font-weight: 900; color: white;
+  line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.02em;
+}
+.hero h1 mark {
+  background: linear-gradient(90deg, #a5b4fc, #67e8f9);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-desc { font-size: 15px; color: rgba(255,255,255,0.65); margin-bottom: 36px; line-height: 1.7; }
+.hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+.stat { text-align: center; }
+.stat-n {
+  font-size: 28px; font-weight: 900;
+  background: linear-gradient(135deg, #a5b4fc, #67e8f9);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-l { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.hero-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white; font-size: 14px; font-weight: 800;
+  padding: 12px 28px; border-radius: 12px; text-decoration: none;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.45); transition: all 0.2s;
+  border: none; cursor: pointer;
+}
+.hero-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(99,102,241,0.55); }
+
+/* ───── MAIN WRAPPER ───── */
+#content {
+  max-width: 1140px; margin: 0 auto; padding: 40px 24px 80px;
+}
+.section { display: none; animation: fadeUp 0.25s ease; }
+.section.active { display: block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+
+/* ───── SECTION HEADER ───── */
+.sec-hd { margin-bottom: 32px; }
+.sec-tag {
+  display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; background: linear-gradient(135deg, #6366f1, #7c3aed);
+  color: white; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
+}
+.sec-hd h2 { font-size: 24px; font-weight: 900; margin-bottom: 6px; }
+.sec-hd p { color: var(--muted); font-size: 15px; }
+
+/* ───── MY TOOLS SHOWCASE ───── */
+.showcase {
+  background:
+    radial-gradient(circle at top right, rgba(129,140,248,0.28), transparent 36%),
+    linear-gradient(145deg, #28206d 0%, #3a2b8f 52%, #284f97 100%);
+  border-radius: var(--r); padding: 32px; margin-top: 48px; margin-bottom: 0;
+  box-shadow: 0 20px 52px rgba(56, 38, 142, 0.18);
+}
+.showcase-hd { margin-bottom: 20px; }
+.showcase-hd .sc-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #c7d2fe; margin-bottom: 6px;
+}
+.showcase-hd h3 { font-size: 20px; font-weight: 900; color: white; margin-bottom: 4px; }
+.showcase-hd p { font-size: 13px; color: rgba(236,242,255,0.8); }
+.sc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.sc-card {
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(191,219,254,0.26);
+  border-radius: 10px; padding: 14px 16px; text-decoration: none; color: white;
+  display: block; transition: all 0.18s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.sc-card:hover {
+  background: rgba(124,58,237,0.28); border-color: rgba(191,219,254,0.48);
+  transform: translateY(-2px);
+}
+.sc-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.sc-icon { font-size: 18px; }
+.sc-badge {
+  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px;
+}
+.sc-badge.ai { background: rgba(129,140,248,0.25); color: #a5b4fc; }
+.sc-badge.hot { background: rgba(245,158,11,0.22); color: #fcd34d; }
+.sc-badge.new { background: rgba(6,182,212,0.2); color: #67e8f9; }
+.sc-badge.emo { background: rgba(236,72,153,0.2); color: #f9a8d4; }
+.sc-name { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+.sc-desc { font-size: 11px; color: rgba(236,242,255,0.74); line-height: 1.45; margin-bottom: 8px; }
+.sc-link { font-size: 11px; font-weight: 700; color: #bfdbfe; }
+
+/* ───── FILTERS ───── */
+.filter-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.filter-lbl { font-size: 12px; font-weight: 700; color: var(--muted); flex-shrink: 0; }
+.fbtn {
+  padding: 6px 13px; border-radius: 20px; font-size: 12px; font-weight: 700;
+  border: 1.5px solid var(--border); background: white; cursor: pointer;
+  color: var(--muted); transition: all 0.14s; white-space: nowrap;
+}
+.fbtn:hover { border-color: var(--primary); color: var(--primary); }
+.fbtn.active { background: var(--primary); border-color: var(--primary); color: white; }
+
+.tool-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.ttab {
+  padding: 8px 18px; border-radius: 10px; font-size: 13px; font-weight: 700;
+  border: 1.5px solid var(--border); background: white; cursor: pointer;
+  color: var(--muted); transition: all 0.14s; white-space: nowrap;
+}
+.ttab:hover { border-color: var(--primary); color: var(--primary); }
+.ttab.active {
+  background: linear-gradient(135deg, var(--primary), var(--violet));
+  border-color: transparent; color: white;
+}
+
+/* ───── TUTORIAL CARDS ───── */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.tcard {
+  background: var(--card); border-radius: var(--r); border: 1px solid var(--border);
+  padding: 20px; display: flex; flex-direction: column; gap: 10px;
+  text-decoration: none; color: inherit; transition: all 0.18s;
+}
+.tcard:hover { box-shadow: var(--shadow); transform: translateY(-2px); border-color: #c7d2fe; }
+.tcard-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.pb { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px; }
+.pb-bilibili   { background: #fff0f6; color: #be185d; }
+.pb-youtube    { background: #fef2f2; color: #dc2626; }
+.pb-douyin     { background: #f3f4f6; color: #374151; }
+.pb-xiaohongshu{ background: #fff1f0; color: #e11d48; }
+.pb-x          { background: #f0f9ff; color: #0369a1; }
+.pb-zhihu      { background: #eff6ff; color: #1d4ed8; }
+.pb-github     { background: #f0fdf4; color: #15803d; }
+.db { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px; }
+.db-beginner     { background: #ecfdf5; color: #059669; }
+.db-intermediate { background: #fffbeb; color: #d97706; }
+.db-advanced     { background: #fef2f2; color: #dc2626; }
+.tcard h3 { font-size: 14px; font-weight: 700; line-height: 1.45; }
+.tcard-author { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+.tcard-reason {
+  font-size: 13px; color: #475569; background: #f8faff;
+  padding: 10px 12px; border-radius: 8px; border-left: 3px solid #c7d2fe; line-height: 1.55;
+  margin-top: auto;
+}
+.tcard-cta { font-size: 13px; font-weight: 700; color: var(--primary); }
+.empty { text-align: center; padding: 60px; color: var(--muted); }
+.empty .ei { font-size: 40px; margin-bottom: 12px; }
+
+/* ───── THEORY CARDS ───── */
+.theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
+.thcard {
+  background: var(--card); border-radius: var(--r); border: 1px solid var(--border);
+  padding: 24px; transition: all 0.18s;
+}
+.thcard:hover { box-shadow: var(--shadow); border-color: #c7d2fe; }
+.th-icon { font-size: 28px; margin-bottom: 12px; }
+.thcard h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+.thcard > p { font-size: 13px; color: var(--muted); margin-bottom: 14px; line-height: 1.6; }
+.rlinks { display: flex; flex-direction: column; gap: 8px; }
+.rlink {
+  display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;
+  color: var(--primary); text-decoration: none; padding: 8px 12px;
+  background: #f5f3ff; border-radius: 8px; transition: background 0.14s;
+}
+.rlink:hover { background: #ede9fe; }
+.rlink .rl { flex: 1; }
+.rlink .rt { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: white; color: var(--muted); flex-shrink: 0; }
+
+/* ───── RESOURCE SECTION ───── */
+.rsec { margin-bottom: 40px; }
+.rsec-title { font-size: 15px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 7px; }
+.rgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 900px) { .rgrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .rgrid { grid-template-columns: 1fr; } }
+.rcard {
+  background: var(--card); border-radius: var(--r); border: 1px solid var(--border);
+  padding: 18px; text-decoration: none; color: inherit; display: block; transition: all 0.18s;
+}
+.rcard:hover { box-shadow: var(--shadow); transform: translateY(-2px); border-color: #c7d2fe; }
+.rcard-icon { font-size: 22px; margin-bottom: 10px; }
+.rcard h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.rcard p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.rtag { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; background: #f5f3ff; color: var(--primary); }
+
+/* ───── PATH CARDS ───── */
+.path-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+.pcard {
+  background: var(--card); border-radius: var(--r); border: 1.5px solid var(--border);
+  padding: 24px; transition: all 0.2s;
+}
+.pcard:hover { box-shadow: 0 6px 28px rgba(99,102,241,0.15); transform: translateY(-3px); }
+.pcard.c1 { border-top: 4px solid #f59e0b; }
+.pcard.c2 { border-top: 4px solid #6366f1; }
+.pcard.c3 { border-top: 4px solid #10b981; }
+.pcard.c4 { border-top: 4px solid #ec4899; }
+.pe { font-size: 32px; margin-bottom: 12px; }
+.pcard h3 { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+.pcard .pg { font-size: 13px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+.psteps { display: flex; flex-direction: column; gap: 7px; }
+.ps { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 600; }
+.psn {
+  width: 22px; height: 22px; border-radius: 50%; color: white;
+  font-size: 11px; font-weight: 800; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; background: var(--primary);
+}
+.psarr { color: #cbd5e1; font-size: 11px; margin: -2px 0 -2px 9px; }
+.pcard-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.ptime { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: #f1f5f9; color: #64748b; }
+.pdiff { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: #ecfdf5; color: #059669; }
+.pcard-cta {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 18px;
+  font-size: 12px; font-weight: 700; color: var(--primary);
+  background: #f5f3ff; border: 1.5px solid #c7d2fe;
+  padding: 7px 14px; border-radius: 8px; cursor: pointer;
+  border: none; font-family: inherit; transition: all 0.15s; width: 100%;
+  justify-content: center;
+}
+.pcard-cta:hover { background: var(--primary); color: white; }
+
+/* ───── BOOK CARDS ───── */
+.book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+.bcard {
+  background: var(--card); border-radius: var(--r); border: 1px solid var(--border);
+  padding: 18px; display: flex; gap: 14px; text-decoration: none;
+  color: inherit; transition: all 0.18s;
+}
+.bcard:hover { box-shadow: var(--shadow); border-color: #c7d2fe; }
+.bcover { width: 46px; height: 60px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.binfo h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; line-height: 1.4; }
+.binfo p { font-size: 12px; color: var(--muted); margin-bottom: 8px; line-height: 1.5; }
+.btags { display: flex; gap: 6px; flex-wrap: wrap; }
+.btag { font-size: 11px; padding: 2px 7px; border-radius: 5px; font-weight: 700; background: #f5f3ff; color: var(--primary); }
+.btag.free { background: #ecfdf5; color: #059669; }
+
+/* ───── FOOTER ───── */
+footer {
+  background:
+    radial-gradient(circle at top right, rgba(99,102,241,0.22), transparent 32%),
+    linear-gradient(145deg, #171236 0%, #241d5a 55%, #1c2b63 100%);
+  padding: 56px 24px 40px;
+}
+.footer-wrap { max-width: 1140px; margin: 0 auto; }
+.footer-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 40px;
+}
+.fbrand h2 { font-size: 22px; font-weight: 900; color: white; margin-bottom: 10px; }
+.fbrand p { font-size: 14px; color: rgba(236,242,255,0.78); line-height: 1.7; max-width: 320px; }
+.fcontact {
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(191,219,254,0.12);
+}
+.fcontact h3 { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(224,231,255,0.72); margin-bottom: 16px; }
+.clist { display: flex; flex-direction: column; gap: 10px; }
+.citem {
+  display: flex; align-items: center; gap: 10px; font-size: 13px;
+  color: rgba(241,245,249,0.84); text-decoration: none; transition: color 0.15s;
+}
+.citem:hover { color: white; }
+.cicon {
+  width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0;
+}
+.citem-copy {
+  cursor: pointer; background: none; border: none; font-family: inherit;
+  display: flex; align-items: center; gap: 10px; font-size: 13px;
+  color: rgba(241,245,249,0.84); transition: color 0.15s; padding: 0;
+}
+.citem-copy:hover { color: white; }
+.wid {
+  font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 5px;
+  background: rgba(129,140,248,0.44); color: #eef2ff; margin-left: 2px;
+}
+.copy-tip { font-size: 11px; color: #c7d2fe; margin-left: 4px; }
+.fdivider { height: 1px; background: rgba(255,255,255,0.12); margin: 32px 0 20px; }
+.fbot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.fbot p { font-size: 12px; color: rgba(226,232,240,0.56); }
+.flinks { display: flex; gap: 16px; }
+.flink { font-size: 12px; color: rgba(224,231,255,0.66); text-decoration: none; transition: color 0.15s; }
+.flink:hover { color: white; }
+
+/* ───── RESPONSIVE ───── */
+@media (max-width: 680px) {
+  .hero { padding: 52px 16px 40px; }
+  .hero-stats { gap: 20px; }
+  #content { padding: 28px 16px 60px; }
+  .cards, .theory-grid, .path-grid, .book-grid { grid-template-columns: 1fr; }
+  .rgrid, .sc-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .nav-tab { padding: 7px 10px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ TOP NAV ══════════ -->
+<nav class="topnav">
+  <a class="nav-brand" href="#">
+    <div class="nav-brand-dot"></div>清溪AI
+  </a>
+  <div class="nav-tabs">
+    <button class="nav-tab active"  onclick="go('p0',this)">🛠 工具教程</button>
+    <button class="nav-tab"         onclick="go('p1',this)">🧠 底层逻辑</button>
+    <button class="nav-tab"         onclick="go('p2',this)">📦 资料库</button>
+    <button class="nav-tab"         onclick="go('p3',this)">🗺 学习路径</button>
+    <button class="nav-tab"         onclick="go('p4',this)">📚 书单订阅</button>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><i></i>小白AI学习导航站 · 持续更新</div>
+    <h1>学 AI 工具，<mark>从这里开始</mark><br>一页找完，不再瞎刷</h1>
+    <p class="hero-desc">清溪帮你从全网筛出最值得看的教程<br>豆包 · 即梦 · 可灵 · Claude Code · OpenClaw，小白直接用</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">10+</div><div class="stat-l">已核对教程</div></div>
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">主流AI工具</div></div>
+      <div class="stat"><div class="stat-n">10+</div><div class="stat-l">清溪做的AI产品</div></div>
+      <div class="stat"><div class="stat-n">10万+</div><div class="stat-l">赞与收藏</div></div>
+    </div>
+    <button class="hero-btn" onclick="go('p0', document.querySelector('.nav-tab'))">开始探索 →</button>
+  </div>
+</section>
+
+<!-- ══════════ CONTENT AREA ══════════ -->
+<div id="content">
+
+  <!-- ── P0: 工具教程 ── -->
+  <div id="p0" class="section active">
+
+    <!-- Section header -->
+    <div class="sec-hd">
+      <div class="sec-tag">P1 · 工具教程库</div>
+      <h2>全网精选 AI 工具教程</h2>
+      <p>每一条都人工看过。按工具 + 平台自由组合筛选，难度标签帮你找到适合自己的</p>
+    </div>
+
+    <!-- Platform filter -->
+    <div class="filter-row">
+      <span class="filter-lbl">平台：</span>
+      <button class="fbtn active" onclick="filterP('all',this)">全部</button>
+      <button class="fbtn" onclick="filterP('bilibili',this)">🎬 B站</button>
+      <button class="fbtn" onclick="filterP('youtube',this)">📺 YouTube</button>
+      <button class="fbtn" onclick="filterP('douyin',this)">🎵 抖音</button>
+      <button class="fbtn" onclick="filterP('xiaohongshu',this)">📕 小红书</button>
+      <button class="fbtn" onclick="filterP('x',this)">🐦 X</button>
+      <button class="fbtn" onclick="filterP('zhihu',this)">💬 知乎</button>
+      <button class="fbtn" onclick="filterP('github',this)">💻 GitHub</button>
+    </div>
+
+    <!-- Tool tabs -->
+    <div class="tool-tabs">
+      <button class="ttab active" onclick="filterT('all',this)">全部工具</button>
+      <button class="ttab" onclick="filterT('doubao',this)">🤖 豆包</button>
+      <button class="ttab" onclick="filterT('jimeng',this)">🎨 即梦</button>
+      <button class="ttab" onclick="filterT('kling',this)">🎥 可灵</button>
+      <button class="ttab" onclick="filterT('claudecode',this)">⌨️ Claude Code</button>
+      <button class="ttab" onclick="filterT('openclaw',this)">🦞 OpenClaw</button>
+      <button class="ttab" onclick="filterT('codex',this)">🧑‍💻 Codex/Cursor</button>
+    </div>
+
+    <div class="cards" id="tgrid"></div>
+    <div class="empty" id="empty" style="display:none">
+      <div class="ei">🔍</div><p>当前筛选暂无结果，换个组合试试～</p>
+    </div>
+
+    <!-- My tools showcase — moved below tutorials -->
+    <div class="showcase">
+      <div class="showcase-hd">
+        <div class="sc-label">✦ 我用 AI 做的产品</div>
+        <h3>我不只推荐教程——我自己也在用 AI 做产品</h3>
+        <p>这些都是我用 Claude Code / Codex / 豆包 实际做出来并部署上线的，点进去看看</p>
+      </div>
+      <div class="sc-grid">
+        <a class="sc-card" href="https://qingxihub.com/portfolio/" target="_blank">
+          <div class="sc-card-top"><span class="sc-icon">🎨</span><span class="sc-badge ai">作品集</span></div>
+          <div class="sc-name">完整作品集</div>
+          <div class="sc-desc">所有AI产品汇总展示页</div>
+          <div class="sc-link">qingxihub.com/portfolio →</div>
+        </a>
+        <a class="sc-card" href="https://qingxihub.com/drama/" target="_blank">
+          <div class="sc-card-top"><span class="sc-icon">🎬</span><span class="sc-badge hot">热门</span></div>
+          <div class="sc-name">AI短剧助手</div>
+          <div class="sc-desc">用AI生成短剧脚本和拍摄方案</div>
+          <div class="sc-link">qingxihub.com/drama →</div>
+        </a>
+        <a class="sc-card" href="https://qingxihub.com/daily/" target="_blank">
+          <div class="sc-card-top"><span class="sc-icon">📅</span><span class="sc-badge new">小程序</span></div>
+          <div class="sc-name">问问日常</div>
+          <div class="sc-desc">AI驱动的日常记录小程序</div>
+          <div class="sc-link">qingxihub.com/daily →</div>
+        </a>
+        <a class="sc-card" href="https://qingxihub.com/tools/" target="_blank">
+          <div class="sc-card-top"><span class="sc-icon">🔧</span><span class="sc-badge ai">工具站</span></div>
+          <div class="sc-name">AI工具箱</div>
+          <div class="sc-desc">清溪精选的AI工具合集目录</div>
+          <div class="sc-link">qingxihub.com/tools →</div>
+        </a>
+        <a class="sc-card" href="https://qingxihub.com/timer/" target="_blank">
+          <div class="sc-card-top"><span class="sc-icon">⏰</span><span class="sc-badge emo">情绪</span></div>
+          <div class="sc-name">下班倒计时</div>
+          <div class="sc-desc">打工人专属，会骂人的屏保</div>
+          <div class="sc-link">qingxihub.com/timer →</div>
+        </a>
+        <a class="sc-card" href="https://qingxihub.com/year-end/" target="_blank">
+          <div class="sc-card-top"><span class="sc-icon">📝</span><span class="sc-badge hot">年终</span></div>
+          <div class="sc-name">年终总结生成器</div>
+          <div class="sc-desc">AI一键生成有情感有数据的年终总结</div>
+          <div class="sc-link">qingxihub.com/year-end →</div>
+        </a>
+        <a class="sc-card" href="https://qingxihub.com/resign/" target="_blank">
+          <div class="sc-card-top"><span class="sc-icon">✉️</span><span class="sc-badge emo">爆款</span></div>
+          <div class="sc-name">离职信生成器</div>
+          <div class="sc-desc">AI生成一封有尊严的离职信</div>
+          <div class="sc-link">qingxihub.com/resign →</div>
+        </a>
+        <a class="sc-card" href="https://qingxi-monday.vercel.app/" target="_blank">
+          <div class="sc-card-top"><span class="sc-icon">😩</span><span class="sc-badge emo">情绪</span></div>
+          <div class="sc-name">周一不想上班生成器</div>
+          <div class="sc-desc">AI帮你生成有创意的请假理由</div>
+          <div class="sc-link">vercel 直达 →</div>
+        </a>
+        <a class="sc-card" href="https://qingxihub.com/anxiety/" target="_blank">
+          <div class="sc-card-top"><span class="sc-icon">🌀</span><span class="sc-badge emo">情绪</span></div>
+          <div class="sc-name">焦虑外包AI</div>
+          <div class="sc-desc">把焦虑说给AI，AI帮你拆解行动</div>
+          <div class="sc-link">qingxihub.com/anxiety →</div>
+        </a>
+        <a class="sc-card" href="https://qingxihub.com/viral-skill/" target="_blank">
+          <div class="sc-card-top"><span class="sc-icon">🔥</span><span class="sc-badge new">新工具</span></div>
+          <div class="sc-name">爆款热点操盘手</div>
+          <div class="sc-desc">输入一个主题，直接拆出标题、开头、结构和收尾</div>
+          <div class="sc-link">qingxihub.com/viral-skill →</div>
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /p0 -->
+
+  <!-- ── P1: 底层逻辑 ── -->
+  <div id="p1" class="section">
+    <div class="sec-hd">
+      <div class="sec-tag">P1 · 底层逻辑课</div>
+      <h2>学工具之前，先搞懂 AI 是怎么工作的</h2>
+      <p>不讲操作，只讲原理和思维。搞懂这些，换什么工具都不迷茫，举一反三</p>
+    </div>
+    <div class="theory-grid">
+      <div class="thcard">
+        <div class="th-icon">⚙️</div>
+        <h3>LLM 基础概念</h3>
+        <p>Token、Context Window、Temperature 是什么？搞懂这些就不会再问"为什么 AI 忘了前面说的"</p>
+        <div class="rlinks">
+          <a class="rlink" href="https://news.qq.com/rain/a/20260224A01NH800" target="_blank">
+            <span class="rl">2026 AI 应用学习路线图（万字长文）</span><span class="rt">腾讯新闻 · 免费</span>
+          </a>
+          <a class="rlink" href="https://www.bilibili.com/video/BV1jEAaz3E6K/" target="_blank">
+            <span class="rl">一个视频搞懂 AI 大模型原理</span><span class="rt">B站 · 免费</span>
+          </a>
+        </div>
+      </div>
+      <div class="thcard">
+        <div class="th-icon">✍️</div>
+        <h3>Prompt 工程入门</h3>
+        <p>好提示词 ≠ 堆更多字。角色设定、Few-shot、Chain-of-Thought，学完 AI 回答质量直接翻倍</p>
+        <div class="rlinks">
+          <a class="rlink" href="https://www.promptingguide.ai/zh" target="_blank">
+            <span class="rl">提示词工程完全指南（中文版）</span><span class="rt">官网 · 免费</span>
+          </a>
+          <a class="rlink" href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank">
+            <span class="rl">吴恩达 · ChatGPT 提示词工程课</span><span class="rt">DeepLearning.AI · 免费</span>
+          </a>
+          <a class="rlink" href="https://coding.imooc.com/class/737.html" target="_blank">
+            <span class="rl">AI 时代必修课：提示词工程实战</span><span class="rt">慕课网 · 付费</span>
+          </a>
+        </div>
+      </div>
+      <div class="thcard">
+        <div class="th-icon">🤖</div>
+        <h3>AI Agent 核心原理</h3>
+        <p>什么是 Agent、Tool Use、Memory 架构？搞懂这些才能真正理解 OpenClaw 和 Claude Code 在干什么</p>
+        <div class="rlinks">
+          <a class="rlink" href="https://cloud.tencent.com/developer/article/2646044" target="_blank">
+            <span class="rl">OpenClaw + Claude Code 一人开发团队实战</span><span class="rt">腾讯云 · 免费</span>
+          </a>
+          <a class="rlink" href="https://github.com/KimYx0207/Claude-Code-x-OpenClaw-Guide-Zh" target="_blank">
+            <span class="rl">Claude Code × OpenClaw 中文完全教程</span><span class="rt">GitHub · 免费</span>
+          </a>
+        </div>
+      </div>
+      <div class="thcard">
+        <div class="th-icon">🔄</div>
+        <h3>上下文工程（2026 新概念）</h3>
+        <p>比 Prompt 工程更进阶。如何系统管理 AI 的记忆和上下文，让 AI 在长任务中持续高质量工作</p>
+        <div class="rlinks">
+          <a class="rlink" href="https://qubittool.com/zh/blog/context-engineering-complete-guide" target="_blank">
+            <span class="rl">上下文工程完全指南 2026</span><span class="rt">QubitTool · 免费</span>
+          </a>
+        </div>
+      </div>
+      <div class="thcard">
+        <div class="th-icon">⚡</div>
+        <h3>AI 生产力思维</h3>
+        <p>怎么用 AI 重构工作流，而不只是替代单点任务。从"省 5 分钟"到"省 5 小时"的思维转变</p>
+        <div class="rlinks">
+          <a class="rlink" href="https://news.qq.com/rain/a/20260224A01NH800" target="_blank">
+            <span class="rl">2026 AI 应用学习路线图（万字长文）</span><span class="rt">腾讯新闻 · 免费</span>
+          </a>
+          <a class="rlink" href="https://www.53ai.com/news/LargeLanguageModel/2025081993651.html" target="_blank">
+            <span class="rl">吴恩达 15 门免费 AI 课精选推荐</span><span class="rt">53AI · 免费</span>
+          </a>
+        </div>
+      </div>
+      <div class="thcard">
+        <div class="th-icon">💰</div>
+        <h3>AI 变现思维</h3>
+        <p>AI 能赚哪些钱？Affiliate、数字产品、AI 服务外包、一人公司……找到最适合你的切入点</p>
+        <div class="rlinks">
+          <a class="rlink" href="https://news.qq.com/rain/a/20260112A05YJ200" target="_blank">
+            <span class="rl">2026 用 AI 零帧起号：AIGC 爆款玩法全盘点</span><span class="rt">腾讯新闻 · 免费</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div><!-- /p1 -->
+
+  <!-- ── P2: 资料库 ── -->
+  <div id="p2" class="section">
+    <div class="sec-hd">
+      <div class="sec-tag">P2 · 资料宝藏库</div>
+      <h2>学 AI 要用到的资料，都在这里</h2>
+      <p>每一个都经过筛选，拒绝付费资料包里的垃圾内容，全部标注免费/付费</p>
+    </div>
+    <div class="rsec">
+      <div class="rsec-title"><span>✍️</span> Prompt 模板合集</div>
+      <div class="rgrid">
+        <a class="rcard" href="https://adg.csdn.net/694cf3115b9f5f31781a9fe5.html" target="_blank">
+          <div class="rcard-icon">📋</div>
+          <h4>AI 提示词从入门到精通</h4>
+          <p>场景化 Prompt 模板，写作/编程/分析/创意全覆盖，可直接复制使用</p>
+          <div class="rtag">CSDN · 免费</div>
+        </a>
+        <a class="rcard" href="https://github.com/langgptai/awesome-doubao-prompts" target="_blank">
+          <div class="rcard-icon">🗂</div>
+          <h4>豆包高质量 Prompt 合集</h4>
+          <p>更适合中文场景直接抄改，打开就是可用的提示词仓库，不再跳到文章风控页</p>
+          <div class="rtag">GitHub · 免费</div>
+        </a>
+        <a class="rcard" href="https://www.promptingguide.ai/zh" target="_blank">
+          <div class="rcard-icon">🌐</div>
+          <h4>Prompting Guide 中文版</h4>
+          <p>全球最权威提示词工程指南，已翻译成中文，系统全面，深度学习首选</p>
+          <div class="rtag">官网 · 免费</div>
+        </a>
+      </div>
+    </div>
+    <div class="rsec">
+      <div class="rsec-title"><span>🔧</span> AI 工具导航（按场景）</div>
+      <div class="rgrid">
+        <a class="rcard" href="https://ai-bot.cn/" target="_blank">
+          <div class="rcard-icon">🤖</div>
+          <h4>AI 工具集导航</h4>
+          <p>收录 1000+ 国内外 AI 工具，按文字/图像/视频/编程分类，找工具首选</p>
+          <div class="rtag">ai-bot.cn · 免费</div>
+        </a>
+        <a class="rcard" href="https://ai-to.cn/" target="_blank">
+          <div class="rcard-icon">🗺</div>
+          <h4>AI 工具阁</h4>
+          <p>专注国内外可用 AI 工具，实时更新可用性状态，中国用户友好</p>
+          <div class="rtag">ai-to.cn · 免费</div>
+        </a>
+        <a class="rcard" href="https://qingxihub.com/tools/" target="_blank">
+          <div class="rcard-icon">⭐</div>
+          <h4>清溪 AI 工具箱</h4>
+          <p>我亲自用过并筛选的 AI 工具合集，去掉了所有我觉得不好用的</p>
+          <div class="rtag">清溪自建 · 免费</div>
+        </a>
+      </div>
+    </div>
+    <div class="rsec">
+      <div class="rsec-title"><span>📚</span> 系统学习资源</div>
+      <div class="rgrid">
+        <a class="rcard" href="https://github.com/KimYx0207/Claude-Code-x-OpenClaw-Guide-Zh" target="_blank">
+          <div class="rcard-icon">💻</div>
+          <h4>Claude Code × OpenClaw 中文教程</h4>
+          <p>21 篇教程、13 万字，从零到企业实战，中文最全的 Claude Code 指南</p>
+          <div class="rtag">GitHub · 免费</div>
+        </a>
+        <a class="rcard" href="https://www.deeplearning.ai/short-courses/" target="_blank">
+          <div class="rcard-icon">🎓</div>
+          <h4>DeepLearning.AI 免费短课</h4>
+          <p>吴恩达出品，提示词工程/LangChain/RAG 等主题，不需要编程基础</p>
+          <div class="rtag">官网 · 全免费</div>
+        </a>
+        <a class="rcard" href="https://segmentfault.com/a/1190000047617816" target="_blank">
+          <div class="rcard-icon">🗺</div>
+          <h4>2026 AI 完整学习路线图</h4>
+          <p>工具·心法·资源·趋势·博主推荐，万字长文，建议收藏反复翻看</p>
+          <div class="rtag">SegmentFault · 免费</div>
+        </a>
+      </div>
+    </div>
+    <div class="rsec">
+      <div class="rsec-title"><span>👥</span> 社区 &amp; 圈子</div>
+      <div class="rgrid">
+        <a class="rcard" href="https://ai-bot.cn/daily-ai-news/" target="_blank">
+          <div class="rcard-icon">📰</div>
+          <h4>AI 工具集每日资讯</h4>
+          <p>每天更新最新 AI 动态、工具发布、融资消息，追热点最快渠道</p>
+          <div class="rtag">每日更新 · 免费</div>
+        </a>
+        <a class="rcard" href="https://simonaking.com/blog/ai-products-2026-q1/" target="_blank">
+          <div class="rcard-icon">📊</div>
+          <h4>Simon King · AI 产品评测</h4>
+          <p>有深度有观点的 AI 产品分析，中文博客里少有的高质量内容</p>
+          <div class="rtag">博客 · 免费</div>
+        </a>
+        <a class="rcard" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank">
+          <div class="rcard-icon">📕</div>
+          <h4>关注清溪 AI（小红书）</h4>
+          <p>我每周更新 AI 工具评测和教程，10 万+赞收藏，跟着学不走弯路</p>
+          <div class="rtag">小红书 · 免费</div>
+        </a>
+      </div>
+    </div>
+  </div><!-- /p2 -->
+
+  <!-- ── P3: 学习路径 ── -->
+  <div id="p3" class="section">
+    <div class="sec-hd">
+      <div class="sec-tag">P3 · 场景化学习路径</div>
+      <h2>你是哪种人，走哪条路</h2>
+      <p>别什么都学。找到你的场景，精准突破。以下工具顺序都是我实测过的，照做就行</p>
+    </div>
+    <div class="path-grid">
+      <div class="pcard c1">
+        <div class="pe">🎬</div>
+        <h3>内容创作者</h3>
+        <div class="pcard-meta">
+          <span class="ptime">⏱ 2–4 周上手</span>
+          <span class="pdiff">零基础可学</span>
+        </div>
+        <p class="pg">目标：用 AI 做选题/文案/配图/短视频，降本增效，爆款率翻倍</p>
+        <div class="psteps">
+          <div class="ps"><div class="psn">1</div>豆包 — AI 助理 + 文案生成</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">2</div>即梦 — AI 图片 + 配图设计</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">3</div>可灵 — AI 视频生成</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">4</div>OpenClaw — 自动化发布工作流</div>
+        </div>
+        <button class="pcard-cta" onclick="go('p0', document.querySelector('.nav-tab')); setTimeout(()=>{ filterT('doubao', document.querySelector('.ttab:nth-child(2)')); }, 300)">从「豆包」开始学 →</button>
+      </div>
+      <div class="pcard c2">
+        <div class="pe">💻</div>
+        <h3>程序员 / 准程序员</h3>
+        <div class="pcard-meta">
+          <span class="ptime">⏱ 1–2 周上手</span>
+          <span class="pdiff" style="background:#eff6ff;color:#2563eb;">有基础更快</span>
+        </div>
+        <p class="pg">目标：用 AI 辅助编程，提升开发效率，独立完成完整项目</p>
+        <div class="psteps">
+          <div class="ps"><div class="psn">1</div>豆包/Claude — 代码解释 + Debug</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">2</div>Cursor — AI IDE，实时补全</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">3</div>Claude Code — 自主完成复杂任务</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">4</div>OpenClaw — 多 Agent 协作开发</div>
+        </div>
+        <button class="pcard-cta" onclick="go('p0', document.querySelector('.nav-tab')); setTimeout(()=>{ filterT('codex', document.querySelectorAll('.ttab')[6]); }, 300)">从「Cursor」开始学 →</button>
+      </div>
+      <div class="pcard c3">
+        <div class="pe">📈</div>
+        <h3>运营 / 职场人</h3>
+        <div class="pcard-meta">
+          <span class="ptime">⏱ 1–3 周上手</span>
+          <span class="pdiff">零基础可学</span>
+        </div>
+        <p class="pg">目标：用 AI 提效日常工作，节省时间，让老板觉得你产出惊人</p>
+        <div class="psteps">
+          <div class="ps"><div class="psn">1</div>豆包 — 文案/邮件/报告生成</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">2</div>即梦 — 营销图片 + 视觉素材</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">3</div>Claude — 深度分析 + 策略制定</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">4</div>OpenClaw — 重复性任务自动化</div>
+        </div>
+        <button class="pcard-cta" onclick="go('p0', document.querySelector('.nav-tab')); setTimeout(()=>{ filterT('doubao', document.querySelector('.ttab:nth-child(2)')); }, 300)">从「豆包」开始学 →</button>
+      </div>
+      <div class="pcard c4">
+        <div class="pe">🚀</div>
+        <h3>想做 IP / 副业人</h3>
+        <div class="pcard-meta">
+          <span class="ptime">⏱ 1–2 月体系化</span>
+          <span class="pdiff" style="background:#fdf4ff;color:#7c3aed;">需要持续投入</span>
+        </div>
+        <p class="pg">目标：用 AI 做个人品牌，一人抵一个团队，Affiliate/数字产品变现</p>
+        <div class="psteps">
+          <div class="ps"><div class="psn">1</div>豆包 + Claude — 选题 + 内容生产</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">2</div>即梦 + 可灵 — 图文 + 视频制作</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">3</div>Claude Code — 搭建个人工具/站点</div>
+          <div class="psarr">↓</div>
+          <div class="ps"><div class="psn">4</div>OpenClaw — 全自动化运营工作流</div>
+        </div>
+        <button class="pcard-cta" onclick="go('p1', document.querySelectorAll('.nav-tab')[1])">先看「底层逻辑」打基础 →</button>
+      </div>
+    </div>
+  </div><!-- /p3 -->
+
+  <!-- ── P4: 书单 ── -->
+  <div id="p4" class="section">
+    <div class="sec-hd">
+      <div class="sec-tag">P4 · 书单 &amp; Newsletter</div>
+      <h2>这些内容，比刷短视频有用 100 倍</h2>
+      <p>AI 工具天天更新，但核心思维不会过时。这些是真正值得沉下心来读的</p>
+    </div>
+    <div class="rsec">
+      <div class="rsec-title"><span>📖</span> 推荐书单</div>
+      <div class="book-grid">
+        <a class="bcard" href="https://search.douban.com/book/subject_search?search_text=AI+极简入门&cat=1001" target="_blank" rel="noopener">
+          <div class="bcover" style="background:#fef9c3;">📘</div>
+          <div class="binfo">
+            <h4>《AI 极简入门》</h4>
+            <p>零基础用最直白语言理解 AI、大模型、提示词原理，第一本书读它</p>
+            <div class="btags"><span class="btag">入门</span><span class="btag free">第一本</span></div>
+          </div>
+        </a>
+        <a class="bcard" href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank">
+          <div class="bcover" style="background:#f0fdf4;">🎓</div>
+          <div class="binfo">
+            <h4>吴恩达·提示词工程课（免费）</h4>
+            <p>DeepLearning.AI 出品，1 小时学完，全球 AI 学习者必看</p>
+            <div class="btags"><span class="btag">提示词</span><span class="btag free">完全免费</span></div>
+          </div>
+        </a>
+        <a class="bcard" href="https://search.douban.com/book/subject_search?search_text=一人公司+Paul+Jarvis&cat=1001" target="_blank" rel="noopener">
+          <div class="bcover" style="background:#fdf4ff;">🧠</div>
+          <div class="binfo">
+            <h4>《一人公司》（Paul Jarvis）</h4>
+            <p>理解为什么"一人 + AI 工具"能取代小团队，变现思维升级必读</p>
+            <div class="btags"><span class="btag">变现思维</span><span class="btag">一人公司</span></div>
+          </div>
+        </a>
+        <a class="bcard" href="https://search.douban.com/book/subject_search?search_text=深度工作+Cal+Newport&cat=1001" target="_blank" rel="noopener">
+          <div class="bcover" style="background:#eff6ff;">💡</div>
+          <div class="binfo">
+            <h4>《深度工作》（Cal Newport）</h4>
+            <p>AI 负责执行，你负责思考方向。AI 时代更需要深度工作能力</p>
+            <div class="btags"><span class="btag">效率思维</span><span class="btag">认知升级</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="rsec">
+      <div class="rsec-title"><span>📬</span> Newsletter 订阅</div>
+      <div class="book-grid">
+        <a class="bcard" href="https://www.deeplearning.ai/the-batch/" target="_blank">
+          <div class="bcover" style="background:#fef3c7;">📨</div>
+          <div class="binfo">
+            <h4>The Batch（吴恩达）</h4>
+            <p>每周一期，涵盖最重要的 AI 进展，观点深刻不标题党</p>
+            <div class="btags"><span class="btag free">免费</span><span class="btag">英文</span></div>
+          </div>
+        </a>
+        <a class="bcard" href="https://bensbites.com/" target="_blank">
+          <div class="bcover" style="background:#ecfdf5;">🍪</div>
+          <div class="binfo">
+            <h4>Ben's Bites</h4>
+            <p>每日 AI 摘要，5 分钟了解当天最重要的 AI 动态，追热点必备</p>
+            <div class="btags"><span class="btag free">免费</span><span class="btag">每日</span></div>
+          </div>
+        </a>
+        <a class="bcard" href="https://ai-bot.cn/daily-ai-news/" target="_blank">
+          <div class="bcover" style="background:#f0f9ff;">📡</div>
+          <div class="binfo">
+            <h4>AI 工具集每日资讯（中文）</h4>
+            <p>国内最及时的 AI 资讯聚合，工具发布、热点事件，中文友好</p>
+            <div class="btags"><span class="btag free">免费</span><span class="btag">中文</span></div>
+          </div>
+        </a>
+        <a class="bcard" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank">
+          <div class="bcover" style="background:#fff1f0;">📕</div>
+          <div class="binfo">
+            <h4>清溪 AI（小红书）</h4>
+            <p>我每周更新 AI 工具评测和中文教程，10 万+赞收藏，跟着不走弯路</p>
+            <div class="btags"><span class="btag free">免费</span><span class="btag">中文</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div><!-- /p4 -->
+
+</div><!-- /#content -->
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-grid">
+      <div class="fbrand">
+        <h2>清溪AI 🌊</h2>
+        <p>用 AI 做产品、做内容、做自己。<br>这个导航站是我送给 AI 小白的礼物——省去你踩坑的时间，直接找到值得看的。</p>
+      </div>
+      <div class="fcontact">
+        <h3>找到我</h3>
+        <div class="clist">
+          <a class="citem" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank">
+            <div class="cicon">📕</div>小红书 · 清溪AI
+          </a>
+          <a class="citem" href="https://v.douyin.com/fZNLm0iCwfA/" target="_blank">
+            <div class="cicon">🎵</div>抖音 · 清溪AI
+          </a>
+          <button class="citem-copy" onclick="copyWechat(this)">
+            <div class="cicon">💬</div>
+            微信 <span class="wid">qingxi20250501</span>
+            <span class="copy-tip" id="ctip">点击复制</span>
+          </button>
+          <a class="citem" href="mailto:zhangxin19940203@gmail.com">
+            <div class="cicon">✉️</div>zhangxin19940203@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="fdivider"></div>
+    <div class="fbot">
+      <p>© 2026 清溪AI · 用爱发电，内容持续更新</p>
+      <div class="flinks">
+        <a class="flink" href="https://qingxihub.com/" target="_blank">个人主页</a>
+        <a class="flink" href="https://qingxihub.com/portfolio/" target="_blank">完整作品集</a>
+        <a class="flink" href="https://qingxihub.com/tools/" target="_blank">AI 工具箱</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ───── DATA ─────
+const tutorials = [
+  {tool:'jimeng',platform:'bilibili',title:'【全 30 集】即梦+豆包+剪映最强 AI 漫剧制作教程，小白 2 小时掌握',author:'B站创作者',link:'https://www.bilibili.com/video/BV1kDfXBNEN7/',difficulty:'beginner',reason:'整套流程是单个视频入口，打开就是具体视频，不会跳到主页或搜索页'},
+  {tool:'kling',platform:'bilibili',title:'锐评 2026 年 AI 视频软件：可灵 vs 即梦 vs Sora，谁夯谁拉？',author:'B站科技区UP',link:'https://www.bilibili.com/video/BV1ncwczbEoy/',difficulty:'intermediate',reason:'直接打开就是单个 B 站视频，适合想先看横评的人'},
+  {tool:'claudecode',platform:'bilibili',title:'Claude Cowork+Code 全面测试：6 大实战场景完整演示',author:'B站技术UP',link:'https://www.bilibili.com/video/BV1i6QBBcEW2/',difficulty:'intermediate',reason:'直接打开单个视频，适合已经了解基础后继续往实战走的人'},
+  {tool:'claudecode',platform:'bilibili',title:'Claude Code 深度分析：封号机制、18 个隐藏功能全揭秘',author:'技术博主',link:'https://www.bilibili.com/video/BV1Qt97BvEPd/',difficulty:'advanced',reason:'偏进阶向，打开就是具体视频，不会落到频道主页'},
+  {tool:'claudecode',platform:'github',title:'Claude Code × OpenClaw 中文完全教程（21 篇·13 万字）',author:'KimYx0207',link:'https://github.com/KimYx0207/Claude-Code-x-OpenClaw-Guide-Zh',difficulty:'intermediate',reason:'这个本来就是 GitHub 教程仓库，目标页和卡片内容一致'},
+  {tool:'openclaw',platform:'bilibili',title:'【保姆级】OpenClaw 全网最细教学：安装→Skills→多 Agent，1 小时全精通',author:'B站UP主',link:'https://www.bilibili.com/video/BV1TpAZzeEiZ/',difficulty:'beginner',reason:'直接打开单个 B 站视频，适合第一次接触 OpenClaw 的人'},
+  {tool:'openclaw',platform:'bilibili',title:'一个视频搞懂 OpenClaw！原理+安装+实战一次讲完',author:'AI工具博主',link:'https://www.bilibili.com/video/BV1jEAaz3E6K/',difficulty:'beginner',reason:'单个视频入口，节奏更快，适合先快速建立整体理解'},
+  {tool:'doubao',platform:'github',title:'Awesome Doubao Prompts：豆包高质量提示词合集',author:'langgptai',link:'https://github.com/langgptai/awesome-doubao-prompts',difficulty:'beginner',reason:'这张卡片现在明确写成提示词合集，打开的是对应仓库，不会再和平台标签冲突'},
+  {tool:'openclaw',platform:'github',title:'OpenClaw Runbook：从安装到稳定运行的实战手册',author:'digitalknk',link:'https://github.com/digitalknk/openclaw-runbook',difficulty:'intermediate',reason:'这张卡片本质就是 runbook 手册，GitHub 仓库页是对的，不是误跳安装页'},
+  {tool:'doubao',platform:'github',title:'doubao-free-api：豆包 API 接入参考项目',author:'LLM-Red-Team',link:'https://github.com/LLM-Red-Team/doubao-free-api',difficulty:'intermediate',reason:'这张卡片现在明确写成参考项目，目标页就是对应代码仓库，语义一致'},
+];
+
+// ───── STATE ─────
+let curP = 'all', curT = 'all';
+const pLbls = {bilibili:'🎬 B站',youtube:'📺 YouTube',douyin:'🎵 抖音',xiaohongshu:'📕 小红书',x:'🐦 X',zhihu:'💬 知乎',github:'💻 GitHub'};
+const dLbls = {beginner:'🟢 小白',intermediate:'🟡 进阶',advanced:'🔴 专业'};
+
+// ───── RENDER ─────
+function render() {
+  const grid = document.getElementById('tgrid');
+  const empty = document.getElementById('empty');
+  const list = tutorials.filter(t =>
+    (curP === 'all' || t.platform === curP) && (curT === 'all' || t.tool === curT)
+  );
+  if (!list.length) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  grid.innerHTML = list.map(t => `
+    <a class="tcard" href="${t.link}" target="_blank" rel="noopener">
+      <div class="tcard-badges">
+        <span class="pb pb-${t.platform}">${pLbls[t.platform]||t.platform}</span>
+        <span class="db db-${t.difficulty}">${dLbls[t.difficulty]}</span>
+      </div>
+      <h3>${t.title}</h3>
+      <div class="tcard-author">👤 ${t.author}</div>
+      <div class="tcard-reason">💡 ${t.reason}</div>
+      <span class="tcard-cta">查看教程 →</span>
+    </a>`).join('');
+}
+
+// ───── FILTER HANDLERS ─────
+function filterP(v, btn) {
+  curP = v;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+function filterT(v, btn) {
+  curT = v;
+  document.querySelectorAll('.ttab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+// ───── NAVIGATION ─────
+function go(id, btn) {
+  // hide all sections
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  // deactivate all nav tabs
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  // show target
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  // scroll to content area, accounting for fixed nav height
+  const el = document.getElementById('content');
+  const top = el.getBoundingClientRect().top + window.scrollY - 68;
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+}
+
+// ───── WECHAT COPY ─────
+function copyWechat(btn) {
+  navigator.clipboard.writeText('qingxi20250501').then(() => {
+    const tip = document.getElementById('ctip');
+    tip.textContent = '已复制 ✓';
+    tip.style.color = '#6ee7b7';
+    setTimeout(() => { tip.textContent = '点击复制'; tip.style.color = ''; }, 2200);
+  });
+}
+
+// ───── INIT ─────
+render();
+</script>
+</body>
+</html>
