@@ -1,0 +1,236 @@
+:root {
+  --bg: linear-gradient(180deg, #fff8f3 0%, #fff3ec 40%, #fffdf8 100%);
+  --card: rgba(255, 255, 255, 0.94);
+  --ink: #2b231d;
+  --muted: #79695f;
+  --line: rgba(93, 61, 45, 0.12);
+  --accent: #ef5b2a;
+  --accent-dark: #d8481a;
+  --accent-soft: rgba(239, 91, 42, 0.12);
+  --shadow: 0 20px 60px rgba(139, 66, 34, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255, 173, 120, 0.22), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(255, 205, 166, 0.26), transparent 32%),
+    var(--bg);
+  color: var(--ink);
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px 16px;
+}
+
+.card {
+  width: min(780px, 100%);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  padding: 28px;
+  backdrop-filter: blur(14px);
+}
+
+.hero-emoji {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff8a4d, #ef5b2a);
+  color: white;
+  font-size: 30px;
+  margin-bottom: 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 46px);
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.chip {
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.chip:hover,
+.chip.active {
+  border-color: rgba(239, 91, 42, 0.4);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.compact .chip {
+  cursor: default;
+}
+
+.compact .chip:hover {
+  color: var(--ink);
+  border-color: var(--line);
+  background: white;
+}
+
+.text-area {
+  width: 100%;
+  min-height: 132px;
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.88);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.65;
+  resize: vertical;
+}
+
+.text-area:focus {
+  outline: 2px solid rgba(239, 91, 42, 0.2);
+  border-color: rgba(239, 91, 42, 0.45);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.btn {
+  border: none;
+  border-radius: 16px;
+  padding: 14px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ef5b2a, #ff7a2f);
+  color: white;
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.hint {
+  min-height: 22px;
+  margin: 10px 0 0;
+  color: var(--accent-dark);
+  font-size: 14px;
+}
+
+.result-panel {
+  margin-top: 22px;
+  display: grid;
+  gap: 14px;
+}
+
+.result-block {
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(93, 61, 45, 0.1);
+}
+
+.result-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.result-block p,
+.result-list {
+  margin: 12px 0 0;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.headline {
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.result-list {
+  padding-left: 18px;
+}
+
+.footer {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.footer a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 22px 18px;
+    border-radius: 24px;
+  }
+
+  .button-row .btn {
+    width: 100%;
+  }
+}

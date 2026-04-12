@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>爆款热点操盘手</title>
+    <meta
+      name="description"
+      content="输入一个主题，直接拆出标题、开头、结构和收尾，适合图文、短视频和知识类内容起稿。"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ef5b2a'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34' fill='white'%3E%E7%88%86%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="viral-theme">
+    <main class="shell">
+      <section class="card">
+        <div class="hero-emoji">🔥</div>
+        <h1>爆款热点操盘手</h1>
+        <p class="subtitle">先把标题、开头、结构和收尾拆出来，再决定怎么把内容做成更有传播力的一版</p>
+
+        <div class="chip-row compact" id="example-list"></div>
+
+        <div class="chip-row" id="mode-row">
+          <button class="chip active" data-mode="xhs">小红书图文</button>
+          <button class="chip" data-mode="video">短视频口播</button>
+          <button class="chip" data-mode="knowledge">知识分享</button>
+        </div>
+
+        <textarea
+          id="topic-input"
+          class="text-area"
+          placeholder="比如：AI做简历、打工人副业、用Claude做内容选题"
+        ></textarea>
+
+        <div class="button-row">
+          <button id="generate-button" class="btn btn-primary">拆一套热点骨架</button>
+          <button id="copy-all" class="btn btn-secondary">复制整套</button>
+          <button id="share-result" class="btn btn-secondary">分享</button>
+        </div>
+        <p id="copied-hint" class="hint" hidden>已复制</p>
+
+        <section id="result-panel" class="result-panel" hidden>
+          <article class="result-block">
+            <span class="result-label">热点角度</span>
+            <p id="result-angle"></p>
+          </article>
+
+          <article class="result-block">
+            <span class="result-label">主标题</span>
+            <p class="headline" id="result-title"></p>
+          </article>
+
+          <article class="result-block">
+            <span class="result-label">备用标题</span>
+            <ul class="result-list" id="result-alt-titles"></ul>
+          </article>
+
+          <article class="result-block">
+            <span class="result-label">开头钩子</span>
+            <p id="result-hook"></p>
+          </article>
+
+          <article class="result-block">
+            <span class="result-label">内容结构</span>
+            <ul class="result-list" id="result-steps"></ul>
+          </article>
+
+          <article class="result-block">
+            <span class="result-label">结尾收口</span>
+            <p id="result-close"></p>
+          </article>
+        </section>
+
+        <footer class="footer">
+          <p>输入主题后，即可得到一套更适合公开内容创作的结构骨架。</p>
+          <div class="footer-links">
+            <a href="https://qingxihub.com/tools/" target="_blank" rel="noreferrer">🛠️ AI工具箱</a>
+            <a href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noreferrer">📕 小红书</a>
+            <a href="https://github.com/qingxi2058/viral-hotspot-operator" target="_blank" rel="noreferrer">⚡ GitHub</a>
+          </div>
+        </footer>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
