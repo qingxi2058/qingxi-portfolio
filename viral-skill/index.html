@@ -8,6 +8,13 @@
       name="description"
       content="输入一个主题，直接拆出标题、开头、结构和收尾，适合图文、短视频和知识类内容起稿。"
     />
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "waxw4010ob");
+    </script>
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ef5b2a'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34' fill='white'%3E%E7%88%86%3C/text%3E%3C/svg%3E"
@@ -17,34 +24,64 @@
   <body class="viral-theme">
     <main class="shell">
       <section class="card">
-        <div class="hero-emoji">🔥</div>
-        <h1>爆款热点操盘手</h1>
-        <p class="subtitle">先把标题、开头、结构和收尾拆出来，再决定怎么把内容做成更有传播力的一版</p>
-
-        <div class="chip-row compact" id="example-list"></div>
-
-        <div class="chip-row" id="mode-row">
-          <button class="chip active" data-mode="xhs">小红书图文</button>
-          <button class="chip" data-mode="video">短视频口播</button>
-          <button class="chip" data-mode="knowledge">知识分享</button>
+        <div class="hero-head">
+          <div class="hero-emoji">🔥</div>
+          <span class="eyebrow">清溪AI Skill · 热点内容起稿器</span>
         </div>
+        <h1>10 秒拆出一版更容易传播的内容骨架</h1>
+        <p class="subtitle">
+          输入一个主题，直接拿到主标题、开头钩子、内容结构和结尾动作，不再从空白开始硬想。
+        </p>
+
+        <div class="value-strip" aria-label="生成结果预览">
+          <span>主标题</span>
+          <span>开头钩子</span>
+          <span>三步结构</span>
+          <span>结尾动作</span>
+        </div>
+
+        <div class="quick-start">
+          <span class="section-kicker">直接试试</span>
+          <div class="chip-row compact" id="example-list"></div>
+        </div>
+
+        <div class="mode-panel">
+          <span class="section-kicker">先选你要发去哪</span>
+          <div class="chip-row" id="mode-row">
+            <button class="chip active" data-mode="xhs">小红书图文</button>
+            <button class="chip" data-mode="video">短视频口播</button>
+            <button class="chip" data-mode="knowledge">知识分享</button>
+          </div>
+          <p id="mode-description" class="mode-description"></p>
+        </div>
+
+        <label class="input-label" for="topic-input">写下你这次要讲的主题</label>
 
         <textarea
           id="topic-input"
           class="text-area"
           placeholder="比如：AI做简历、打工人副业、用Claude做内容选题"
         ></textarea>
+        <p class="input-helper">点上面的示例可直接生成；按 Command / Ctrl + Enter 也能生成</p>
 
         <div class="button-row">
-          <button id="generate-button" class="btn btn-primary">拆一套热点骨架</button>
-          <button id="copy-all" class="btn btn-secondary">复制整套</button>
-          <button id="share-result" class="btn btn-secondary">分享</button>
+          <button id="generate-button" class="btn btn-primary">生成一版可发骨架</button>
+          <button id="copy-all" class="btn btn-secondary" disabled>复制这一版</button>
+          <button id="share-result" class="btn btn-secondary" disabled>分享这一版</button>
         </div>
         <p id="copied-hint" class="hint" hidden>已复制</p>
 
         <section id="result-panel" class="result-panel" hidden>
+          <div class="result-header">
+            <div>
+              <span class="section-kicker">生成结果</span>
+              <h2>这一版先从这里开始发</h2>
+            </div>
+            <p id="result-summary" class="result-summary"></p>
+          </div>
+
           <article class="result-block">
-            <span class="result-label">热点角度</span>
+            <span class="result-label">建议角度</span>
             <p id="result-angle"></p>
           </article>
 
@@ -69,15 +106,27 @@
           </article>
 
           <article class="result-block">
+            <span class="result-label">发法提醒</span>
+            <p id="result-delivery"></p>
+          </article>
+
+          <article class="result-block">
             <span class="result-label">结尾收口</span>
             <p id="result-close"></p>
           </article>
         </section>
 
         <footer class="footer">
-          <p>输入主题后，即可得到一套更适合公开内容创作的结构骨架。</p>
+          <p class="footer-lead">先把这一条跑起来，再去看更多工具、案例和可直接复用的入口。</p>
+          <div class="footer-cta">
+            <a class="footer-button primary" href="https://qingxihub.com/tools/" target="_blank" rel="noreferrer">
+              去 AI 工具箱继续找工具
+            </a>
+            <a class="footer-button" href="https://qingxihub.com/guide/" target="_blank" rel="noreferrer">
+              看清溪AI指南
+            </a>
+          </div>
           <div class="footer-links">
-            <a href="https://qingxihub.com/tools/" target="_blank" rel="noreferrer">🛠️ AI工具箱</a>
             <a href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noreferrer">📕 小红书</a>
             <a href="https://github.com/qingxi2058/viral-hotspot-operator" target="_blank" rel="noreferrer">⚡ GitHub</a>
           </div>

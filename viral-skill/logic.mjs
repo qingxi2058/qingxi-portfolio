@@ -1,7 +1,55 @@
 export const VIRAL_MODES = {
-  xhs: { label: "小红书图文", open: "先给结果，再讲过程" },
-  video: { label: "短视频口播", open: "先打断，再给反差" },
-  knowledge: { label: "知识分享", open: "先讲误区，再给方法" },
+  xhs: {
+    label: "小红书图文",
+    open: "先给结果，再讲过程",
+    description: "适合收藏型图文，重点是结论前置、结构干净、最后一句让人愿意顺手收藏。",
+    summary: "更偏收藏型图文，重点不是观点多，而是用户能马上拿走一句能照抄的话。",
+    titleTemplates: [
+      "{{topic}}，先别急着发，收藏率更高的一版这样写",
+      "想把{{topic}}写成一条会被收藏的内容，先用这套结构",
+      "{{topic}}最适合做成图文的，不是观点，而是这一版骨架",
+    ],
+    stepTemplates: [
+      "封面先写结果：一句话说清 {{topic}} 这条能帮谁解决什么问题。",
+      "正文只保留 3 段：误区 / 做法 / 可直接照抄的一句示例。",
+      "最后加一句收藏理由，让用户知道下次做到 {{topic}} 时还会回来翻。",
+    ],
+    deliveryTip: "建议做成 6 到 8 屏图文：封面讲结果，中间给步骤，最后一屏放收藏提醒。",
+  },
+  video: {
+    label: "短视频口播",
+    open: "先打断，再给反差",
+    description: "适合口播和短视频，重点是前 3 秒先打断，再用反差把人留下来。",
+    summary: "更偏口播节奏，重点是第一句、反差句和结尾那一下互动，不要一上来就平铺直叙。",
+    titleTemplates: [
+      "如果你要讲{{topic}}，前 3 秒别直接上方法",
+      "{{topic}}想拍得有人停下来看，先换这个开头",
+      "做{{topic}}短视频，真正重要的是第一句怎么说",
+    ],
+    stepTemplates: [
+      "开头先打断：先说大家做 {{topic}} 时最容易犯的错，不要直接讲步骤。",
+      "中段给反差：把方法拆成 2 到 3 个连续动作，不要一口气全说完。",
+      "结尾留互动：别总结太满，用一句提问把评论区带起来。",
+    ],
+    deliveryTip: "建议拍成 30 到 45 秒口播：前 3 秒打断，中段给动作，最后 1 句拉互动。",
+  },
+  knowledge: {
+    label: "知识分享",
+    open: "先讲误区，再给方法",
+    description: "适合知识类内容，重点是先拆误区，再讲原因，最后再给真正可执行的方法。",
+    summary: "更偏知识表达，重点是先让人听懂为什么，再给做法，不要把工具名当内容本身。",
+    titleTemplates: [
+      "讲{{topic}}，先别堆方法，先把这 3 个误区讲清楚",
+      "{{topic}}想讲得像真懂，先别急着罗列工具",
+      "如果你要认真讲{{topic}}，这套知识型结构更稳",
+    ],
+    stepTemplates: [
+      "先点误区：直接说大家围绕 {{topic}} 最常见的一个理解偏差。",
+      "再补原因：解释为什么会错，用户才会觉得这条不是空口输出。",
+      "最后给方法：只给 2 到 3 步能执行的动作，不再继续发散。",
+    ],
+    deliveryTip: "建议做成长图文或知识口播：先讲误区，再讲原因，最后落到 2 到 3 步方法。",
+  },
 };
 
 const CATEGORY_RULES = [
@@ -14,13 +62,13 @@ const CATEGORY_RULES = [
       "{{topic}}别再从0开始，先抄这套可执行骨架",
       "用{{topic}}做内容，最省时间的不是写，是先这样拆",
     ],
-    hook: "大多数人做{{topic}}没起色，不是不会，而是第一步就太散了。我把最容易出效果的顺序先给你。",
+    hook: "大多数人讲{{topic}}没起色，不是不会，而是第一步就太散了。我把最容易出效果的顺序先给你。",
     steps: [
       "先把场景说死：这一条到底解决谁的什么问题。",
       "再把产出拆小：标题、开头、主体、结尾一段一段写。",
       "最后只保留能直接复制的句子，不留空泛形容词。",
     ],
-    close: "如果你也在做{{topic}}，先照这套发一版，再回来看哪一步最容易出反馈。",
+    close: "如果你最近也在折腾{{topic}}，先照这套发一版，再回来看哪一步最容易出反馈。",
   },
   {
     name: "career",
@@ -101,33 +149,37 @@ function fill(template, topic) {
 
 function modeClose(mode, topic) {
   if (mode === "video") {
-    return `如果你正准备讲${topic}，结尾别收太满，留一句“要不要我把完整模板也给你”，更容易接互动。`;
+    return `围绕${topic}拍口播时，结尾别收太满，留一句“要不要我把完整模板也给你”，更容易接互动。`;
   }
 
   if (mode === "knowledge") {
-    return `讲${topic}时，记得把“为什么”和“怎么做”连起来，用户才会觉得这一条真有用。`;
+    return `围绕${topic}做知识分享时，记得把“为什么”和“怎么做”连起来，用户才会觉得这一条真有用。`;
   }
 
-  return `做${topic}图文时，最后留一句能让人顺手收藏的话，转化会更自然。`;
+  return `围绕${topic}做图文时，最后留一句能让人顺手收藏的话，转化会更自然。`;
 }
 
 export function createViralSkillKit(options = {}) {
   const topic = cleanTopic(options.topic);
   const mode = normalizeMode(options.mode);
+  const modeConfig = VIRAL_MODES[mode];
   const category = selectCategory(topic);
-  const titles = category.titles.map((item) => fill(item, topic));
-  const steps = category.steps.map((item, index) => `${index + 1}. ${fill(item, topic)}`);
+  const titles = modeConfig.titleTemplates.map((item) => fill(item, topic));
+  const steps = modeConfig.stepTemplates.map((item, index) => `${index + 1}. ${fill(item, topic)}`);
 
   return {
     topic,
     mode,
-    modeLabel: VIRAL_MODES[mode].label,
-    angle: category.angle,
+    modeLabel: modeConfig.label,
+    modeDescription: modeConfig.description,
+    summary: modeConfig.summary,
+    angle: `${modeConfig.label}里，${category.angle}`,
     title: titles[0],
-    altTitles: titles.slice(1),
-    hook: `${VIRAL_MODES[mode].open}。${fill(category.hook, topic)}`,
+    altTitles: [...titles.slice(1), fill(category.titles[0], topic)].slice(0, 3),
+    hook: `${modeConfig.open}。${fill(category.hook, topic)}`,
     steps,
+    deliveryTip: modeConfig.deliveryTip,
     close: `${fill(category.close, topic)} ${modeClose(mode, topic)}`,
-    shareText: `我刚用爆款Skill拆了一套“${topic}”的内容骨架，标题、开头、结构和收尾都出来了。`,
+    shareText: `我刚用爆款热点操盘手拆了一套“${topic}”的${modeConfig.label}骨架，标题、开头、结构和结尾都出来了。`,
   };
 }
