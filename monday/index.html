@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>周一不想上班生成器</title>
+    <meta
+      name="description"
+      content="周一不想上班？给你一条像你本人会发的文案，再顺手给你请假版、同事版和群聊版。"
+    />
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "waxw4010ob");
+    </script>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23df5d12'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34' fill='white'%3E%E5%91%A8%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="monday-theme">
+    <main class="shell">
+      <section class="card">
+        <div class="hero-emoji">😫</div>
+        <h1>周一不想上班</h1>
+        <p class="subtitle">生成一条更像你本人会发的周一状态</p>
+
+        <div class="chip-row compact" id="top-reasons"></div>
+
+        <div class="chip-row" id="mode-row">
+          <button class="chip active" data-mode="soul" data-placeholder="比如：日报、回消息、整理待办">
+            人到了，魂没到
+          </button>
+          <button class="chip" data-mode="meeting" data-placeholder="比如：周会、复盘会、客户会">
+            不想开会
+          </button>
+          <button class="chip" data-mode="leave" data-placeholder="比如：述职会、提案、加班任务">
+            想请假
+          </button>
+          <button class="chip" data-mode="feral" data-placeholder="比如：老板消息、临时需求、无意义沟通">
+            想发疯但还得上班
+          </button>
+        </div>
+
+        <div class="chip-row compact">
+          <button class="chip soft" data-intensity="low">轻微摆烂</button>
+          <button class="chip soft active" data-intensity="sharp">正常发疯</button>
+          <button class="chip soft" data-intensity="feral">彻底没电</button>
+        </div>
+
+        <input
+          id="detail-input"
+          class="text-input"
+          type="text"
+          placeholder="比如：日报、回消息、整理待办"
+        />
+
+        <div class="display">
+          <p class="display-label" id="result-summary">先点一下，抽你今天的周一状态</p>
+          <p class="display-text" id="result-headline">周一：还没准备好上班</p>
+        </div>
+
+        <section id="detail-panel" class="detail-panel" hidden>
+          <article class="detail-item">
+            <span>体面请假版</span>
+            <p id="result-excuse"></p>
+          </article>
+          <article class="detail-item">
+            <span>同事可直接发</span>
+            <p id="result-reply"></p>
+          </article>
+          <article class="detail-item">
+            <span>群聊 / 朋友圈版</span>
+            <p id="result-caption"></p>
+          </article>
+          <p class="detail-reminder" id="result-reminder"></p>
+        </section>
+
+        <div class="button-row">
+          <button id="generate-button" class="btn btn-primary">🔄 再来一条</button>
+          <button id="copy-all" class="btn btn-secondary">📋 复制整套</button>
+          <button id="share-result" class="btn btn-secondary">📤 分享</button>
+        </div>
+        <p id="copied-hint" class="hint" hidden>已复制</p>
+
+        <footer class="footer">
+          <p>我是 <strong>清溪</strong>，你的周一战友</p>
+          <div class="footer-links">
+            <a href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noreferrer">📕 小红书</a>
+            <a href="https://v.douyin.com/fZNLm0iCwfA/" target="_blank" rel="noreferrer">🎬 抖音</a>
+            <a href="https://qingxihub.com/tools" target="_blank" rel="noreferrer">🛠️ AI工具箱</a>
+          </div>
+        </footer>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

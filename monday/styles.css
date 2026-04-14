@@ -1,0 +1,263 @@
+:root {
+  --orange-1: #fff6e8;
+  --orange-2: #ffe3b8;
+  --orange-3: #ffb45d;
+  --orange-4: #e06616;
+  --orange-5: #8f3a00;
+  --text: #2f2218;
+  --muted: #7a6555;
+  --line: rgba(224, 102, 22, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", sans-serif;
+  color: var(--text);
+}
+
+.monday-theme {
+  background: linear-gradient(135deg, #ff9800 0%, #ffb74d 46%, #fff3e0 100%);
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 28px;
+  padding: 34px 28px 28px;
+  box-shadow: 0 28px 70px rgba(143, 58, 0, 0.22);
+  text-align: center;
+}
+
+.hero-emoji {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 30px;
+  color: var(--orange-5);
+}
+
+.subtitle {
+  margin: 10px 0 22px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.chip-row.compact {
+  margin-bottom: 16px;
+}
+
+.chip {
+  border: 1px solid rgba(224, 102, 22, 0.18);
+  background: #fffaf4;
+  color: var(--orange-5);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.chip.soft {
+  color: var(--muted);
+}
+
+.chip.active {
+  background: linear-gradient(135deg, var(--orange-4), var(--orange-3));
+  color: white;
+  border-color: transparent;
+}
+
+.chip:hover,
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.text-input {
+  width: 100%;
+  border: 2px solid rgba(224, 102, 22, 0.12);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font: inherit;
+  font-size: 15px;
+  margin: 4px 0 18px;
+  outline: none;
+}
+
+.text-input:focus {
+  border-color: rgba(224, 102, 22, 0.34);
+}
+
+.display {
+  background: linear-gradient(180deg, #fff8ef 0%, #fff2dd 100%);
+  border-radius: 20px;
+  padding: 24px 22px;
+  min-height: 148px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.display-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.display-text {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.55;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.detail-panel {
+  text-align: left;
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #fffaf4;
+  border: 1px solid var(--line);
+}
+
+.detail-item + .detail-item {
+  margin-top: 14px;
+}
+
+.detail-item span {
+  display: block;
+  color: var(--orange-4);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.detail-item p,
+.detail-reminder {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.detail-reminder {
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 18px;
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--orange-4), var(--orange-3));
+  color: white;
+  box-shadow: 0 12px 28px rgba(224, 102, 22, 0.25);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--orange-5);
+  border: 1px solid rgba(224, 102, 22, 0.18);
+}
+
+.hint {
+  min-height: 20px;
+  margin: 10px 0 0;
+  color: #3e9e4f;
+  font-size: 13px;
+}
+
+.footer {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(224, 102, 22, 0.12);
+}
+
+.footer p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.footer strong {
+  color: var(--orange-4);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--orange-5);
+  background: #fff4e6;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+@media (max-width: 560px) {
+  .card {
+    padding: 28px 18px 22px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .display-text {
+    font-size: 21px;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
