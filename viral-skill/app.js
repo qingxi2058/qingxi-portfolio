@@ -21,13 +21,10 @@ const topicInput = document.querySelector("#topic-input");
 const copiedHint = document.querySelector("#copied-hint");
 const resultPanel = document.querySelector("#result-panel");
 const weeklyNote = document.querySelector("#weekly-note");
-const modeDescription = document.querySelector("#mode-description");
 const generateButton = document.querySelector("#generate-button");
 const remixButton = document.querySelector("#remix-button");
 const copyAllButton = document.querySelector("#copy-all");
 const shareButton = document.querySelector("#share-result");
-const previewPromise = document.querySelector("#preview-promise");
-const previewSnapshot = document.querySelector("#preview-snapshot");
 const recentList = document.querySelector("#recent-list");
 
 const resultFields = {
@@ -61,9 +58,6 @@ function updateModePreview() {
     variant: state.variant,
   });
 
-  modeDescription.textContent = previewKit.modeDescription;
-  previewPromise.textContent = previewKit.promise;
-  previewSnapshot.textContent = previewKit.snapshot;
   recentList.innerHTML = previewKit.freshFindings.map((item) => `<li>${item}</li>`).join("");
 }
 
