@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>清溪AI · AI小白指南</title>
+<title>清溪AI · AI小白学习指南</title>
 <script type="text/javascript">
   (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -29,7 +29,7 @@
   --green: #059669;
   --amber: #d97706;
   --red: #dc2626;
-  --bg: #f8faff;
+  --bg: #f8f7ff;
   --card: #ffffff;
   --text: #0f172a;
   --muted: #64748b;
@@ -41,7 +41,8 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-  background: var(--bg); color: var(--text); line-height: 1.6;
+  background: var(--bg);
+  color: var(--text); line-height: 1.6;
 }
 
 /* ───── TOP NAV ───── */
@@ -114,6 +115,14 @@ body {
   background-clip: text;
 }
 .hero-desc { font-size: 15px; color: rgba(255,255,255,0.65); margin-bottom: 36px; line-height: 1.7; }
+.hero-meta {
+  display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(191,219,254,0.22);
+  color: rgba(236,242,255,0.92); font-size: 12px; font-weight: 700;
+  padding: 8px 14px; border-radius: 999px; margin-bottom: 28px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.hero-meta strong { color: white; font-weight: 800; }
 .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
 .stat { text-align: center; }
 .stat-n {
@@ -134,7 +143,12 @@ body {
 
 /* ───── MAIN WRAPPER ───── */
 #content {
-  max-width: 1140px; margin: 0 auto; padding: 40px 24px 80px;
+  max-width: 1140px; margin: -18px auto 0; padding: 42px 24px 80px;
+  background: transparent;
+  border-radius: 28px 28px 0 0;
+  box-shadow: none;
+  position: relative;
+  z-index: 2;
 }
 .section { display: none; animation: fadeUp 0.25s ease; }
 .section.active { display: block; }
@@ -153,41 +167,96 @@ body {
 /* ───── MY TOOLS SHOWCASE ───── */
 .showcase {
   background:
-    radial-gradient(circle at top right, rgba(129,140,248,0.28), transparent 36%),
-    linear-gradient(145deg, #28206d 0%, #3a2b8f 52%, #284f97 100%);
-  border-radius: var(--r); padding: 32px; margin-top: 48px; margin-bottom: 0;
-  box-shadow: 0 20px 52px rgba(56, 38, 142, 0.18);
+    radial-gradient(circle at top left, rgba(167, 139, 250, 0.10), transparent 28%),
+    radial-gradient(circle at top right, rgba(125, 211, 252, 0.12), transparent 30%),
+    linear-gradient(180deg, #f4f1ff 0%, #eef4ff 100%);
+  border-radius: 22px; padding: 34px 32px 30px; margin-top: 48px; margin-bottom: 0;
+  border: 1px solid #dde4f5;
+  box-shadow: 0 18px 42px rgba(99, 102, 241, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(255,255,255,0.36), transparent 36%),
+    linear-gradient(180deg, rgba(255,255,255,0.10), transparent 48%);
+  pointer-events: none;
+}
+.showcase > * {
+  position: relative;
+  z-index: 1;
 }
 .showcase-hd { margin-bottom: 20px; }
 .showcase-hd .sc-label {
   font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-  color: #c7d2fe; margin-bottom: 6px;
+  color: #5b5fc7; margin-bottom: 6px;
 }
-.showcase-hd h3 { font-size: 20px; font-weight: 900; color: white; margin-bottom: 4px; }
-.showcase-hd p { font-size: 13px; color: rgba(236,242,255,0.8); }
+.showcase-hd h3 { font-size: 20px; font-weight: 900; color: #172036; margin-bottom: 4px; }
+.showcase-hd p { font-size: 13px; color: #66748f; }
 .sc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
 .sc-card {
-  background: rgba(255,255,255,0.12); border: 1px solid rgba(191,219,254,0.26);
-  border-radius: 10px; padding: 14px 16px; text-decoration: none; color: white;
+  --sc-accent: #7c3aed;
+  --sc-link-color: #4f46e5;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid var(--sc-border);
+  border-radius: 16px; padding: 14px 16px; text-decoration: none; color: #18233f;
   display: block; transition: all 0.18s;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+.sc-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  background: var(--sc-accent);
+  opacity: 0.95;
 }
 .sc-card:hover {
-  background: rgba(124,58,237,0.28); border-color: rgba(191,219,254,0.48);
-  transform: translateY(-2px);
+  border-color: #cfd9f2;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 28px rgba(99, 102, 241, 0.10);
 }
 .sc-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .sc-icon { font-size: 18px; }
+.sc-card--content {
+  --sc-accent: #8b5cf6;
+  --sc-border: #ddd6fe;
+}
+.sc-card--product {
+  --sc-accent: #3b82f6;
+  --sc-border: #dbeafe;
+}
+.sc-card--tool {
+  --sc-accent: #06b6d4;
+  --sc-border: #d9f5fb;
+}
+.sc-card--emotion {
+  --sc-accent: #a855f7;
+  --sc-border: #eadbff;
+}
+.sc-card--feature {
+  --sc-accent: #64748b;
+  --sc-border: #dbe3ef;
+}
 .sc-badge {
   font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px;
 }
-.sc-badge.ai { background: rgba(129,140,248,0.25); color: #a5b4fc; }
-.sc-badge.hot { background: rgba(245,158,11,0.22); color: #fcd34d; }
-.sc-badge.new { background: rgba(6,182,212,0.2); color: #67e8f9; }
-.sc-badge.emo { background: rgba(236,72,153,0.2); color: #f9a8d4; }
-.sc-name { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
-.sc-desc { font-size: 11px; color: rgba(236,242,255,0.74); line-height: 1.45; margin-bottom: 8px; }
-.sc-link { font-size: 11px; font-weight: 700; color: #bfdbfe; }
+.sc-badge.ai,
+.sc-badge.hot,
+.sc-badge.new,
+.sc-badge.emo {
+  background: #f2f4fb;
+  color: #6a7590;
+}
+.sc-name { font-size: 13px; font-weight: 800; margin-bottom: 3px; color: #18233f; }
+.sc-desc { font-size: 11px; color: #66748f; line-height: 1.45; margin-bottom: 8px; }
+.sc-link { font-size: 11px; font-weight: 700; color: var(--sc-link-color); }
 
 /* ───── FILTERS ───── */
 .filter-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
@@ -214,12 +283,75 @@ body {
 
 /* ───── TUTORIAL CARDS ───── */
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.level-group {
+  margin-bottom: 34px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+  border: 1px solid #e4eaf5;
+  border-radius: 20px;
+  padding: 18px 18px 20px;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+}
+.level-group--beginner {
+  background: linear-gradient(180deg, #ffffff 0%, #f5fbf7 100%);
+  border-color: #dcefe2;
+}
+.level-group--intermediate {
+  background: linear-gradient(180deg, #ffffff 0%, #fffaf0 100%);
+  border-color: #f4e7c8;
+}
+.level-group--advanced {
+  background: linear-gradient(180deg, #ffffff 0%, #fff6f5 100%);
+  border-color: #f2d9d7;
+}
+.level-group--repo {
+  background: linear-gradient(180deg, #f3f5ff 0%, #eef2ff 100%);
+  border-color: #d5dcff;
+}
+.level-head {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 24px; font-weight: 900; margin-bottom: 10px; color: var(--text);
+  letter-spacing: -0.02em;
+}
+.level-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  box-shadow: none;
+}
+.level-dot.beginner { background: #22c55e; }
+.level-dot.intermediate { background: #f59e0b; }
+.level-dot.advanced { background: #ef4444; }
+.level-dot.repo { background: #6366f1; }
+.level-sub {
+  font-size: 14px; color: var(--muted); margin-bottom: 18px; line-height: 1.7;
+  max-width: 720px;
+}
+.filter-tip {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #eef2ff, #f8faff);
+  border: 1px solid #c7d2fe;
+  color: #4c1d95;
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.filter-tip.show { display: inline-flex; }
 .tcard {
   background: var(--card); border-radius: var(--r); border: 1px solid var(--border);
   padding: 20px; display: flex; flex-direction: column; gap: 10px;
   text-decoration: none; color: inherit; transition: all 0.18s;
 }
 .tcard:hover { box-shadow: var(--shadow); transform: translateY(-2px); border-color: #c7d2fe; }
+.tcard--repo {
+  background: linear-gradient(180deg, #fbfbff 0%, #f1f4ff 100%);
+  border-color: #d9e0ff;
+}
+.tcard--repo:hover {
+  border-color: #b9c5ff;
+  box-shadow: 0 8px 28px rgba(99,102,241,0.10);
+}
 .tcard-badges { display: flex; gap: 6px; flex-wrap: wrap; }
 .pb { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px; }
 .pb-bilibili   { background: #fff0f6; color: #be185d; }
@@ -384,6 +516,8 @@ footer {
   .hero-stats { gap: 20px; }
   #content { padding: 28px 16px 60px; }
   .cards, .theory-grid, .path-grid, .book-grid { grid-template-columns: 1fr; }
+  .level-group { padding: 16px 14px 18px; }
+  .level-head { font-size: 22px; }
   .rgrid, .sc-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .nav-tab { padding: 7px 10px; font-size: 12px; }
@@ -409,13 +543,13 @@ footer {
 <!-- ══════════ HERO ══════════ -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow"><i></i>小白AI学习导航站 · 持续更新</div>
+    <div class="hero-eyebrow"><i></i>AI小白学习指南 · 持续更新</div>
     <h1>学 AI 工具，<mark>从这里开始</mark><br>一页找完，不再瞎刷</h1>
-    <p class="hero-desc">清溪帮你从全网筛出最值得看的教程<br>豆包 · 即梦 · 可灵 · Claude Code · OpenClaw，小白直接用</p>
+    <p class="hero-desc">清溪帮你从全网筛出最值得看的教程<br>豆包 · DeepSeek · Nano Banana · 剪映 · Claude Code · OpenClaw，小白直接用</p>
+    <div class="hero-meta">🕒 实时更新：<strong id="update-date">加载中</strong></div>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-n">10+</div><div class="stat-l">已核对教程</div></div>
-      <div class="stat"><div class="stat-n">6</div><div class="stat-l">主流AI工具</div></div>
-      <div class="stat"><div class="stat-n">10+</div><div class="stat-l">清溪做的AI产品</div></div>
+      <div class="stat"><div class="stat-n">9</div><div class="stat-l">主流AI工具</div></div>
+      <div class="stat"><div class="stat-n">20+</div><div class="stat-l">清溪做的AI产品</div></div>
       <div class="stat"><div class="stat-n">10万+</div><div class="stat-l">赞与收藏</div></div>
     </div>
     <button class="hero-btn" onclick="go('p0', document.querySelector('.nav-tab'))">开始探索 →</button>
@@ -432,34 +566,37 @@ footer {
     <div class="sec-hd">
       <div class="sec-tag">P1 · 工具教程库</div>
       <h2>全网精选 AI 工具教程</h2>
-      <p>每一条都人工看过。按工具 + 平台自由组合筛选，难度标签帮你找到适合自己的</p>
     </div>
 
     <!-- Platform filter -->
     <div class="filter-row">
       <span class="filter-lbl">平台：</span>
-      <button class="fbtn active" onclick="filterP('all',this)">全部</button>
-      <button class="fbtn" onclick="filterP('bilibili',this)">🎬 B站</button>
-      <button class="fbtn" onclick="filterP('youtube',this)">📺 YouTube</button>
-      <button class="fbtn" onclick="filterP('douyin',this)">🎵 抖音</button>
-      <button class="fbtn" onclick="filterP('xiaohongshu',this)">📕 小红书</button>
-      <button class="fbtn" onclick="filterP('x',this)">🐦 X</button>
-      <button class="fbtn" onclick="filterP('zhihu',this)">💬 知乎</button>
-      <button class="fbtn" onclick="filterP('github',this)">💻 GitHub</button>
+      <button class="fbtn platform-btn active" onclick="filterP('all',this)">全部</button>
+      <button class="fbtn platform-btn" onclick="filterP('bilibili',this)">🎬 B站</button>
+      <button class="fbtn platform-btn" onclick="filterP('youtube',this)">📺 YouTube</button>
+      <button class="fbtn platform-btn" onclick="filterP('douyin',this)">🎵 抖音</button>
+      <button class="fbtn platform-btn" onclick="filterP('xiaohongshu',this)">📕 小红书</button>
+      <button class="fbtn platform-btn" onclick="filterP('x',this)">🐦 X</button>
+      <button class="fbtn platform-btn" onclick="filterP('zhihu',this)">💬 知乎</button>
+      <button class="fbtn platform-btn" onclick="filterP('github',this)">💻 GitHub</button>
     </div>
 
     <!-- Tool tabs -->
     <div class="tool-tabs">
-      <button class="ttab active" onclick="filterT('all',this)">全部工具</button>
-      <button class="ttab" onclick="filterT('doubao',this)">🤖 豆包</button>
-      <button class="ttab" onclick="filterT('jimeng',this)">🎨 即梦</button>
-      <button class="ttab" onclick="filterT('kling',this)">🎥 可灵</button>
-      <button class="ttab" onclick="filterT('claudecode',this)">⌨️ Claude Code</button>
-      <button class="ttab" onclick="filterT('openclaw',this)">🦞 OpenClaw</button>
-      <button class="ttab" onclick="filterT('codex',this)">🧑‍💻 Codex/Cursor</button>
+      <button class="ttab active" data-tool="all" onclick="filterT('all',this)">全部工具</button>
+      <button class="ttab" data-tool="doubao" onclick="filterT('doubao',this)">🤖 豆包</button>
+      <button class="ttab" data-tool="deepseek" onclick="filterT('deepseek',this)">🧠 DeepSeek</button>
+      <button class="ttab" data-tool="jimeng" onclick="filterT('jimeng',this)">🎨 即梦</button>
+      <button class="ttab" data-tool="kling" onclick="filterT('kling',this)">🎥 可灵</button>
+      <button class="ttab" data-tool="nanobanana" onclick="filterT('nanobanana',this)">🍌 Nano Banana</button>
+      <button class="ttab" data-tool="jianying" onclick="filterT('jianying',this)">✂️ 剪映</button>
+      <button class="ttab" data-tool="claudecode" onclick="filterT('claudecode',this)">⌨️ Claude Code</button>
+      <button class="ttab" data-tool="openclaw" onclick="filterT('openclaw',this)">🦞 OpenClaw</button>
+      <button class="ttab" data-tool="codex" onclick="filterT('codex',this)">🧑‍💻 Codex/Cursor</button>
     </div>
 
-    <div class="cards" id="tgrid"></div>
+    <div class="filter-tip" id="filter-tip">⚠️ 当前平台内容还在补充，先给你看同主题里最值得看的教程</div>
+    <div id="tgrid"></div>
     <div class="empty" id="empty" style="display:none">
       <div class="ei">🔍</div><p>当前筛选暂无结果，换个组合试试～</p>
     </div>
@@ -472,55 +609,55 @@ footer {
         <p>这些都是我用 Claude Code / Codex / 豆包 实际做出来并部署上线的，点进去看看</p>
       </div>
       <div class="sc-grid">
-        <a class="sc-card" href="https://qingxihub.com/drama/" target="_blank">
+        <a class="sc-card sc-card--content" href="https://qingxihub.com/drama/" target="_blank">
           <div class="sc-card-top"><span class="sc-icon">🎬</span><span class="sc-badge hot">热门</span></div>
           <div class="sc-name">AI短剧助手</div>
           <div class="sc-desc">用AI生成短剧脚本和拍摄方案</div>
           <div class="sc-link">qingxihub.com/drama →</div>
         </a>
-        <a class="sc-card" href="https://qingxihub.com/daily/" target="_blank">
+        <a class="sc-card sc-card--product" href="https://qingxihub.com/daily/" target="_blank">
           <div class="sc-card-top"><span class="sc-icon">📅</span><span class="sc-badge new">小程序</span></div>
           <div class="sc-name">问问日常</div>
           <div class="sc-desc">AI驱动的日常记录小程序</div>
           <div class="sc-link">qingxihub.com/daily →</div>
         </a>
-        <a class="sc-card" href="https://qingxihub.com/tools/" target="_blank">
+        <a class="sc-card sc-card--tool" href="https://qingxihub.com/tools/" target="_blank">
           <div class="sc-card-top"><span class="sc-icon">🔧</span><span class="sc-badge ai">工具站</span></div>
           <div class="sc-name">AI工具箱</div>
           <div class="sc-desc">清溪精选的AI工具合集目录</div>
           <div class="sc-link">qingxihub.com/tools →</div>
         </a>
-        <a class="sc-card" href="https://qingxihub.com/timer/" target="_blank">
+        <a class="sc-card sc-card--emotion" href="https://qingxihub.com/timer/" target="_blank">
           <div class="sc-card-top"><span class="sc-icon">⏰</span><span class="sc-badge emo">情绪</span></div>
           <div class="sc-name">下班倒计时</div>
           <div class="sc-desc">打工人专属，会骂人的屏保</div>
           <div class="sc-link">qingxihub.com/timer →</div>
         </a>
-        <a class="sc-card" href="https://qingxihub.com/year-end/" target="_blank">
+        <a class="sc-card sc-card--feature" href="https://qingxihub.com/year-end/" target="_blank">
           <div class="sc-card-top"><span class="sc-icon">📝</span><span class="sc-badge hot">年终</span></div>
           <div class="sc-name">年终总结生成器</div>
           <div class="sc-desc">AI一键生成有情感有数据的年终总结</div>
           <div class="sc-link">qingxihub.com/year-end →</div>
         </a>
-        <a class="sc-card" href="https://qingxihub.com/resign/" target="_blank">
+        <a class="sc-card sc-card--feature" href="https://qingxihub.com/resign/" target="_blank">
           <div class="sc-card-top"><span class="sc-icon">✉️</span><span class="sc-badge emo">爆款</span></div>
           <div class="sc-name">离职信生成器</div>
           <div class="sc-desc">AI生成一封有尊严的离职信</div>
           <div class="sc-link">qingxihub.com/resign →</div>
         </a>
-        <a class="sc-card" href="https://qingxi-monday.vercel.app/" target="_blank">
+        <a class="sc-card sc-card--emotion" href="https://qingxi-monday.vercel.app/" target="_blank">
           <div class="sc-card-top"><span class="sc-icon">😩</span><span class="sc-badge emo">情绪</span></div>
           <div class="sc-name">周一不想上班生成器</div>
           <div class="sc-desc">AI帮你生成有创意的请假理由</div>
           <div class="sc-link">vercel 直达 →</div>
         </a>
-        <a class="sc-card" href="https://qingxihub.com/anxiety/" target="_blank">
+        <a class="sc-card sc-card--emotion" href="https://qingxihub.com/anxiety/" target="_blank">
           <div class="sc-card-top"><span class="sc-icon">🌀</span><span class="sc-badge emo">情绪</span></div>
           <div class="sc-name">焦虑外包AI</div>
           <div class="sc-desc">把焦虑说给AI，AI帮你拆解行动</div>
           <div class="sc-link">qingxihub.com/anxiety →</div>
         </a>
-        <a class="sc-card" href="https://qingxihub.com/viral-skill/" target="_blank">
+        <a class="sc-card sc-card--tool" href="https://qingxihub.com/viral-skill/" target="_blank">
           <div class="sc-card-top"><span class="sc-icon">🔥</span><span class="sc-badge new">新工具</span></div>
           <div class="sc-name">爆款热点操盘手</div>
           <div class="sc-desc">输入一个主题，直接拆出标题、开头、结构和收尾</div>
@@ -708,10 +845,10 @@ footer {
           <p>有深度有观点的 AI 产品分析，中文博客里少有的高质量内容</p>
           <div class="rtag">博客 · 免费</div>
         </a>
-        <a class="rcard" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank">
+        <a class="rcard" href="https://www.xiaohongshu.com/search_result?keyword=%E6%B8%85%E6%BA%AAAI" target="_blank">
           <div class="rcard-icon">📕</div>
-          <h4>关注清溪 AI（小红书）</h4>
-          <p>我每周更新 AI 工具评测和教程，10 万+赞收藏，跟着学不走弯路</p>
+          <h4>搜清溪 AI（小红书）</h4>
+          <p>打开后直接搜“清溪AI”，能看到我持续更新的 AI 工具评测和教程</p>
           <div class="rtag">小红书 · 免费</div>
         </a>
       </div>
@@ -743,7 +880,7 @@ footer {
           <div class="psarr">↓</div>
           <div class="ps"><div class="psn">4</div>OpenClaw — 自动化发布工作流</div>
         </div>
-        <button class="pcard-cta" onclick="go('p0', document.querySelector('.nav-tab')); setTimeout(()=>{ filterT('doubao', document.querySelector('.ttab:nth-child(2)')); }, 300)">从「豆包」开始学 →</button>
+        <button class="pcard-cta" onclick="go('p0', document.querySelector('.nav-tab')); setTimeout(()=>{ focusTool('doubao'); }, 300)">从「豆包」开始学 →</button>
       </div>
       <div class="pcard c2">
         <div class="pe">💻</div>
@@ -762,7 +899,7 @@ footer {
           <div class="psarr">↓</div>
           <div class="ps"><div class="psn">4</div>OpenClaw — 多 Agent 协作开发</div>
         </div>
-        <button class="pcard-cta" onclick="go('p0', document.querySelector('.nav-tab')); setTimeout(()=>{ filterT('codex', document.querySelectorAll('.ttab')[6]); }, 300)">从「Cursor」开始学 →</button>
+        <button class="pcard-cta" onclick="go('p0', document.querySelector('.nav-tab')); setTimeout(()=>{ focusTool('codex'); }, 300)">从「Cursor」开始学 →</button>
       </div>
       <div class="pcard c3">
         <div class="pe">📈</div>
@@ -781,7 +918,7 @@ footer {
           <div class="psarr">↓</div>
           <div class="ps"><div class="psn">4</div>OpenClaw — 重复性任务自动化</div>
         </div>
-        <button class="pcard-cta" onclick="go('p0', document.querySelector('.nav-tab')); setTimeout(()=>{ filterT('doubao', document.querySelector('.ttab:nth-child(2)')); }, 300)">从「豆包」开始学 →</button>
+        <button class="pcard-cta" onclick="go('p0', document.querySelector('.nav-tab')); setTimeout(()=>{ focusTool('doubao'); }, 300)">从「豆包」开始学 →</button>
       </div>
       <div class="pcard c4">
         <div class="pe">🚀</div>
@@ -876,11 +1013,11 @@ footer {
             <div class="btags"><span class="btag free">免费</span><span class="btag">中文</span></div>
           </div>
         </a>
-        <a class="bcard" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank">
+        <a class="bcard" href="https://www.xiaohongshu.com/search_result?keyword=%E6%B8%85%E6%BA%AAAI" target="_blank">
           <div class="bcover" style="background:#fff1f0;">📕</div>
           <div class="binfo">
-            <h4>清溪 AI（小红书）</h4>
-            <p>我每周更新 AI 工具评测和中文教程，10 万+赞收藏，跟着不走弯路</p>
+            <h4>清溪 AI（小红书搜索）</h4>
+            <p>点开就是“清溪AI”的搜索结果，能直接看到我在小红书的更新内容</p>
             <div class="btags"><span class="btag free">免费</span><span class="btag">中文</span></div>
           </div>
         </a>
@@ -901,11 +1038,11 @@ footer {
       <div class="fcontact">
         <h3>找到我</h3>
         <div class="clist">
-          <a class="citem" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank">
-            <div class="cicon">📕</div>小红书 · 清溪AI
+          <a class="citem" href="https://www.xiaohongshu.com/search_result?keyword=%E6%B8%85%E6%BA%AAAI" target="_blank">
+            <div class="cicon">📕</div>小红书 · 搜清溪AI
           </a>
-          <a class="citem" href="https://v.douyin.com/fZNLm0iCwfA/" target="_blank">
-            <div class="cicon">🎵</div>抖音 · 清溪AI
+          <a class="citem" href="https://www.douyin.com/search/%E6%B8%85%E6%BA%AAAI" target="_blank">
+            <div class="cicon">🎵</div>抖音 · 搜清溪AI
           </a>
           <button class="citem-copy" onclick="copyWechat(this)">
             <div class="cicon">💬</div>
@@ -933,12 +1070,23 @@ footer {
 // ───── DATA ─────
 const tutorials = [
   {tool:'jimeng',platform:'bilibili',title:'【全 30 集】即梦+豆包+剪映最强 AI 漫剧制作教程，小白 2 小时掌握',author:'B站创作者',link:'https://www.bilibili.com/video/BV1kDfXBNEN7/',difficulty:'beginner',reason:'整套流程是单个视频入口，打开就是具体视频，不会跳到主页或搜索页'},
+  {tool:'deepseek',platform:'bilibili',title:'DeepSeek 保姆级教程：从入门到精通，适合第一次系统上手的人',author:'B站知识区UP',link:'https://www.bilibili.com/video/BV1YTVyzYEZ1/',difficulty:'beginner',reason:'这是成套入门视频，覆盖 DeepSeek 是什么、怎么提问、怎么结合办公和知识库使用，适合先搭出完整认知'},
+  {tool:'deepseek',platform:'github',title:'DeepSeek 中文使用指南：网页版入口、下载和新手上手说明',author:'deepseek-plus',link:'https://github.com/deepseek-plus/deepseek-cn',difficulty:'beginner',reason:'适合不想先看长视频的人，直接打开就是图文说明，先搞清楚入口、模型差别和常见使用方式'},
   {tool:'kling',platform:'bilibili',title:'锐评 2026 年 AI 视频软件：可灵 vs 即梦 vs Sora，谁夯谁拉？',author:'B站科技区UP',link:'https://www.bilibili.com/video/BV1ncwczbEoy/',difficulty:'intermediate',reason:'直接打开就是单个 B 站视频，适合想先看横评的人'},
+  {tool:'codex',platform:'bilibili',title:'Codex APP 保姆级使用教程：从下载安装到写出第一个可用项目',author:'技术爬爬虾',link:'https://www.bilibili.com/video/BV1oJAoz2Emf/',difficulty:'beginner',reason:'适合第一次接触 Codex 的人，先把安装、基本提问方式和最小可用流程走通，再去碰更复杂的自动化能力'},
   {tool:'claudecode',platform:'bilibili',title:'Claude Cowork+Code 全面测试：6 大实战场景完整演示',author:'B站技术UP',link:'https://www.bilibili.com/video/BV1i6QBBcEW2/',difficulty:'intermediate',reason:'直接打开单个视频，适合已经了解基础后继续往实战走的人'},
   {tool:'claudecode',platform:'bilibili',title:'Claude Code 深度分析：封号机制、18 个隐藏功能全揭秘',author:'技术博主',link:'https://www.bilibili.com/video/BV1Qt97BvEPd/',difficulty:'advanced',reason:'偏进阶向，打开就是具体视频，不会落到频道主页'},
   {tool:'claudecode',platform:'github',title:'Claude Code × OpenClaw 中文完全教程（21 篇·13 万字）',author:'KimYx0207',link:'https://github.com/KimYx0207/Claude-Code-x-OpenClaw-Guide-Zh',difficulty:'intermediate',reason:'这个本来就是 GitHub 教程仓库，目标页和卡片内容一致'},
+  {tool:'claudecode',platform:'bilibili',title:'Claude Code Skills 深入实战：从会用到会搭自己的技能库',author:'苏苏的信息渠道',link:'https://www.bilibili.com/video/BV1SqUCBoEDz/',difficulty:'advanced',reason:'这条更适合已经会基础操作的人，重点不是再教你点按钮，而是把 Skills 真正用进长期工作流'},
+  {tool:'nanobanana',platform:'bilibili',title:'Nano Banana 超详细保姆级无限使用指南',author:'建筑师可乐',link:'https://www.bilibili.com/video/BV1WwamzuE2b/',difficulty:'beginner',reason:'更适合第一次接触 Nano Banana 的人，重点是先把入口、基本玩法和常见出图方式跑通'},
+  {tool:'nanobanana',platform:'bilibili',title:'Nano banana 女团 MV 制作教程，送剪辑教程',author:'上分吧Pt',link:'https://www.bilibili.com/video/BV1fSYMzoEda/',difficulty:'intermediate',reason:'适合已经会基本生图的人，开始把图像生成和剪辑串起来，做成更完整的视频内容'},
+  {tool:'jianying',platform:'bilibili',title:'2026 剪映手机版全套教程，适合零基础小白学习',author:'梦梦316',link:'https://www.bilibili.com/video/BV1TzsoznEnX/',difficulty:'beginner',reason:'偏纯剪辑基础，适合还不会剪映的人先把基础操作、常用功能和上手节奏摸熟'},
+  {tool:'jianying',platform:'bilibili',title:'系统 AI 视频课：脚本创作 + 配音配乐 + 视频剪辑一套讲完',author:'B站教程UP',link:'https://www.bilibili.com/video/BV1ptaqzrEHg/',difficulty:'intermediate',reason:'适合已经想开始做完整视频的人，把豆包、即梦、剪映串成一条从脚本到成片的流程'},
   {tool:'openclaw',platform:'bilibili',title:'【保姆级】OpenClaw 全网最细教学：安装→Skills→多 Agent，1 小时全精通',author:'B站UP主',link:'https://www.bilibili.com/video/BV1TpAZzeEiZ/',difficulty:'beginner',reason:'直接打开单个 B 站视频，适合第一次接触 OpenClaw 的人'},
-  {tool:'openclaw',platform:'bilibili',title:'一个视频搞懂 OpenClaw！原理+安装+实战一次讲完',author:'AI工具博主',link:'https://www.bilibili.com/video/BV1jEAaz3E6K/',difficulty:'beginner',reason:'单个视频入口，节奏更快，适合先快速建立整体理解'},
+  {tool:'openclaw',platform:'bilibili',title:'一个视频搞懂 OpenClaw！原理+安装+实战一次讲完',author:'AI工具博主',link:'https://www.bilibili.com/video/BV1jEAaz3E6K/',difficulty:'intermediate',reason:'适合已经知道 OpenClaw 是什么的人，想把原理、安装和完整实战一次串起来，而不只是停在概念层'},
+  {tool:'openclaw',platform:'bilibili',title:'AI 自动操作浏览器：把重复流程交给 OpenClaw 跑起来',author:'技术爬爬虾',link:'https://www.bilibili.com/video/BV1ooDyBmE6v/',difficulty:'advanced',reason:'更适合已经上手 Agent 的人，重点是把浏览器操作、自动化流程和实际业务场景连成一套'},
+  {tool:'codex',platform:'bilibili',title:'Claude Code / Codex MCP 高阶配置：真正好用的 15 个能力怎么接起来',author:'技术爬爬虾',link:'https://www.bilibili.com/video/BV1ZJsBznEt3/',difficulty:'advanced',reason:'这条不是给新手认工具用的，而是给已经在写代码、想把 MCP 和工作流真正接进日常产出的用户'},
+  {tool:'codex',platform:'bilibili',title:'Claude Code 与 Codex 实战对比：从能用到好用的关键差别',author:'技术爬爬虾',link:'https://www.bilibili.com/video/BV1Wc9KBsEQf/',difficulty:'advanced',reason:'适合已经同时接触过 Claude Code 和 Codex 的人，重点看两者在真实开发任务里的差异和更优用法'},
   {tool:'doubao',platform:'github',title:'Awesome Doubao Prompts：豆包高质量提示词合集',author:'langgptai',link:'https://github.com/langgptai/awesome-doubao-prompts',difficulty:'beginner',reason:'这张卡片现在明确写成提示词合集，打开的是对应仓库，不会再和平台标签冲突'},
   {tool:'openclaw',platform:'github',title:'OpenClaw Runbook：从安装到稳定运行的实战手册',author:'digitalknk',link:'https://github.com/digitalknk/openclaw-runbook',difficulty:'intermediate',reason:'这张卡片本质就是 runbook 手册，GitHub 仓库页是对的，不是误跳安装页'},
   {tool:'doubao',platform:'github',title:'doubao-free-api：豆包 API 接入参考项目',author:'LLM-Red-Team',link:'https://github.com/LLM-Red-Team/doubao-free-api',difficulty:'intermediate',reason:'这张卡片现在明确写成参考项目，目标页就是对应代码仓库，语义一致'},
@@ -947,34 +1095,105 @@ const tutorials = [
 // ───── STATE ─────
 let curP = 'all', curT = 'all';
 const pLbls = {bilibili:'🎬 B站',youtube:'📺 YouTube',douyin:'🎵 抖音',xiaohongshu:'📕 小红书',x:'🐦 X',zhihu:'💬 知乎',github:'💻 GitHub'};
-const dLbls = {beginner:'🟢 小白',intermediate:'🟡 进阶',advanced:'🔴 专业'};
+const dLbls = {beginner:'🟢 小白',intermediate:'🟡 进阶',advanced:'🔴 高手'};
+const dHeadings = {beginner:'小白',intermediate:'进阶',advanced:'高手'};
+const dTips = {
+  beginner:'先看这些，适合刚开始接触，先把入口、基本操作和整体感觉跑通。',
+  intermediate:'已经会基础后，从这里往实战走，开始串流程、补方法、做完整结果。',
+  advanced:'这部分更适合已经上手的人，重点看深度玩法、效率提升和复杂场景。'
+};
+const difficultyOrder = ['beginner', 'intermediate', 'advanced'];
+const repoSection = {
+  label:'GitHub / Skill',
+  tip:'这一部分单独放仓库、技能库和 runbook。更适合你已经知道自己要找什么，想直接抄仓库、拿模板或照着配置。'
+};
+
+function formatUpdateDate(rawValue) {
+  const fallback = new Date();
+  const parsed = rawValue ? new Date(rawValue) : fallback;
+  const finalDate = Number.isNaN(parsed.getTime()) ? fallback : parsed;
+  const y = finalDate.getFullYear();
+  const m = String(finalDate.getMonth() + 1).padStart(2, '0');
+  const d = String(finalDate.getDate()).padStart(2, '0');
+  return `${y}.${m}.${d}`;
+}
 
 // ───── RENDER ─────
 function render() {
   const grid = document.getElementById('tgrid');
   const empty = document.getElementById('empty');
-  const list = tutorials.filter(t =>
-    (curP === 'all' || t.platform === curP) && (curT === 'all' || t.tool === curT)
+  const tip = document.getElementById('filter-tip');
+  const exactList = tutorials.filter(t =>
+    (curP === 'all' || t.platform === curP) &&
+    (curT === 'all' || t.tool === curT)
   );
-  if (!list.length) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
+  let list = exactList;
+  if (!list.length && curP !== 'all') {
+    list = tutorials.filter(t =>
+      (curT === 'all' || t.tool === curT)
+    );
+    tip.classList.toggle('show', list.length > 0);
+  } else {
+    tip.classList.remove('show');
+  }
+  if (!list.length) {
+    tip.classList.remove('show');
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
   empty.style.display = 'none';
-  grid.innerHTML = list.map(t => `
-    <a class="tcard" href="${t.link}" target="_blank" rel="noopener">
-      <div class="tcard-badges">
-        <span class="pb pb-${t.platform}">${pLbls[t.platform]||t.platform}</span>
-        <span class="db db-${t.difficulty}">${dLbls[t.difficulty]}</span>
-      </div>
-      <h3>${t.title}</h3>
-      <div class="tcard-author">👤 ${t.author}</div>
-      <div class="tcard-reason">💡 ${t.reason}</div>
-      <span class="tcard-cta">查看教程 →</span>
-    </a>`).join('');
+  const contentList = list.filter(t => t.platform !== 'github');
+  const repoList = list.filter(t => t.platform === 'github');
+  const sections = difficultyOrder.map(level => {
+    const group = contentList.filter(t => t.difficulty === level);
+    if (!group.length) return '';
+    return `
+      <section class="level-group">
+        <div class="level-head"><span class="level-dot ${level}"></span>${dHeadings[level]}</div>
+        <p class="level-sub">${dTips[level]}</p>
+        <div class="cards">
+          ${group.map(t => `
+            <a class="tcard${t.platform === 'github' ? ' tcard--repo' : ''}" href="${t.link}" target="_blank" rel="noopener">
+              <div class="tcard-badges">
+                <span class="pb pb-${t.platform}">${pLbls[t.platform]||t.platform}</span>
+                <span class="db db-${t.difficulty}">${dLbls[t.difficulty]}</span>
+              </div>
+              <h3>${t.title}</h3>
+              <div class="tcard-author">👤 ${t.author}</div>
+              <div class="tcard-reason">💡 ${t.reason}</div>
+              <span class="tcard-cta">查看教程 →</span>
+            </a>`).join('')}
+        </div>
+      </section>`;
+  });
+  if (repoList.length) {
+    sections.push(`
+      <section class="level-group">
+        <div class="level-head"><span class="level-dot repo"></span>${repoSection.label}</div>
+        <p class="level-sub">${repoSection.tip}</p>
+        <div class="cards">
+          ${repoList.map(t => `
+            <a class="tcard tcard--repo" href="${t.link}" target="_blank" rel="noopener">
+              <div class="tcard-badges">
+                <span class="pb pb-${t.platform}">${pLbls[t.platform]||t.platform}</span>
+                <span class="db db-${t.difficulty}">${dLbls[t.difficulty]}</span>
+              </div>
+              <h3>${t.title}</h3>
+              <div class="tcard-author">👤 ${t.author}</div>
+              <div class="tcard-reason">💡 ${t.reason}</div>
+              <span class="tcard-cta">打开仓库 →</span>
+            </a>`).join('')}
+        </div>
+      </section>`);
+  }
+  grid.innerHTML = sections.join('');
 }
 
 // ───── FILTER HANDLERS ─────
 function filterP(v, btn) {
   curP = v;
-  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   render();
 }
@@ -983,6 +1202,10 @@ function filterT(v, btn) {
   document.querySelectorAll('.ttab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   render();
+}
+function focusTool(tool) {
+  const btn = document.querySelector(`.ttab[data-tool="${tool}"]`);
+  if (btn) filterT(tool, btn);
 }
 
 // ───── NAVIGATION ─────
@@ -1011,6 +1234,7 @@ function copyWechat(btn) {
 }
 
 // ───── INIT ─────
+document.getElementById('update-date').textContent = formatUpdateDate(document.lastModified);
 render();
 </script>
 </body>
