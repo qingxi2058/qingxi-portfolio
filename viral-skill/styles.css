@@ -62,19 +62,19 @@ a {
 
 .hero-topline {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   align-items: center;
 }
 
 .hero-mark {
-  width: 58px;
-  height: 58px;
+  width: 52px;
+  height: 52px;
   display: grid;
   place-items: center;
-  border-radius: 18px;
+  border-radius: 16px;
   background: linear-gradient(135deg, var(--fire), #eb6e36);
   color: white;
-  font-size: 28px;
+  font-size: 24px;
   box-shadow: 0 12px 22px rgba(228, 107, 49, 0.18);
 }
 
@@ -88,8 +88,8 @@ a {
 .status-pill {
   display: inline-flex;
   align-items: center;
-  min-height: 30px;
-  padding: 0 12px;
+  min-height: 28px;
+  padding: 0 11px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 800;
@@ -111,33 +111,33 @@ a {
 
 h1 {
   margin: 14px 0 0;
-  font-size: clamp(28px, 3.2vw, 38px);
-  line-height: 1.18;
+  font-size: clamp(26px, 2.9vw, 34px);
+  line-height: 1.16;
   letter-spacing: -0.045em;
   font-weight: 800;
-  max-width: 10.8em;
+  max-width: 13.2em;
 }
 
 .subtitle {
-  margin: 14px 0 0;
+  margin: 12px 0 0;
   color: var(--muted);
   font-size: 15px;
-  line-height: 1.8;
-  max-width: 720px;
+  line-height: 1.75;
+  max-width: 680px;
 }
 
 .proof-row,
 .quick-start,
 .weekly-note,
 .result-panel {
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .workflow-grid {
   display: grid;
   grid-template-columns: minmax(320px, 0.86fr) minmax(420px, 1.14fr);
   gap: 16px;
-  margin-top: 16px;
+  margin-top: 14px;
   align-items: start;
 }
 
@@ -174,7 +174,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 6px;
+  gap: 4px;
 }
 
 .helper-note,
@@ -202,7 +202,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .chip {
@@ -257,22 +257,16 @@ h1 {
 }
 
 .proof-row {
-  grid-template-columns: repeat(4, max-content);
-  align-items: start;
-}
-
-.proof-row span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 34px;
-  padding: 0 13px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: #fff;
+  display: block;
   color: var(--muted);
   font-size: 13px;
-  font-weight: 560;
-  opacity: 0.9;
+  line-height: 1.7;
+  opacity: 0.88;
+}
+
+.proof-row strong {
+  color: var(--ink);
+  font-weight: 700;
 }
 
 .preview-strip {
@@ -311,7 +305,8 @@ h1 {
 
 .weekly-note {
   background: #fffdfb;
-  margin-top: 28px;
+  margin-top: 36px;
+  border-color: rgba(238, 227, 218, 0.78);
 }
 
 .weekly-label {
@@ -322,7 +317,7 @@ h1 {
   border-radius: 999px;
   background: var(--plum-soft);
   color: var(--plum);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
 }
 
