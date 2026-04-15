@@ -111,11 +111,12 @@ a {
 
 h1 {
   margin: 14px 0 0;
-  font-size: clamp(26px, 2.9vw, 34px);
-  line-height: 1.16;
+  font-size: clamp(24px, 2.5vw, 30px);
+  line-height: 1.12;
   letter-spacing: -0.045em;
   font-weight: 800;
-  max-width: 13.2em;
+  max-width: none;
+  white-space: nowrap;
 }
 
 .subtitle {
@@ -501,6 +502,7 @@ h1 {
   h1 {
     font-size: 30px;
     max-width: none;
+    white-space: normal;
   }
 
   .hero-mark {
