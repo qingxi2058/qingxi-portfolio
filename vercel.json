@@ -1,4 +1,66 @@
 {
+  "redirects": [
+    {
+      "source": "/create",
+      "destination": "/drama/#/create",
+      "permanent": true
+    },
+    {
+      "source": "/projects",
+      "destination": "/drama/#/projects",
+      "permanent": true
+    },
+    {
+      "source": "/login",
+      "destination": "/drama/#/login",
+      "permanent": true
+    },
+    {
+      "source": "/register",
+      "destination": "/drama/#/register",
+      "permanent": true
+    },
+    {
+      "source": "/character-setting",
+      "destination": "/drama/#/character-setting",
+      "permanent": true
+    },
+    {
+      "source": "/storyboard",
+      "destination": "/drama/#/storyboard",
+      "permanent": true
+    },
+    {
+      "source": "/resource-center",
+      "destination": "/drama/#/resource-center",
+      "permanent": true
+    },
+    {
+      "source": "/pricing",
+      "destination": "/drama/#/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/drama/#/dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/analytics",
+      "destination": "/drama/#/analytics",
+      "permanent": true
+    },
+    {
+      "source": "/explore",
+      "destination": "/drama/#/explore",
+      "permanent": true
+    },
+    {
+      "source": "/player/:id",
+      "destination": "/drama/#/player/:id",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/daily",
