@@ -480,6 +480,6 @@ export function createViralSkillKit(options = {}) {
     emotion: buildCatchLine(topic, category),
     caution: buildDeleteLine(category),
     checklist: category.checklist,
-    shareText: `我刚用爆款热点操盘手拆了一套“${topic}”的${modeConfig.label}骨架，标题、开头、结构和结尾都出来了。`,
+    shareText: `我刚用热点操盘手拆了一套“${topic}”的${modeConfig.label}骨架，标题、开头、结构和结尾都出来了。`,
   };
 }

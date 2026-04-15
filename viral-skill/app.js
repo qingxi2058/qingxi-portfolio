@@ -148,7 +148,7 @@ function renderKit(kit) {
   shareButton.onclick = async () => {
     if (navigator.share) {
       await navigator.share({
-        title: `爆款热点操盘手 · ${kit.modeLabel}`,
+        title: `热点操盘手 · ${kit.modeLabel}`,
         text: kit.shareText,
         url: window.location.href,
       });

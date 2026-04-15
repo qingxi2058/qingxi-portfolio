@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>年终汇报翻译器｜老板听得懂版</title>
+    <title>年终总结生成器｜3分钟写出可交付总结</title>
     <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -869,15 +869,15 @@
         <!-- 使用人数横幅 -->
         <div class="usage-banner">
           <span class="fire">🔥</span>
-          已帮助 <strong id="usageCount">12,847</strong> 人写出有战略高度的年终汇报 &nbsp;·&nbsp; 完全免费
+          已帮助 <strong id="usageCount">12,847</strong> 人写出更有结构的年终总结 &nbsp;·&nbsp; 完全免费
         </div>
 
         <header class="topbar">
           <div class="topbar-left">
             <span class="tag">YEAR-END REPORT</span>
             <h1>
-              3分钟把杂事写成可交付的年终汇报
-              <span class="title-break">（PPT可直接用）</span>
+              年终总结生成器
+              <span class="title-break">3分钟把杂事写成可交付总结（PPT可直接用）</span>
             </h1>
             <p>
               自动生成：一句话总结｜亮点3条｜STAR项目｜指标证据链｜OKR明年计划｜30秒口播。复制即可交差。
@@ -910,7 +910,7 @@
                 <select id="mode" class="ghost">
                   <option value="buzz">黑话一句话</option>
                   <option value="weekly">周报结构</option>
-                  <option value="annual" selected>年终汇报四件套</option>
+                  <option value="annual" selected>年终总结四件套</option>
                 </select>
               </div>
               <div class="control-group">
@@ -942,7 +942,7 @@
               </div>
             </div>
             <div class="buttons">
-              <button id="generateBtn">生成年终汇报</button>
+              <button id="generateBtn">生成年终总结</button>
               <button id="copyBtn" class="ghost">复制结果</button>
             </div>
           </div>
@@ -996,7 +996,7 @@
       <div class="modal-box">
         <button class="modal-close" id="modalClose" type="button" aria-label="关闭">✕</button>
         <div class="modal-title">把这个工具分享给同事 🎉</div>
-        <div class="modal-sub">免费 · 无需登录 · 3分钟生成年终汇报 · PPT直接用</div>
+        <div class="modal-sub">免费 · 无需登录 · 3分钟生成年终总结 · PPT直接用</div>
         <div class="modal-url-row" id="modalUrlRow" title="点击复制链接">
           🔗 qingxihub.com/year-end/
         </div>
@@ -1005,7 +1005,7 @@
             <span class="btn-icon">📋</span>
             <div class="btn-label">
               <strong>复制微信/朋友圈话术</strong>
-              <span>一键发群，帮同事3分钟搞定年终汇报</span>
+              <span>一键发群，帮同事3分钟搞定年终总结</span>
             </div>
           </button>
           <button class="modal-action-btn" id="modalCopyLink" type="button">
@@ -1693,7 +1693,7 @@
         txtBtn.className = "chip export-btn";
         txtBtn.textContent = "导出 TXT";
         txtBtn.addEventListener("click", () => {
-          downloadText("年终汇报.txt", formatAnnualText(data));
+          downloadText("年终总结.txt", formatAnnualText(data));
         });
 
         const mdBtn = document.createElement("button");
@@ -1701,7 +1701,7 @@
         mdBtn.className = "chip export-btn";
         mdBtn.textContent = "导出 Markdown";
         mdBtn.addEventListener("click", () => {
-          downloadText("年终汇报.md", formatAnnualMarkdown(data));
+          downloadText("年终总结.md", formatAnnualMarkdown(data));
         });
 
         exportWrap.appendChild(txtBtn);
@@ -1761,7 +1761,7 @@
         const labelMap = {
           buzz: "生成黑话总结",
           weekly: "生成周报",
-          annual: "生成年终汇报",
+          annual: "生成年终总结",
         };
         generateBtn.textContent = labelMap[mode] || "生成黑话总结";
       };
@@ -1841,14 +1841,14 @@
       // — 分享话术 —
       const SHARE_PHRASE =
         '🎯 打工人互助：发现一个超好用的免费工具！\n' +
-        '3分钟把今年干的事写成有战略高度的年终汇报，PPT可以直接用。\n' +
+        '3分钟把今年干的事写成更清楚的年终总结，PPT可以直接用。\n' +
         '还能调"黑话强度"，老板喜欢什么风格就出什么风格 😂\n' +
         '产品/运营/研发/HR/销售都有专属模板，完全免费。\n' +
         '🔗 ' + TOOL_URL;
 
       const XHS_PHRASE =
         '打工人年终总结救星！\n' +
-        '3分钟把杂事写成可交付的年终汇报，PPT直接用 ✅\n\n' +
+        '3分钟把杂事写成可交付的年终总结，PPT直接用 ✅\n\n' +
         '只需输入你今年干了啥，自动生成：\n' +
         '✅ 一句话总结（有战略高度）\n' +
         '✅ 亮点3条（STAR结构）\n' +
