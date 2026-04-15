@@ -12,8 +12,9 @@ test("builds AI topic kit with expected structure", () => {
   assert.equal(kit.mode, "xhs");
   assert.match(kit.title, /Claude|内容选题/);
   assert.equal(kit.altTitles.length, 3);
-  assert.equal(kit.steps.length, 3);
-  assert.match(kit.hook, /结果亮出来|最容易出效果的顺序/);
+  assert.ok(kit.steps.length >= 6);
+  assert.match(kit.hook, /第1句：/);
+  assert.match(kit.steps[0], /封面标题：/);
   assert.match(kit.deliveryTip, /图文/);
   assert.equal(kit.modeLabel, VIRAL_MODES.xhs.label);
   assert.equal(kit.checklist.length, 3);
@@ -37,7 +38,10 @@ test("different modes produce clearly different headlines and delivery tips", ()
 
   assert.notEqual(xhs.title, video.title);
   assert.notEqual(video.title, knowledge.title);
+  assert.match(video.hook, /第1句：/);
+  assert.match(video.steps[0], /镜头1/);
   assert.match(video.deliveryTip, /口播|45 秒/);
+  assert.match(knowledge.steps[0], /开场定义/);
   assert.match(knowledge.modeDescription, /知识类表达|误区/);
 });
 

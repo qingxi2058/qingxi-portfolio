@@ -313,6 +313,11 @@ h1 {
   font-size: 15px;
 }
 
+#result-hook,
+#result-close {
+  white-space: pre-line;
+}
+
 .weekly-note {
   background: #fffdfb;
   margin-top: 36px;

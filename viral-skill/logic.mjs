@@ -284,6 +284,100 @@ function modeClose(mode, topic) {
   return `围绕${topic}做图文时，最后留一句能让人顺手收藏的话，转化会更自然。`;
 }
 
+function buildOpeningScript(topic, mode, variant = 0) {
+  if (mode === "video") {
+    return [
+      [
+        `第1句：如果你讲${topic}总是没人停下来，问题不在内容，在开头。`,
+        `第2句：你先别铺背景，先把结果亮出来。`,
+        `第3句：我直接给你一版能开拍的口播顺序。`,
+      ],
+      [
+        `第1句：你做${topic}口播没起色，多半不是内容差，是前两句太慢。`,
+        `第2句：先把结果扔出来，再说观众原来哪里容易做错。`,
+        `第3句：下面这 6 段你直接按顺序讲就行。`,
+      ],
+      [
+        `第1句：如果你一讲${topic}就被划走，先别怪账号。`,
+        `第2句：真正的问题，是你把最该放前面的那句放后面了。`,
+        `第3句：我现在直接给你一版更容易停留的开场脚本。`,
+      ],
+    ][variant % 3].join("\n");
+  }
+
+  if (mode === "knowledge") {
+    return [
+      [
+        `第1句：很多人讲${topic}，一上来就讲方法，所以越讲越散。`,
+        `第2句：正确顺序不是先堆步骤，而是先把误区讲明白。`,
+        `第3句：下面这版就是可以直接照着讲的分享框架。`,
+      ],
+      [
+        `第1句：你讲${topic}如果总像念资料，问题通常不是不懂，是顺序不对。`,
+        `第2句：先讲大家最容易错在哪里，再讲为什么，最后才讲做法。`,
+        `第3句：这三段你照着讲，整条内容就会稳很多。`,
+      ],
+      [
+        `第1句：多数人分享${topic}，输就输在一开头就想把所有步骤讲完。`,
+        `第2句：真正更像懂的人，是先讲判断，再讲动作。`,
+        `第3句：我下面直接给你一版可复用的分享提纲。`,
+      ],
+    ][variant % 3].join("\n");
+  }
+
+  return [
+    [
+      `第1句：如果你想把${topic}做成一条会被收藏的内容，别先讲背景。`,
+      `第2句：先亮结果，再给一句能直接照抄的话。`,
+      `第3句：下面这 6 屏就是可以直接去写的顺序。`,
+    ],
+    [
+      `第1句：你发${topic}总没人收藏，往往不是主题不行，是开头太虚。`,
+      `第2句：封面先给结果，正文再拆步骤，用户才会愿意存下来。`,
+      `第3句：我把顺序直接给你，照着写就够了。`,
+    ],
+    [
+      `第1句：做${topic}图文，最怕一上来就解释太多。`,
+      `第2句：先把结论甩出来，再补“为什么值得看”。`,
+      `第3句：下面这版就是你可以直接套进去的图文骨架。`,
+    ],
+  ][variant % 3].join("\n");
+}
+
+function buildScriptSteps(topic, mode, title) {
+  if (mode === "video") {
+    return [
+      `镜头1（0-3秒）：正对镜头先说“如果你讲${topic}总没人停下来，问题不在内容，在开头。”`,
+      `镜头2（3-8秒）：马上补结果，“你先别讲方法，先把结果亮出来。”`,
+      `镜头3（8-18秒）：点常见错误，“大多数人一上来就铺背景，所以前两句就被滑走了。”`,
+      `镜头4（18-30秒）：给顺序，“第一句讲结果，第二句讲误区，第三句再讲具体做法。”`,
+      `镜头5（30-40秒）：拆动作，“做法只保留 2 到 3 个动作，不要一口气讲完。”`,
+      `镜头6（收尾）：追问一句“要不要我把${topic}这套完整口播模板也拆给你？”`,
+    ];
+  }
+
+  if (mode === "knowledge") {
+    return [
+      `开场定义：先说“讲${topic}时，大家最容易错的不是不会做，而是顺序不对。”`,
+      `第一段误区：只讲一个最常见的误区，不要一下子列太多。`,
+      `第二段原因：解释为什么这个误区会让${topic}越讲越散。`,
+      `第三段做法：先给判断，再给步骤，别直接扔一堆方法。`,
+      `第四段动作：步骤只保留 2 到 3 个，而且每一步都能执行。`,
+      `结尾收束：补一句“如果你正准备讲${topic}，先照这个顺序讲一版。”`,
+    ];
+  }
+
+  return [
+    `封面标题：${title}`,
+    `第1屏：先亮结果。直接写“${topic}这条内容，先帮你省下哪一步”。`,
+    `第2屏：点常见卡点。写“多数人不是不会做${topic}，而是第一步就写散了”。`,
+    `第3屏：给动作1。先写结果句，再补一句为什么这个结果值得看。`,
+    `第4屏：给动作2。把做法只拆成 2 到 3 步，每一步只写一个动作。`,
+    `第5屏：放一句可直接照抄的话。比如“如果你现在就在做${topic}，先照这一步改。”`,
+    `第6屏：结尾收口。提醒用户“下次做到这里，回来翻这一条”。`,
+  ];
+}
+
 export function createViralSkillKit(options = {}) {
   const topic = cleanTopic(options.topic);
   const mode = normalizeMode(options.mode);
@@ -299,7 +393,7 @@ export function createViralSkillKit(options = {}) {
     rotate(baseTitles, variant, 2),
     rotate(extraTitles, variant),
   ]).slice(0, 3);
-  const steps = modeConfig.stepTemplates.map((item, index) => `${index + 1}. ${fill(item, topic)}`);
+  const steps = buildScriptSteps(topic, mode, title);
 
   return {
     topic,
@@ -314,7 +408,7 @@ export function createViralSkillKit(options = {}) {
     angle: `${modeConfig.label}里，${category.angle}`,
     title,
     altTitles,
-    hook: `${fill(rotate(category.hooks, variant), topic)} ${modeConfig.promise}`,
+    hook: buildOpeningScript(topic, mode, variant),
     steps,
     deliveryTip: rotate(modeConfig.deliveryTips, variant),
     close: `${fill(rotate(category.closes, variant), topic)} ${modeClose(mode, topic)}`,
