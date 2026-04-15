@@ -110,34 +110,34 @@ a {
 }
 
 h1 {
-  margin: 18px 0 0;
-  font-size: clamp(30px, 3.6vw, 42px);
-  line-height: 1.14;
-  letter-spacing: -0.04em;
+  margin: 14px 0 0;
+  font-size: clamp(28px, 3.2vw, 38px);
+  line-height: 1.18;
+  letter-spacing: -0.045em;
   font-weight: 800;
-  max-width: 11.4em;
+  max-width: 10.8em;
 }
 
 .subtitle {
-  margin: 16px 0 0;
+  margin: 14px 0 0;
   color: var(--muted);
-  font-size: 16px;
-  line-height: 1.85;
-  max-width: 760px;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 720px;
 }
 
 .proof-row,
 .quick-start,
 .weekly-note,
 .result-panel {
-  margin-top: 18px;
+  margin-top: 20px;
 }
 
 .workflow-grid {
   display: grid;
   grid-template-columns: minmax(320px, 0.86fr) minmax(420px, 1.14fr);
-  gap: 18px;
-  margin-top: 18px;
+  gap: 16px;
+  margin-top: 16px;
   align-items: start;
 }
 
@@ -145,7 +145,17 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 22px;
   background: #fffdfb;
-  padding: 18px;
+  padding: 16px;
+}
+
+.mode-card {
+  background: #fffefc;
+}
+
+.input-card {
+  background: #fffefa;
+  border-color: rgba(237, 115, 58, 0.14);
+  box-shadow: 0 10px 24px rgba(111, 72, 46, 0.04);
 }
 
 .mode-card .mode-panel,
@@ -191,8 +201,8 @@ h1 {
 .chip-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .chip {
@@ -200,9 +210,9 @@ h1 {
   background: #fff;
   color: var(--ink);
   border-radius: 999px;
-  padding: 11px 16px;
+  padding: 10px 14px;
   line-height: 1.25;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition:
@@ -228,8 +238,8 @@ h1 {
 
 .example-chip {
   color: var(--fire-deep);
-  background: rgba(240, 130, 73, 0.03);
-  border-color: rgba(240, 130, 73, 0.12);
+  background: rgba(240, 130, 73, 0.025);
+  border-color: rgba(240, 130, 73, 0.1);
 }
 
 .input-label {
@@ -254,19 +264,20 @@ h1 {
 .proof-row span {
   display: inline-flex;
   align-items: center;
-  min-height: 38px;
-  padding: 0 14px;
+  min-height: 34px;
+  padding: 0 13px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: #fff;
   color: var(--muted);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 560;
+  opacity: 0.9;
 }
 
 .preview-strip {
-  margin-top: 14px;
-  gap: 12px;
+  margin-top: 12px;
+  gap: 10px;
 }
 
 .spotlight-card,
@@ -299,7 +310,8 @@ h1 {
 }
 
 .weekly-note {
-  background: #fffaf7;
+  background: #fffdfb;
+  margin-top: 28px;
 }
 
 .weekly-label {
@@ -327,7 +339,7 @@ h1 {
 .text-area {
   width: 100%;
   min-height: 112px;
-  margin-top: 12px;
+  margin-top: 10px;
   padding: 18px 18px;
   border-radius: 20px;
   border: 1px solid var(--line);
@@ -355,7 +367,7 @@ h1 {
 }
 
 .button-row {
-  margin-top: 18px;
+  margin-top: 16px;
 }
 
 .btn {
