@@ -1,11 +1,11 @@
 import { createViralSkillKit } from "./logic.mjs";
 
 const examples = [
-  "用 AI 做简历优化",
+  "AI简历优化",
   "打工人副业起步",
   "普通人如何学 Claude Code",
   "怎么把选题写得更像真人",
-  "AI 内容怎么做成高收藏图文",
+  "AI内容怎么做成高收藏图文",
 ];
 
 const state = {

@@ -344,6 +344,70 @@ function buildOpeningScript(topic, mode, variant = 0) {
   ][variant % 3].join("\n");
 }
 
+function buildSummary(topic, modeLabel) {
+  return `这条先按${modeLabel}来做，别试着一次讲完，先把下面这版直接发出去。`;
+}
+
+function buildPositioning(topic, category) {
+  if (category.name === "ai") {
+    return `别讲“${topic}有多强”，直接讲“${topic}替你省掉了哪一步”。`;
+  }
+
+  if (category.name === "career") {
+    return `别先给大道理，先把${topic}里那句“这也太像我了”说出来。`;
+  }
+
+  if (category.name === "money") {
+    return `别先讲赚多少，先讲“做${topic}的人第一步到底从哪开始”。`;
+  }
+
+  return `别先讲背景，先把${topic}里最具体的结果放到第一句。`;
+}
+
+function buildCatchLine(topic, category) {
+  if (category.name === "ai") {
+    return `先抓“${topic}不是不会做，而是第一步就做散了”。`;
+  }
+
+  if (category.name === "career") {
+    return `先抓“原来卡在${topic}的人，不只是我一个”。`;
+  }
+
+  if (category.name === "money") {
+    return `先抓“${topic}别想太远，先把第一步跑出来”。`;
+  }
+
+  return `先抓“${topic}别讲满，先把结果亮出来”。`;
+}
+
+function buildFormatLine(mode) {
+  if (mode === "video") {
+    return "拍成 30 到 45 秒口播：前 3 秒打断，中间只留 2 到 3 个动作，结尾留追问。";
+  }
+
+  if (mode === "knowledge") {
+    return "按“误区 -> 原因 -> 做法”讲，步骤别超过 3 个，不要一股脑全倒出来。";
+  }
+
+  return "做成 6 屏左右图文：封面给结果，正文只留 3 个动作，最后一屏放收藏提醒。";
+}
+
+function buildDeleteLine(category) {
+  if (category.name === "ai") {
+    return "删掉模型名、术语和炫技描述，只留“它到底替人省了哪一步”。";
+  }
+
+  if (category.name === "career") {
+    return "删掉空鸡汤和长抱怨，先留真实处境，再留一步能做的动作。";
+  }
+
+  if (category.name === "money") {
+    return "删掉“轻松赚”“快速起号”这种大词，先把门槛和第一步讲明白。";
+  }
+
+  return "删掉大段背景和抽象判断，先留下结果句和动作句。";
+}
+
 function buildScriptSteps(topic, mode, title) {
   if (mode === "video") {
     return [
@@ -404,17 +468,17 @@ export function createViralSkillKit(options = {}) {
     promise: modeConfig.promise,
     snapshot: modeConfig.snapshot,
     freshFindings: modeConfig.freshFindings,
-    summary: `${modeConfig.label}里，重点不是讲得多，而是先把最容易让人停下来的那一下讲准。`,
-    angle: `${modeConfig.label}里，${category.angle}`,
+    summary: buildSummary(topic, modeConfig.label),
+    angle: buildPositioning(topic, category),
     title,
     altTitles,
     hook: buildOpeningScript(topic, mode, variant),
     steps,
     deliveryTip: rotate(modeConfig.deliveryTips, variant),
     close: `${fill(rotate(category.closes, variant), topic)} ${modeClose(mode, topic)}`,
-    bestMoment: rotate(modeConfig.bestMoments, variant),
-    emotion: rotate(category.emotions, variant),
-    caution: rotate(category.cautions, variant),
+    bestMoment: buildFormatLine(mode),
+    emotion: buildCatchLine(topic, category),
+    caution: buildDeleteLine(category),
     checklist: category.checklist,
     shareText: `我刚用爆款热点操盘手拆了一套“${topic}”的${modeConfig.label}骨架，标题、开头、结构和结尾都出来了。`,
   };

@@ -15,6 +15,11 @@ test("builds AI topic kit with expected structure", () => {
   assert.ok(kit.steps.length >= 6);
   assert.match(kit.hook, /第1句：/);
   assert.match(kit.steps[0], /封面标题：/);
+  assert.match(kit.summary, /先按小红书图文来做/);
+  assert.match(kit.angle, /替你省掉了哪一步/);
+  assert.match(kit.emotion, /先抓“/);
+  assert.match(kit.bestMoment, /6 屏左右图文/);
+  assert.match(kit.caution, /删掉/);
   assert.match(kit.deliveryTip, /图文/);
   assert.equal(kit.modeLabel, VIRAL_MODES.xhs.label);
   assert.equal(kit.checklist.length, 3);
