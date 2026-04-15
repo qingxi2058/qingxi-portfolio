@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { createViralSkillKit } from "../logic.mjs";
+import { createViralSkillKit, VIRAL_MODES } from "../logic.mjs";
 
 test("builds AI topic kit with expected structure", () => {
   const kit = createViralSkillKit({
@@ -13,9 +13,10 @@ test("builds AI topic kit with expected structure", () => {
   assert.match(kit.title, /Claude|内容选题/);
   assert.equal(kit.altTitles.length, 3);
   assert.equal(kit.steps.length, 3);
-  assert.match(kit.hook, /先给结果/);
+  assert.match(kit.hook, /结果亮出来|最容易出效果的顺序/);
   assert.match(kit.deliveryTip, /图文/);
-  assert.match(kit.summary, /收藏型图文/);
+  assert.equal(kit.modeLabel, VIRAL_MODES.xhs.label);
+  assert.equal(kit.checklist.length, 3);
 });
 
 test("falls back to defaults for unknown mode and blank topic", () => {
@@ -37,5 +38,21 @@ test("different modes produce clearly different headlines and delivery tips", ()
   assert.notEqual(xhs.title, video.title);
   assert.notEqual(video.title, knowledge.title);
   assert.match(video.deliveryTip, /口播|45 秒/);
-  assert.match(knowledge.summary, /知识表达/);
+  assert.match(knowledge.modeDescription, /知识类表达|误区/);
+});
+
+test("variant can remix title and hook", () => {
+  const first = createViralSkillKit({
+    topic: "普通人如何学 Claude Code",
+    mode: "knowledge",
+    variant: 0,
+  });
+  const second = createViralSkillKit({
+    topic: "普通人如何学 Claude Code",
+    mode: "knowledge",
+    variant: 1,
+  });
+
+  assert.notEqual(first.title, second.title);
+  assert.notEqual(first.hook, second.hook);
 });

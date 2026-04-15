@@ -6,7 +6,7 @@
     <title>爆款热点操盘手</title>
     <meta
       name="description"
-      content="输入一个主题，直接拆出标题、开头、结构和收尾，适合图文、短视频和知识类内容起稿。"
+      content="输入一个主题，直接拿到更适合公开表达的标题、开头、结构和结尾，不再从空白页硬想。"
     />
     <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
@@ -24,23 +24,26 @@
     </script>
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ef5b2a'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34' fill='white'%3E%E7%88%86%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ff6a3d'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34' fill='white'%3E%E7%88%86%3C/text%3E%3C/svg%3E"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="viral-theme">
     <main class="shell">
       <section class="card">
-        <div class="hero-head">
-          <div class="hero-emoji">🔥</div>
-          <span class="eyebrow">清溪AI Skill · 热点内容起稿器</span>
+        <div class="hero-topline">
+          <div class="hero-mark" aria-hidden="true">🔥</div>
+          <div class="hero-copy">
+            <span class="eyebrow">清溪 AI Skill · 热点内容起稿器</span>
+          </div>
         </div>
+
         <h1>10 秒拆出一版更容易传播的内容骨架</h1>
         <p class="subtitle">
           输入一个主题，直接拿到主标题、开头钩子、内容结构和结尾动作，不再从空白开始硬想。
         </p>
 
-        <div class="value-strip" aria-label="生成结果预览">
+        <div class="proof-row" aria-label="这页会给你什么">
           <span>主标题</span>
           <span>开头钩子</span>
           <span>三步结构</span>
@@ -48,94 +51,165 @@
         </div>
 
         <div class="quick-start">
-          <span class="section-kicker">直接试试</span>
+          <div class="helper-head">
+            <span class="section-kicker">直接试试</span>
+          </div>
           <div class="chip-row compact" id="example-list"></div>
         </div>
 
-        <div class="mode-panel">
-          <span class="section-kicker">先选你要发去哪</span>
-          <div class="chip-row" id="mode-row">
-            <button class="chip active" data-mode="xhs">小红书图文</button>
-            <button class="chip" data-mode="video">短视频口播</button>
-            <button class="chip" data-mode="knowledge">知识分享</button>
-          </div>
-          <p id="mode-description" class="mode-description"></p>
+        <div class="workflow-grid">
+          <section class="workflow-card mode-card">
+            <div class="mode-panel">
+              <span class="input-label">先选你要发去哪</span>
+              <div class="chip-row" id="mode-row">
+                <button class="chip active" data-mode="xhs" data-placeholder="比如：AI做简历优化、如何用 Claude 改标题">
+                  小红书图文
+                </button>
+                <button class="chip" data-mode="video" data-placeholder="比如：副业起步、普通人怎么学 Claude Code">
+                  短视频口播
+                </button>
+                <button class="chip" data-mode="knowledge" data-placeholder="比如：AI 内容选题、涨粉内容怎么搭结构">
+                  知识分享
+                </button>
+              </div>
+              <p id="mode-description" class="mode-description"></p>
+            </div>
+
+            <div class="preview-strip">
+              <p><strong>先抓：</strong><span id="preview-promise"></span></p>
+              <p><strong>开头：</strong><span id="preview-snapshot"></span></p>
+            </div>
+          </section>
+
+          <section class="workflow-card input-card">
+            <label class="input-label" for="topic-input">写下你这次要讲的主题</label>
+            <textarea
+              id="topic-input"
+              class="text-area"
+              placeholder="比如：AI做简历优化、打工人副业、用Claude做内容选题"
+            ></textarea>
+            <p class="input-helper">点上面的示例可直接生成；按 Command / Ctrl + Enter 也能生成</p>
+
+            <div class="button-row">
+              <button id="generate-button" class="btn btn-primary">生成一版可发骨架</button>
+              <button id="remix-button" class="btn btn-secondary" disabled>换个角度</button>
+              <button id="copy-all" class="btn btn-secondary" disabled>复制这一版</button>
+              <button id="share-result" class="btn btn-secondary" disabled>分享这一版</button>
+            </div>
+            <p id="copied-hint" class="hint" hidden>已复制</p>
+          </section>
         </div>
-
-        <label class="input-label" for="topic-input">写下你这次要讲的主题</label>
-
-        <textarea
-          id="topic-input"
-          class="text-area"
-          placeholder="比如：AI做简历、打工人副业、用Claude做内容选题"
-        ></textarea>
-        <p class="input-helper">点上面的示例可直接生成；按 Command / Ctrl + Enter 也能生成</p>
-
-        <div class="button-row">
-          <button id="generate-button" class="btn btn-primary">生成一版可发骨架</button>
-          <button id="copy-all" class="btn btn-secondary" disabled>复制这一版</button>
-          <button id="share-result" class="btn btn-secondary" disabled>分享这一版</button>
-        </div>
-        <p id="copied-hint" class="hint" hidden>已复制</p>
 
         <section id="result-panel" class="result-panel" hidden>
           <div class="result-header">
             <div>
               <span class="section-kicker">生成结果</span>
-              <h2>这一版先从这里开始发</h2>
+              <h2>先从这一版开始发</h2>
+              <p id="result-summary" class="result-summary"></p>
             </div>
-            <p id="result-summary" class="result-summary"></p>
           </div>
 
-          <article class="result-block">
-            <span class="result-label">建议角度</span>
-            <p id="result-angle"></p>
-          </article>
+          <section class="result-section">
+            <div class="section-head">
+              <span class="section-dot"></span>
+              <div>
+                <h3>先判断这条怎么发</h3>
+                <p>先看这条该抓什么、适合什么时候发，以及发布前最该避开什么。</p>
+              </div>
+            </div>
 
-          <article class="result-block">
-            <span class="result-label">主标题</span>
-            <p class="headline" id="result-title"></p>
-          </article>
+            <div class="spotlight-grid">
+              <article class="spotlight-card">
+                <span class="spotlight-label">更适合抓住的点</span>
+                <p id="result-emotion"></p>
+              </article>
+              <article class="spotlight-card">
+                <span class="spotlight-label">这一条更适合什么时候发</span>
+                <p id="result-best-moment"></p>
+              </article>
+              <article class="spotlight-card quiet">
+                <span class="spotlight-label">发布前先避开</span>
+                <p id="result-caution"></p>
+              </article>
+            </div>
 
-          <article class="result-block">
-            <span class="result-label">备用标题</span>
-            <ul class="result-list" id="result-alt-titles"></ul>
-          </article>
+            <div class="result-grid compact-grid">
+              <article class="result-block hero-block wide">
+                <span class="result-label">建议角度</span>
+                <p id="result-angle"></p>
+              </article>
+            </div>
+          </section>
 
-          <article class="result-block">
-            <span class="result-label">开头钩子</span>
-            <p id="result-hook"></p>
-          </article>
+          <section class="result-section">
+            <div class="section-head">
+              <span class="section-dot"></span>
+              <div>
+                <h3>再把正文骨架写出来</h3>
+                <p>这一组就是你可以直接拿去起稿的部分，先写标题，再接开头和结构。</p>
+              </div>
+            </div>
 
-          <article class="result-block">
-            <span class="result-label">内容结构</span>
-            <ul class="result-list" id="result-steps"></ul>
-          </article>
+            <div class="result-grid writing-grid">
+              <article class="result-block hero-block">
+                <span class="result-label">主标题</span>
+                <p class="headline" id="result-title"></p>
+              </article>
 
-          <article class="result-block">
-            <span class="result-label">发法提醒</span>
-            <p id="result-delivery"></p>
-          </article>
+              <article class="result-block">
+                <span class="result-label">开头钩子</span>
+                <p id="result-hook"></p>
+              </article>
 
-          <article class="result-block">
-            <span class="result-label">结尾收口</span>
-            <p id="result-close"></p>
-          </article>
+              <article class="result-block">
+                <span class="result-label">备用标题</span>
+                <ul class="result-list" id="result-alt-titles"></ul>
+              </article>
+
+              <article class="result-block wide">
+                <span class="result-label">内容结构</span>
+                <ul class="result-list" id="result-steps"></ul>
+              </article>
+            </div>
+          </section>
+
+          <section class="result-section">
+            <div class="section-head">
+              <span class="section-dot"></span>
+              <div>
+                <h3>最后补上发法和收口</h3>
+                <p>这部分负责把内容从“能写”补到“更适合发”。</p>
+              </div>
+            </div>
+
+            <div class="result-grid finish-grid">
+              <article class="result-block">
+                <span class="result-label">发法提醒</span>
+                <p id="result-delivery"></p>
+              </article>
+
+              <article class="result-block">
+                <span class="result-label">结尾收口</span>
+                <p id="result-close"></p>
+              </article>
+
+              <article class="result-block wide">
+                <span class="result-label">发布前检查</span>
+                <ul class="result-list" id="result-checklist"></ul>
+              </article>
+            </div>
+          </section>
         </section>
 
+        <div class="weekly-note">
+          <span class="weekly-label">本周更有效的发法</span>
+          <ul class="weekly-list" id="recent-list"></ul>
+        </div>
+
         <footer class="footer">
-          <p class="footer-lead">先把这一条跑起来，再去看更多工具、案例和可直接复用的入口。</p>
-          <div class="footer-cta">
-            <a class="footer-button primary" href="https://qingxihub.com/tools/" target="_blank" rel="noreferrer">
-              去 AI 工具箱继续找工具
-            </a>
-            <a class="footer-button" href="https://xhslink.com/m/3pdBcBDfYmx" target="_blank" rel="noreferrer">
-              去小红书看更多
-            </a>
-          </div>
-          <div class="footer-links">
-            <a href="https://github.com/qingxi2058/viral-hotspot-operator" target="_blank" rel="noreferrer">⚡ GitHub</a>
-          </div>
+          <a class="footer-link" href="https://qingxihub.com/tools/" target="_blank" rel="noreferrer">
+            去 AI 工具箱继续找工具
+          </a>
         </footer>
       </section>
     </main>
