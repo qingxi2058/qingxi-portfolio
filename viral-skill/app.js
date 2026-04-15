@@ -20,6 +20,7 @@ const exampleList = document.querySelector("#example-list");
 const topicInput = document.querySelector("#topic-input");
 const copiedHint = document.querySelector("#copied-hint");
 const resultPanel = document.querySelector("#result-panel");
+const weeklyNote = document.querySelector("#weekly-note");
 const modeDescription = document.querySelector("#mode-description");
 const generateButton = document.querySelector("#generate-button");
 const remixButton = document.querySelector("#remix-button");
@@ -130,6 +131,7 @@ function renderKit(kit) {
   resultPanel.classList.add("flash");
 
   setResultActionsEnabled(true);
+  weeklyNote.hidden = false;
   syncUrl(kit.topic);
 
   copyAllButton.onclick = () =>
