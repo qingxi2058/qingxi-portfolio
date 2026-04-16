@@ -20,6 +20,8 @@ const WORK_DAYS_PER_MONTH = 22;
 const HOURS_PER_DAY = 8;
 const WORK_MINUTES_PER_MONTH = WORK_DAYS_PER_MONTH * HOURS_PER_DAY * 60;
 const BEIJING_OFFSET_MS = 8 * 60 * 60 * 1000;
+const DESKTOP_APP_PATH = "wallpaper.html?app=1";
+const DESKTOP_SETTINGS_FLAG = "desktop-settings";
 const barrageLines = [
   "快滚回家搞副业！",
   "还不走？老板给你加钱了吗？快滚去搞副业！",
@@ -38,6 +40,14 @@ let storedSalaryValue = "";
 let lastThirtyReminderKey = null;
 let deferredInstallPrompt = null;
 let installPromptWaiters = [];
+
+function getDesktopAppUrl() {
+  return new URL(DESKTOP_APP_PATH, window.location.href).toString();
+}
+
+function shouldStayOnSettingsPage() {
+  return new URLSearchParams(window.location.search).get(DESKTOP_SETTINGS_FLAG) === "1";
+}
 
 function parseTime(value) {
   if (!value || !value.includes(":")) {
@@ -158,7 +168,11 @@ async function tryInstallApp() {
   }
 
   if (isStandaloneMode()) {
-    showToast("已经安装好了，桌面或应用列表里可以直接打开");
+    if (!window.location.pathname.endsWith("/wallpaper.html")) {
+      window.location.replace(getDesktopAppUrl());
+      return;
+    }
+    showToast("已经装好了，桌面版现在就是纯计时器界面");
     return;
   }
 
@@ -196,6 +210,17 @@ function isStandaloneMode() {
 
 function syncStandaloneLayout() {
   bodyEl.classList.toggle("standalone-app", isStandaloneMode());
+}
+
+function redirectStandaloneToDesktopIfNeeded() {
+  if (!isStandaloneMode() || shouldStayOnSettingsPage()) {
+    return;
+  }
+  const currentPath = window.location.pathname;
+  if (currentPath.endsWith("/wallpaper.html")) {
+    return;
+  }
+  window.location.replace(getDesktopAppUrl());
 }
 
 function registerServiceWorker() {
@@ -386,7 +411,7 @@ window.addEventListener("beforeinstallprompt", (event) => {
 window.addEventListener("appinstalled", () => {
   deferredInstallPrompt = null;
   updateInstallButtonVisibility(false);
-  showToast("已添加到桌面，之后可以像独立应用一样打开");
+  showToast("已添加到桌面，打开后默认就是纯净计时器版");
 });
 
 if (installAppBtn) {
@@ -404,6 +429,7 @@ if (installShareBtn) {
 registerServiceWorker();
 updateInstallButtonVisibility(false);
 syncStandaloneLayout();
+redirectStandaloneToDesktopIfNeeded();
 const displayModeQuery = window.matchMedia("(display-mode: standalone)");
 if (displayModeQuery.addEventListener) {
   displayModeQuery.addEventListener("change", syncStandaloneLayout);
