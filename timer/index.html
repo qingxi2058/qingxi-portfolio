@@ -76,6 +76,69 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* ── 自定义弹幕 UI ── */
+      .custom-barrage-wrap { margin-top: 14px; }
+      .custom-barrage-label {
+        display: flex; align-items: center; gap: 6px;
+        font-size: 13px; color: rgba(224,240,255,0.7);
+        margin-bottom: 7px;
+      }
+      .barrage-count-badge {
+        font-size: 11px; font-weight: 700;
+        background: rgba(57,255,20,0.15);
+        color: #39ff14;
+        border: 1px solid rgba(57,255,20,0.3);
+        padding: 1px 7px; border-radius: 10px;
+        display: none;
+      }
+      .barrage-input-row { display: flex; gap: 6px; }
+      .barrage-input {
+        flex: 1; min-width: 0;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.15);
+        color: #e0f0ff; border-radius: 6px;
+        padding: 7px 10px; font-size: 13px;
+        outline: none; transition: border-color 0.15s;
+      }
+      .barrage-input::placeholder { color: rgba(200,220,255,0.35); }
+      .barrage-input:focus { border-color: rgba(57,255,20,0.45); }
+      .barrage-add-btn {
+        background: rgba(57,255,20,0.13);
+        border: 1px solid rgba(57,255,20,0.35);
+        color: #39ff14; border-radius: 6px;
+        padding: 7px 13px; font-size: 13px; font-weight: 700;
+        cursor: pointer; white-space: nowrap; transition: all 0.15s;
+        flex-shrink: 0;
+      }
+      .barrage-add-btn:hover { background: rgba(57,255,20,0.25); }
+      .barrage-add-btn:active { transform: scale(0.96); }
+      .barrage-tags {
+        display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+      }
+      .barrage-tag {
+        display: inline-flex; align-items: center; gap: 5px;
+        background: rgba(57,255,20,0.08);
+        border: 1px solid rgba(57,255,20,0.22);
+        color: #c0f0c0; border-radius: 4px;
+        padding: 3px 4px 3px 9px; font-size: 12px;
+        max-width: 200px;
+      }
+      .barrage-tag-text {
+        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      }
+      .barrage-tag-del {
+        background: none; border: none;
+        color: rgba(255,255,255,0.3);
+        cursor: pointer; font-size: 15px; line-height: 1;
+        padding: 0 3px; flex-shrink: 0; transition: color 0.12s;
+      }
+      .barrage-tag-del:hover { color: #ff6b6b; }
+      .barrage-hint {
+        font-size: 11px; color: rgba(200,220,255,0.3);
+        margin-top: 5px;
+      }
+    </style>
   </head>
   <body>
     <div class="app">
@@ -157,6 +220,28 @@
               <span>30 分钟前提醒</span>
             </div>
           </label>
+
+          <!-- ✅ 自定义弹幕 -->
+          <div class="custom-barrage-wrap">
+            <div class="custom-barrage-label">
+              <span>💬 自定义弹幕</span>
+              <span class="barrage-count-badge" id="barrageCountBadge"></span>
+            </div>
+            <div class="barrage-input-row">
+              <input
+                type="text"
+                id="barrageInput"
+                class="barrage-input"
+                placeholder="写你想说的，到点会飞出来"
+                maxlength="20"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <button type="button" class="barrage-add-btn" id="barrageAddBtn">＋ 添加</button>
+            </div>
+            <div class="barrage-tags" id="barrageTags"></div>
+            <p class="barrage-hint">最多 20 字 · 本地保存 · 刷新不丢</p>
+          </div>
         </div>
       </header>
 

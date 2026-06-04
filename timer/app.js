@@ -14,6 +14,7 @@ const installAppBtn = document.querySelector("#installAppBtn");
 const installShareBtn = document.querySelector("#installShareBtn");
 
 const SETTINGS_KEY = "offwork-clock-settings";
+const CUSTOM_BARRAGE_KEY = "offwork-custom-barrages";
 const MONEY_MASK = "****";
 const THIRTY_MINUTES_MS = 30 * 60 * 1000;
 const WORK_DAYS_PER_MONTH = 22;
@@ -36,6 +37,7 @@ let lastMinuteMark = null;
 let toastTimer = null;
 let barrageTimer = null;
 let salaryVisible = false;
+let customBarrageLines = [];
 let storedSalaryValue = "";
 let lastThirtyReminderKey = null;
 let deferredInstallPrompt = null;
@@ -235,16 +237,92 @@ function registerServiceWorker() {
   });
 }
 
+function getBarragePool() {
+  if (customBarrageLines.length === 0) return barrageLines;
+  return Math.random() < 0.55 ? customBarrageLines : barrageLines;
+}
+
 function createBarrageItem() {
+  const pool = getBarragePool();
   const item = document.createElement("div");
   item.className = "barrage-item";
-  item.textContent = barrageLines[Math.floor(Math.random() * barrageLines.length)];
+  item.textContent = pool[Math.floor(Math.random() * pool.length)];
   item.style.top = `${Math.random() * 70 + 5}%`;
   item.style.animationDuration = `${6 + Math.random() * 6}s`;
   item.style.fontSize = `${14 + Math.random() * 12}px`;
   item.style.opacity = (0.75 + Math.random() * 0.25).toFixed(2);
   barrageEl.appendChild(item);
   item.addEventListener("animationend", () => item.remove());
+}
+
+// ── 自定义弹幕管理 ──
+function loadCustomBarrages() {
+  try {
+    const raw = window.localStorage.getItem(CUSTOM_BARRAGE_KEY);
+    customBarrageLines = raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    customBarrageLines = [];
+  }
+  renderBarrageTags();
+}
+
+function saveCustomBarrages() {
+  window.localStorage.setItem(CUSTOM_BARRAGE_KEY, JSON.stringify(customBarrageLines));
+}
+
+function addCustomBarrage(text) {
+  const trimmed = text.trim();
+  if (!trimmed) return false;
+  if (customBarrageLines.includes(trimmed)) {
+    showToast("这条已经有了～");
+    return false;
+  }
+  if (customBarrageLines.length >= 10) {
+    showToast("最多 10 条，先删一条再加");
+    return false;
+  }
+  customBarrageLines = [...customBarrageLines, trimmed];
+  saveCustomBarrages();
+  renderBarrageTags();
+  return true;
+}
+
+function removeCustomBarrage(index) {
+  customBarrageLines = customBarrageLines.filter((_, i) => i !== index);
+  saveCustomBarrages();
+  renderBarrageTags();
+}
+
+function renderBarrageTags() {
+  const container = document.getElementById("barrageTags");
+  const badge = document.getElementById("barrageCountBadge");
+  if (!container) return;
+
+  container.innerHTML = "";
+  customBarrageLines.forEach((text, idx) => {
+    const tag = document.createElement("span");
+    tag.className = "barrage-tag";
+
+    const textEl = document.createElement("span");
+    textEl.className = "barrage-tag-text";
+    textEl.textContent = text;
+
+    const delBtn = document.createElement("button");
+    delBtn.className = "barrage-tag-del";
+    delBtn.textContent = "×";
+    delBtn.title = "删除";
+    delBtn.addEventListener("click", () => removeCustomBarrage(idx));
+
+    tag.appendChild(textEl);
+    tag.appendChild(delBtn);
+    container.appendChild(tag);
+  });
+
+  if (badge) {
+    const count = customBarrageLines.length;
+    badge.textContent = count > 0 ? `${count} 条` : "";
+    badge.style.display = count > 0 ? "" : "none";
+  }
 }
 
 function startBarrage() {
@@ -426,6 +504,27 @@ if (installShareBtn) {
   });
 }
 
+// ── 自定义弹幕输入事件 ──
+const barrageInputEl = document.getElementById("barrageInput");
+const barrageAddBtnEl = document.getElementById("barrageAddBtn");
+
+if (barrageInputEl && barrageAddBtnEl) {
+  barrageAddBtnEl.addEventListener("click", () => {
+    if (addCustomBarrage(barrageInputEl.value)) {
+      barrageInputEl.value = "";
+    }
+  });
+  barrageInputEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (addCustomBarrage(barrageInputEl.value)) {
+        barrageInputEl.value = "";
+      }
+    }
+  });
+}
+
+loadCustomBarrages();
 registerServiceWorker();
 updateInstallButtonVisibility(false);
 syncStandaloneLayout();
